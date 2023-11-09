@@ -13,6 +13,34 @@ body {
     font-weight: 400; /* 600 is typically used for semi-bold */
 }
 
+.underline-link {
+    text-decoration: none;
+    position: relative;
+    color: #3498db;
+    transition: color 0.3s ease-in-out;
+}
+
+.underline-link:hover {
+    color: #2980b9; /* Change color on hover */
+}
+
+.underline-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #3498db; /* Underline color */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.underline-link:hover::after {
+    width: 100%;
+}
+
+
 .container {
     text-align: center;
     padding: 50px;
@@ -24,6 +52,9 @@ body {
 
 .grid-container {
     position: relative;
+    max-width: 900px; /* Adjust the maximum width of the grid container */
+    margin: 0 auto; /* Center the grid container horizontally */
+    margin-bottom: 20px; 
 }
 
 .data-grid, .dance-grid {
@@ -97,9 +128,17 @@ body {
     margin: 0 10px;
 }
 
+.navbar .logo {
+    font-weight: bold;
+    font-size: 20px; /* Adjust the font size as needed */
+    color: rgb(0, 0, 0); /* Text color */
+    text-decoration: none;
+    float: left;
+}
+
 .navbar a {
     text-decoration: none;
-    color: #fff; /* White text color */
+    color: rgb(0, 0, 0); /* White text color */
     font-weight: bold;
     font-size: 16px;
     transition: color 0.3s ease-in-out; /* Smooth color transition */
