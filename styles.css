@@ -1,67 +1,84 @@
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: linear-gradient(#000 1px, transparent 1px),
-                linear-gradient(90deg, #000 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+    font-family: 'Helvetica Neue', monospace;
+    background-color: #f6ebeb; /* Cream/neutral-toned background */
 }
 
-header {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    width: 100%;
-    position: fixed;
+.container {
+    text-align: center;
+    padding: 50px;
+}
+
+.sentence {
+    font-size: 18px;
+}
+
+/* .data-grid, .dance-grid {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 20px; 
+} */
+
+.grid-container {
+    position: relative;
+}
+
+.data-grid, .dance-grid {
+    position: absolute;
     top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Adjust the duration and easing as needed */
+    display: flex;
+    flex-wrap: wrap;
+    width: 200px; /* Adjust the width of the grid */
+}
+
+.data-grid.show, .dance-grid.show {
+    opacity: 1;
+}
+
+.data-grid {
     z-index: 1;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.dance-grid {
+    z-index: 2;
 }
 
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
+.grid-item {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 20px); /* Two items in a row with 20px margin between them */
+    box-sizing: border-box;
+    flex: 1 1 45%; /* Equal width for each item, with some margin */
 }
 
-ul {
-    list-style-type: none;
-    display: flex;
-    gap: 20px;
-}
-
-li a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s ease-in-out;
-}
-
-li a:hover {
-    color: #3498db;
-}
-
-.glassmorphism {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-    max-width: 600px;
-    width: 100%;
+.navbar {
+    background-color: #333; /* Dark background color */
+    padding: 10px 0;
     text-align: center;
 }
 
-/* Add more styling for additional sections if needed */
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff; /* White text color */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+/* Add more styles for the navbar if needed */

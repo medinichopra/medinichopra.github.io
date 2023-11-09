@@ -3,30 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Outer Space Landing</title>
+    <title>Minimalist Page</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">SpaceX</div>
-        <ul>
-          <li><a href="#about">About Me</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+    <nav class="navbar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
 
-    <section id="about" class="glassmorphism">
-      <h2>About Me</h2>
-      <p>
-        Welcome to the infinite cosmos! I'm a stargazer and explorer on a
-        mission to unravel the mysteries of the universe. Join me on this cosmic
-        journey.
+    <div class="container">
+      <p class="sentence">
+        I like telling stories with both <a href="#" id="dataLink">data</a> and
+        <a href="#" id="danceLink">dance</a>.
       </p>
-    </section>
 
-    <!-- Add more sections as needed -->
+      <div class="grid-container">
+        <div class="data-grid">
+          <div class="grid-item">Data Story 1</div>
+          <div class="grid-item">Data Story 2</div>
+          <div class="grid-item">Data Story 3</div>
+          <div class="grid-item">Data Story 4</div>
+        </div>
+
+        <div class="dance-grid">
+          <div class="grid-item">Dance Story 1</div>
+          <div class="grid-item">Dance Story 2</div>
+          <div class="grid-item">Dance Story 3</div>
+          <div class="grid-item">Dance Story 4</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
