@@ -1,6 +1,16 @@
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+}
+
 body {
-    font-family: 'Helvetica Neue', monospace;
+    font-family: 'Inter', sans-serif;
     background-color: #eaeaea; /* Cream/neutral-toned background */
+}
+
+.special-sentence {
+    font-size: 40px; /* Adjust the font size as needed */
+    font-weight: 400; /* 600 is typically used for semi-bold */
 }
 
 .container {
@@ -39,17 +49,6 @@ body {
 .dance-grid {
     z-index: 2;
 }
-
-/* .grid-item {
-    background-color: #fff;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 20px); 
-    box-sizing: border-box;
-    flex: 1 1 45%;
-} */
 
 .grid-item {
     background-color: #fff;
