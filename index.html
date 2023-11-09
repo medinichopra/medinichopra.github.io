@@ -1,105 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Website</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background: linear-gradient(to bottom right, #d1e0f5, #f1f1f1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            display: flex;
-            justify-content: space-between;
-            z-index: 1;
-        }
-
-        nav {
-            display: flex;
-            gap: 20px;
-        }
-
-        section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 80px;
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .project {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        footer {
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outer Space Landing</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <header>
-        <div>
-            <h1>Your Name</h1>
-            <p>Web Developer</p>
-        </div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <!-- Add more navigation links as needed -->
-        </nav>
+      <nav>
+        <div class="logo">SpaceX</div>
+        <ul>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Web developer passionate about creating awesome websites.</p>
+    <section id="about" class="glassmorphism">
+      <h2>About Me</h2>
+      <p>
+        Welcome to the infinite cosmos! I'm a stargazer and explorer on a
+        mission to unravel the mysteries of the universe. Join me on this cosmic
+        journey.
+      </p>
     </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <div>
-                <h3>Project 1</h3>
-                <p>Description of Project 1.</p>
-            </div>
-            <a href="#" target="_blank"><img src="icon.png" alt="Project Icon"></a>
-        </div>
-        <div class="project">
-            <div>
-                <h3>Project 2</h3>
-                <p>Description of Project 2.</p>
-            </div>
-            <a href="#" target="_blank"><img src="icon.png" alt="Project Icon"></a>
-        </div>
-        <!-- Add more projects as needed -->
-    </section>
-
-    <footer>
-        <p>Contact me at: your@email.com</p>
-    </footer>
-
-</body>
+    <!-- Add more sections as needed -->
+  </body>
 </html>
