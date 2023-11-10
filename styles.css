@@ -12,7 +12,9 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--background); /* Cream/neutral-toned background */
+    cursor: none;
 }
+
 
 .special-sentence {
     font-size: 40px; /* Adjust the font size as needed */
@@ -58,7 +60,6 @@ li.underline-link::after {
     width: 100%;
 }
 
-
 .container {
     text-align: center;
     padding: 50px;
@@ -70,8 +71,8 @@ li.underline-link::after {
 
 .grid-container {
     position: relative;
-    max-width: 900px; /* Adjust the maximum width of the grid container */
-    margin: 0 auto; /* Center the grid container horizontally */
+    max-width: 900px; 
+    margin: 0 auto; 
     margin-bottom: 20px; 
 }
 
@@ -84,6 +85,14 @@ li.underline-link::after {
     display: flex;
     flex-wrap: wrap;
     justify-content: center; /* Center align items horizontally */
+}
+
+.row {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.row.show {
+    opacity: 1;
 }
 
 .data-grid.show, .dance-grid.show {
@@ -141,7 +150,7 @@ li.underline-link::after {
 }
 
 .navbar li {
-    display: inline;
+    display: inline-block;
     margin: 0 10px;
 }
 
@@ -160,12 +169,31 @@ li.underline-link::after {
     font-size: 12px;/* better to set the font sizes for responsiveness in a different css */
     transition: color 0.3s ease-in-out; /* Smooth color transition */
 }
+
+.cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4baced; /* Adjust the color as needed */
+    border-radius: 50%;
+    pointer-events: none;
+    transform-origin: center;
+    z-index: 2; /* Place the cursor above the trail */
+}
+
+.cursor-trail {
+    position: absolute;
+    width: 10px; /* Adjust the trail width */
+    height: 10px; /* Adjust the trail height */
+    background-color: #64bfff; /* Use blue color */
+    border-radius: 50%;
+    pointer-events: none;
+    transform-origin: center;
+    opacity: 0;
+    z-index: 1; /* Place the trail behind the cursor */
+    transition: opacity 0.2s ease-in-out;
+}
 /* 
 .navbar a:hover {
     color: #ddd; 
 } */
-
-
-
-
-/* Add more styles for the navbar if needed */
