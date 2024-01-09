@@ -1,0 +1,202 @@
+:root { 
+    font-family: 'Inter', sans-serif; 
+    --primary-color: black;
+    --highlight: #5d8a8f;
+    --background: #f1eee8;
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }
+
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background); /* Cream/neutral-toned background */
+    cursor: none;
+}
+
+
+.special-sentence {
+    font-size: 40px; /* Adjust the font size as needed */
+    font-weight: 400; 
+}
+
+.underline-link {
+    text-decoration: none;
+    position: relative;
+    color: var(--highlight);
+    transition: color 0.3s ease-in-out;
+}
+
+.underline-link:hover {
+    color: #2980b9; 
+}
+
+.underline-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--highlight);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+li.underline-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.underline-link:hover::after {
+    width: 100%;
+}
+
+.container {
+    text-align: center;
+    padding: 50px;
+}
+
+.sentence {
+    font-size: 18px;
+}
+
+.grid-container {
+    position: relative;
+    max-width: 900px; 
+    margin: 0 auto; 
+    margin-bottom: 20px; 
+}
+
+.data-grid, .dance-grid {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Adjust the duration and easing as needed */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align items horizontally */
+}
+
+.row {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.row.show {
+    opacity: 1;
+}
+
+.data-grid.show, .dance-grid.show {
+    opacity: 1;
+}
+
+.data-grid {
+    z-index: 1;
+}
+
+.dance-grid {
+    z-index: 2;
+}
+
+.grid-item {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 20px); /* Two items in a row with 20px margin between them */
+    box-sizing: border-box;
+    flex: 1 1 35%; /* Equal width for each item, with some margin */
+    text-align: center;
+    height: 400px; /* Adjust the height as needed */
+}
+
+.grid-item img {
+    max-width: 80%;
+    max-height:80%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.grid-item p {
+    font-size: 14px;
+}
+
+.grid-item a {
+    text-decoration: none;
+    color: #3498db; /* Link color */
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px 0;
+    /* text-align: right;  */
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.navbar .logo {
+    font-weight: normal;
+    font-size: 20px; /* Adjust the font size as needed */
+    color: var(--primary-color); /* Text color */
+    text-decoration: none;
+    /* float: left; */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgb(0, 0, 0); /* White text color */
+    font-weight: normal;
+    font-size: 12px;/* better to set the font sizes for responsiveness in a different css */
+    transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4baced; /* Adjust the color as needed */
+    border-radius: 50%;
+    pointer-events: none;
+    transform-origin: center;
+    z-index: 2; /* Place the cursor above the trail */
+}
+
+.cursor-trail {
+    position: absolute;
+    width: 10px; /* Adjust the trail width */
+    height: 10px; /* Adjust the trail height */
+    background-color: #64bfff; /* Use blue color */
+    border-radius: 50%;
+    pointer-events: none;
+    transform-origin: center;
+    opacity: 0;
+    z-index: 1; /* Place the trail behind the cursor */
+    transition: opacity 0.2s ease-in-out;
+}
+/* 
+.navbar a:hover {
+    color: #ddd; 
+} */
