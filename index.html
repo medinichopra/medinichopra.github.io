@@ -1,117 +1,873 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Minimalist Page</title>
-    <!-- Bootstrap CSS -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
+      href="https://fonts.googleapis.com/css2?family=DM Sans:wght@400;500;700&display=swap"
     />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inknut Antiqua:wght@400&display=swap"
+    />
   </head>
-  <body>
-    <!-- Bootstrap JS -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Bootstrap JS -->
-    <div class="cursor-trail"></div>
-    <div class="cursor"></div>
-    <nav class="navbar">
-      <ul>
-        <li class="logo">medinichopra</li>
-        <li class="underline-link"><a href="#">About</a></li>
-        <li class="underline-link"><a href="#">Resume</a></li>
-        <li class="underline-link"><a href="#">Contact</a></li>
-      </ul>
-    </nav>
+  <body class="space-y-6">
+    <div id="page1" class="c1 min-h-screen w-full overflow-y-hidden">
+      <section
+        class="relative bg-gray-100 w-full h-fit overflow-hidden flex flex-col items-center justify-start py-4 px-0 box-border"
+      >
+        <main
+          class="relative flex flex-col lg:scale-75 xl:scale-100 max-w-screen-xl xl:max-w-screen-2xl 2xl:w-full items-center justify-center py-0 px-[30px]"
+        >
+          <header
+            class="w-full flex flex-row flex-wrap items-center max-w-screen-xl px-4 justify-between text-right text-[36px] text-colors-black-100 font-inknut-antiqua"
+          >
+            <div
+              class="shrink-0 flex flex-row items-center scale-[0.8] justify-center gap-[10px]"
+            >
+              <img
+                class="relative w-[78.6px] h-[77.9px] object-contain"
+                alt=""
+                src="/public/globe.svg"
+              />
 
-    <div class="container">
-      <p class="special-sentence">
-        I like telling stories through
-        <a href="#" class="underline-link" id="dataLink">data</a> and
-        <a href="#" class="underline-link" id="danceLink">dance</a>.
-      </p>
+              <div
+                class="relative leading-[40px] flex items-center h-fit shrink-0"
+              >
+                <a
+                  href="index.html"
+                  class="w-full no-underline cursor-pointer text-colors-black-100 tracking-[-3.2px]"
+                >
+                  Plutus Labs
+                </a>
+              </div>
+            </div>
+            <div
+              class="shrink-0 flex flex-row items-center justify-center gap-[30px] text-center text-[20px] font-inter"
+            >
+              <a
+                class="relative font-medium !cursor-pointer transition-all no-underline hover:underline hover:text-mediumaquamarine text-[inherit]"
+                href="sectionAbout.html"
+                >About</a
+              >
+              <a
+                class="relative !cursor-pointer font-medium transition-all no-underline hover:underline hover:text-mediumaquamarine text-[inherit]"
+                href="#"
+                >Document</a
+              >
+            </div>
+          </header>
+          <section
+            class="relative w-[1197px] h-[570px] -mt-4 flex flex-col items-center justify-center text-center text-[70px] text-colors-black-100 font-inter"
+            id="homepage"
+          >
+            <div class="w-fit flex flex-col items-center justify-center">
+              <div
+                class="shrink-0 flex flex-row items-center justify-center gap-4"
+              >
+                <h3
+                  class="m-0 relative text-inherit tracking-[-3.2px] font-normal font-inherit"
+                >
+                  I like telling
+                </h3>
+                <span class="relative tracking-[-3.2px] font-semibold">
+                  stories
+                </span>
+                <img
+                  class="relative w-[36.2px] h-[39px] object-cover"
+                  alt=""
+                  src="/public/pencursor@2x.png"
+                />
 
-      <div class="grid-container">
-        <div class="data-grid">
-          <div class="grid-item">
-            <img src="space1.jpg" alt="Data Image 1" />
-            <p>Data Description 1</p>
-            <a href="#">Learn more</a>
-          </div>
-          <div class="grid-item">
-            <img src="space2.jpg" alt="Data Image 2" />
-            <p>Data Description 2</p>
-            <a href="#">Learn more</a>
-          </div>
-          <div class="grid-item">
-            <img src="space3.jpg" alt="Data Image 3" />
-            <p>Data Description 3</p>
-            <a href="#">Learn more</a>
-          </div>
-          <div class="grid-item">
-            <img src="space4.jpg" alt="Data Image 4" />
-            <p>Data Description 4</p>
-            <a href="#">Learn more</a>
+                <h3
+                  class="m-0 relative text-inherit tracking-[-3.2px] leading-[88px] font-normal font-inherit"
+                >
+                  through
+                </h3>
+              </div>
+              <div
+                class="shrink-0 flex flex-row items-center justify-center gap-[20px] text-mediumaquamarine"
+              >
+                <div
+                  class="shrink-0 flex flex-row items-center justify-center gap-[15px]"
+                >
+                  <a
+                    class="transition-all !cursor-pointer hover:text-mediumseagreen-100 relative tracking-[-3.2px] leading-[88px] font-semibold text-[inherit]"
+                    href="#"
+                    id="link1"
+                    >data</a
+                  >
+                  <img
+                    class="relative w-12 h-[47px] overflow-hidden shrink-0"
+                    alt=""
+                    src="/public/svg1.svg"
+                  />
+                </div>
+                <div
+                  class="relative tracking-[-3.2px] leading-[88px] font-semibold text-colors-black-100"
+                >
+                  &
+                </div>
+                <div
+                  class="shrink-0 flex flex-row items-center justify-center gap-[15px]"
+                >
+                  <a
+                    class="transition-all !cursor-pointer hover:text-mediumseagreen-100 relative tracking-[-3.2px] leading-[88px] font-semibold text-[inherit]"
+                    href="#"
+                    id="link2"
+                    >codes</a
+                  >
+                  <img
+                    class="relative w-[26.8px] h-[47.4px]"
+                    alt=""
+                    src="/public/Vector.png"
+                  />
+                </div>
+              </div>
+              <h5
+                class="m-0 relative text-15xl tracking-[-3.2px] leading-[88px] font-normal font-inherit"
+              >
+                (and also listening to them.)
+              </h5>
+            </div>
+            <img
+              class="absolute h-[19.68%] w-auto top-[14.54%] left-[85%] max-w-full overflow-hidden max-h-full object-cover"
+              alt=""
+              src="/public/stars2@2x.png"
+            />
+
+            <img
+              class="absolute top-2/4 left-[10%] w-[130px] h-[130px] overflow-hidden object-cover"
+              alt=""
+              src="/public/arrow-051@2x.png"
+            />
+
+            <img
+              class="absolute top-[75%] left-3/4 w-[139.1px] h-[154.3px] overflow-hidden object-contain"
+              alt=""
+              src="/public/arrow-021@2x.png"
+            />
+          </section>
+          <footer
+            class="2xl:w-5/6 lg:w-full text-[20px] flex flex-row items-start justify-between font-dm-sans"
+          >
+            <a
+              class="[text-decoration:none] !cursor-pointer hover:bg-mediumaquamarine transition-all duration-150 font-medium rounded-31xl bg-whitesmoke shrink-0 flex flex-row items-center justify-center py-2 px-[25px] gap-[11px] [transform:_rotate(-1.12deg)] text-[inherit]"
+              href="sectionAbout.html"
+            >
+              <img
+                class="relative w-auto h-12 !cursor-pointer object-contain [transform:_rotate(1.12deg)]"
+                alt=""
+                src="/public/stars2@2x.png"
+              />
+
+              Get in Touch
+            </a>
+            <a
+              target="_blank"
+              rel="noopener"
+              class="[text-decoration:none] rounded-6xl !cursor-pointer transition-all hover:bg-whitesmoke hover:text-colors-black-100 bg-mediumaquamarine w-[213px] py-4 overflow-hidden shrink-0 flex flex-row items-center justify-center text-5xl text-gray-300 font-plus-jakarta-sans"
+              href="https://twitter.com/Unicohub"
+            >
+              Send a song!
+            </a>
+          </footer>
+        </main>
+      </section>
+    </div>
+    <!-- data page -->
+
+    <div id="page2" class="c2 min-h-screen w-full block z-0 overflow-y-hidden">
+      <div
+        id="ticketModal"
+        class="fixed inset-0 bg-black bg-opacity-80 z-10 flex items-center justify-center"
+      >
+        <div
+          class="rounded-2xl scale-125 transition-all duration-300 text-4xl shadow-lg max-w-xl w-full"
+        >
+          <!-- Your HTML content goes here -->
+          <div
+            class="rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] overflow-hidden flex flex-col items-center justify-start py-[50px] px-[33px] gap-[21px] border-[1px] border-solid border-lightgray"
+          >
+            <div
+              class="shrink-0 flex flex-col items-start justify-start gap-[11px]"
+            >
+              <b class="relative tracking-[0.3px] leading-[27.4px] font-inter"
+                >Ticketing</b
+              >
+              <div
+                class="relative text-base tracking-[0.5px] leading-[26.44px] font-dm-sans"
+              >
+                <p class="m-0">
+                  Easily collaborate with colleagues to quickly solve complex
+                  problems,
+                </p>
+                <p class="m-0">
+                  as well as allow customers to track progress in real time.
+                </p>
+              </div>
+            </div>
+            <div class="relative w-[527px] h-[174px]">
+              <img
+                class="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
+                alt=""
+                src="/public/image6@2x.png"
+              />
+            </div>
+            <div
+              class="relative text-base tracking-[0.5px] leading-[26.44px] font-dm-sans"
+            >
+              <p class="m-0">
+                Easily collaborate with colleagues to quickly solve complex
+                problems,
+              </p>
+              <p class="m-0">
+                as well as allow customers to track progress in real time.
+              </p>
+            </div>
+            <a
+              href="/public/image6@2x.png"
+              target="_blank"
+              rel="noopener"
+              class="font-dm-sans text-mini no-underline rounded-lg text-white px-2 py-2 bg-mediumseagreen-200 transition-all w-fit self-start cursor-pointer hover:bg-mediumaquamarine"
+              >Open in new tab</a
+            >
           </div>
         </div>
-
-        <!-- make this into cards -->
-
-        <div class="dance-grid">
-          <div class="grid-item">Dance Story 1</div>
-          <div class="grid-item">Dance Story 2</div>
-          <div class="grid-item">Dance Story 3</div>
-          <div class="grid-item">Dance Story 4</div>
+      </div>
+      <div
+        id="notionModal"
+        class="fixed inset-0 bg-black bg-opacity-80 z-10 flex items-center justify-center"
+      >
+        <div
+          class="flex flex-col relative bg-white overflow-x-hidden items-center transition-all duration-300 shadow-lg w-full max-w-screen-2xl"
+        >
+          <!-- Your HTML content goes here -->
+          <div class="w-full flex flex-row justify-end pe-8">
+            <span
+              class="flex flex-row justify-between pt-5 items-center gap-4 w-fit"
+            >
+              <a
+                href="https://fanatical-iodine-239.notion.site/Product-Requirement-Document-PRD-a01e03c963154745a96d8e8b52829f7a"
+                target="_blank"
+                rel="noopener"
+                class="font-inter cursor-pointer text-[16px] px-4 w-fit no-underline py-2 text-white rounded-md transition-all bg-mediumaquamarine hover:bg-mediumseagreen-100"
+              >
+                Open in new tab
+              </a>
+              <button
+                id="closeNotionModal"
+                class="px-4 cursor-pointer text-[16px] w-fit py-2 bg-red-500 text-white rounded-md transition-all font-inter hover:bg-red-700"
+              >
+                Close
+              </button>
+            </span>
+          </div>
+          <!-- <iframe
+            src="https://www.notioniframe.com/notion/d9eku1vcage"
+            class="w-full h-[95vh] border-0"
+          ></iframe> -->
+          <iframe
+            src="https://v2-embednotion.com/Product-Requirement-Document-PRD-a01e03c963154745a96d8e8b52829f7a"
+            class="w-full h-[95vh] border-0"
+          ></iframe>
+          <div class="bg-white fixed w-4/5 bottom-0 h-[10vh] z-10"></div>
         </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="card">
-                <img src="space1.jpg" class="card-img-top" />
-                <div class="card-body">
-                  <h5 class="card-title">Project 1</h5>
-                </div>
+      </div>
+      <div
+        id="multiplayerModal"
+        class="fixed inset-0 bg-black bg-opacity-80 z-10 flex items-center justify-center"
+      >
+        <div
+          class="rounded-2xl scale-125 transition-all duration-300 text-4xl shadow-lg max-w-sm font-inter w-full"
+        >
+          <!-- Your HTML content goes here -->
+          <div
+            class="rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-hidden flex flex-col items-center justify-start py-[25px] px-[22px] gap-[25px] border-[1px] border-solid border-lightgray"
+          >
+            <div
+              class="shrink-0 flex flex-col items-start justify-center gap-[11px]"
+            >
+              <b class="relative tracking-[0.3px] leading-[27.4px]"
+                >Multiplayer</b
+              >
+              <div
+                class="relative text-base tracking-[0.5px] leading-[26.44px] font-dm-sans"
+              >
+                <p class="m-0">Collaborate efficiently with teammates in</p>
+                <p class="m-0">real time thanks to co-presence indicators,</p>
+                <p class="m-0">notes, and @mentions.</p>
               </div>
             </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <img src="space2.jpg" class="card-img-top" />
-                <div class="card-body">
-                  <h5 class="card-title">Project 2</h5>
-                </div>
-              </div>
+            <div class="relative w-[349px] h-[158px]">
+              <img
+                class="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
+                alt=""
+                src="/public/image@2x.png"
+              />
             </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <img src="space3.jpg" class="card-img-top" />
-                <div class="card-body">
-                  <h5 class="card-title">Project 3</h5>
-                </div>
+            <a
+              href="/public/image6@2x.png"
+              target="_blank"
+              rel="noopener"
+              class="font-dm-sans text-mini no-underline rounded-lg text-white px-2 py-2 bg-mediumseagreen-200 transition-all w-fit self-start cursor-pointer hover:bg-mediumaquamarine"
+              >Open in new tab</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        id="configureModal"
+        class="fixed inset-0 bg-black bg-opacity-80 z-10 flex items-center justify-center"
+      >
+        <div
+          class="bg-transparent rounded-2xl scale-110 transition-all duration-300 shadow-lg max-w-xl w-full font-inter text-15xl"
+        >
+          <!-- Your HTML content goes here -->
+          <div
+            class="rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] shrink-0 flex flex-col items-center justify-center py-[70px] px-4 border-[1px] border-solid border-lightgray"
+          >
+            <div
+              class="shrink-0 flex flex-col items-start justify-center ps-4 gap-[10px]"
+            >
+              <div
+                class="relative tracking-[0.3px] leading-[27.4px] flex items-center w-72"
+              >
+                Configurable
               </div>
-            </div>
-          <div class="col-sm-6">
-            <div class="card">
-              <img src="space4.jpg" class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">Project 4</h5>
+              <div
+                class="relative text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-[561px]"
+              >
+                Change language, turn on dark mode, save custom views, and more.
               </div>
             </div>
           </div>
         </div>
       </div>
+      <section
+        class="relative bg-gray-100 fade-in w-full h-fit overflow-hidden flex flex-col items-center justify-start pt-1 px-0 gap-0 box-border"
+      >
+        <main
+          class="flex flex-col scale-90 items-center justify-center gap-9 text-left text-4xl text-gray-400 font-inter"
+          id="data"
+        >
+          <div
+            class="shrink-0 flex flex-row items-center justify-center max-h-fit lg:gap-11 xl:gap-10"
+          >
+            <div
+              id="openTicketModal"
+              class="openNotionModal !cursor-pointer rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] overflow-hidden flex flex-col items-center justify-start py-[50px] px-[33px] gap-[21px] border-[1px] border-solid border-lightgray"
+            >
+              <div
+                class="shrink-0 flex flex-col !cursor-pointer items-start justify-start gap-[11px]"
+              >
+                <b
+                  class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px]"
+                  >Ticketing</b
+                >
+                <div
+                  class="relative text-base !cursor-pointer tracking-[0.5px] leading-[26.44px] font-dm-sans"
+                >
+                  <p class="m-0 !cursor-pointer">
+                    Easily collaborate with colleagues to quickly solve complex
+                    problems,
+                  </p>
+                  <p class="m-0 !cursor-pointer">
+                    as well as allow customers to track progress in real time.
+                  </p>
+                </div>
+              </div>
+              <div class="relative !cursor-pointer w-[527px] h-[174px]">
+                <img
+                  class="absolute !cursor-pointer h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
+                  alt=""
+                  src="/public/image6@2x.png"
+                />
+              </div>
+              <div
+                class="relative !cursor-pointer text-base tracking-[0.5px] leading-[26.44px] font-dm-sans"
+              >
+                <p class="m-0 !cursor-pointer">
+                  Easily collaborate with colleagues to quickly solve complex
+                  problems,
+                </p>
+                <p class="m-0 !cursor-pointer">
+                  as well as allow customers to track progress in real time.
+                </p>
+              </div>
+            </div>
+            <div
+              class="lg:gap-11 xl:gap-12 shrink-0 flex flex-col !cursor-pointer items-start justify-between py-0 box-border text-15xl"
+            >
+              <div
+                class="openNotionModal !cursor-pointer openConfigureModal rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] shrink-0 flex flex-col items-center justify-center py-[70px] px-5 border-[1px] border-solid border-lightgray"
+              >
+                <div
+                  class="shrink-0 flex flex-col !cursor-pointer items-start justify-center gap-[10px]"
+                >
+                  <div
+                    class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px] flex items-center w-72"
+                  >
+                    Configurable
+                  </div>
+                  <div
+                    class="relative !cursor-pointer text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-[561px]"
+                  >
+                    Change language, turn on dark mode, save custom views, and
+                    more.
+                  </div>
+                </div>
+              </div>
+              <div
+                class="openNotionModal !cursor-pointer openConfigureModal rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] shrink-0 flex flex-col items-center justify-center py-[70px] px-5 border-[1px] border-solid border-lightgray"
+              >
+                <div
+                  class="shrink-0 flex flex-col !cursor-pointer items-start justify-center gap-[10px]"
+                >
+                  <div
+                    class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px] flex items-center w-72"
+                  >
+                    Configurable
+                  </div>
+                  <div
+                    class="relative !cursor-pointer text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-[561px]"
+                  >
+                    Change language, turn on dark mode, save custom views, and
+                    more.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-full shrink-0 flex flex-row items-center justify-between text-5xl"
+          >
+            <div
+              class="openNotionModal !cursor-pointer openMultiplayerModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-hidden flex flex-col items-center justify-start py-[25px] px-[22px] gap-[25px] border-[1px] border-solid border-lightgray"
+            >
+              <div
+                class="shrink-0 flex flex-col items-start !cursor-pointer justify-center gap-[11px]"
+              >
+                <b class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px]"
+                  >Multiplayer</b
+                >
+                <div
+                  class="relative text-base tracking-[0.5px] !cursor-pointer leading-[26.44px] font-dm-sans"
+                >
+                  <p class="m-0 !cursor-pointer">Collaborate efficiently with teammates in</p>
+                  <p class="m-0 !cursor-pointer">real time thanks to co-presence indicators,</p>
+                  <p class="m-0 !cursor-pointer">notes, and @mentions.</p>
+                </div>
+              </div>
+              <div class="relative !cursor-pointer w-[349px] h-[158px]">
+                <img
+                  class="absolute !cursor-pointer h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
+                  alt=""
+                  src="/public/image@2x.png"
+                />
+              </div>
+            </div>
+            <div
+              class="openNotionModal !cursor-pointer openMultiplayerModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-hidden flex flex-col items-center justify-start py-[25px] px-[22px] gap-[25px] border-[1px] border-solid border-lightgray"
+            >
+              <div
+                class="shrink-0 flex flex-col !cursor-pointer items-start justify-center gap-[11px]"
+              >
+                <b class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px]"
+                  >Multiplayer</b
+                >
+                <div
+                  class="relative text-base tracking-[0.5px] !cursor-pointer leading-[26.44px] font-dm-sans"
+                >
+                  <p class="m-0 !cursor-pointer">Collaborate efficiently with teammates in</p>
+                  <p class="m-0 !cursor-pointer">real time thanks to co-presence indicators,</p>
+                  <p class="m-0 !cursor-pointer">notes, and @mentions.</p>
+                </div>
+              </div>
+              <div class="relative  w-[349px] h-[158px]">
+                <img
+                  class="absolute !cursor-pointer h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
+                  alt=""
+                  src="/public/image@2x.png"
+                />
+              </div>
+            </div>
+            <div
+              class="openNotionModal !cursor-pointer openMultiplayerModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-hidden flex flex-col items-center justify-start py-[25px] px-[22px] gap-[25px] border-[1px] border-solid border-lightgray"
+            >
+              <div
+                class="shrink-0 flex flex-col !cursor-pointer items-start justify-center gap-[11px]"
+              >
+                <b class="relative tracking-[0.3px] !cursor-pointer leading-[27.4px]"
+                  >Multiplayer</b
+                >
+                <div
+                  class="relative text-base !cursor-pointer tracking-[0.5px] leading-[26.44px] font-dm-sans"
+                >
+                  <p class="m-0 !cursor-pointer">Collaborate efficiently with teammates in</p>
+                  <p class="m-0 !cursor-pointer">real time thanks to co-presence indicators,</p>
+                  <p class="m-0 !cursor-pointer">notes, and @mentions.</p>
+                </div>
+              </div>
+              <div class="relative !cursor-pointer w-[349px] h-[158px]">
+                <img
+                  class="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
+                  alt=""
+                  src="/public/image@2x.png"
+                />
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer
+          class="w-8/12 flex flex-row items-start lg:-mt-8 xl:-mt-7 justify-center"
+        >
+          <a
+            href="#page1"
+            class="shrink-0 flex flex-row items-center justify-start p-1.5 gap-[7px] text-[20px] text-colors-black-100 font-dm-sans"
+          >
+            <div
+              class="relative tracking-[0.5px] leading-[26.44px] font-medium"
+            >
+              Go back
+            </div>
+            <img
+              class="relative w-[14.7px] h-[27px] object-contain"
+              alt=""
+              src="/public/arrow-1-stroke@2x.png"
+            />
+          </a>
+        </footer>
+      </section>
     </div>
-    <script src="script.js"></script>
+
+    <!-- coded page -->
+    <div id="page3" class="c3 min-h-screen w-full block overflow-y-hidden">
+      <div
+        id="multiplayerVideoModal"
+        class="fixed inset-0 bg-black bg-opacity-80 z-10 flex items-center justify-center"
+      >
+        <div
+          class="rounded-2xl scale-125 transition-all max-h-fit duration-300 text-4xl shadow-lg max-w-sm font-inter w-full"
+        >
+          <!-- Your HTML content goes here -->
+          <div
+            class="rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border w-full h-full overflow-hidden flex flex-col items-center justify-center gap-4 p-4 relative border-[1px] border-solid border-lightgray"
+          >
+            <iframe
+              width="349"
+              height="247"
+              src="https://www.youtube.com/embed/lDZEU7EoaF0?si=zDXUqntDmhGt6e_4"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              class="rounded-xl"
+            ></iframe>
+
+            <div
+              class="h-[119px] shrink-0 flex flex-col items-start justify-center gap-[11px] z-[1]"
+            >
+              <b class="relative tracking-[0.3px] leading-[27.4px]"
+                >Multiplayer</b
+              >
+              <div
+                class="relative text-base tracking-[0.5px] leading-[26.44px]"
+              >
+                <p class="m-0">Collaborate efficiently with teammates in</p>
+                <p class="m-0">real time thanks to co-presence indicators,</p>
+                <p class="m-0">notes, and @mentions.</p>
+              </div>
+            </div>
+            <a
+              href="https://www.youtube.com/embed/lDZEU7EoaF0?si=zDXUqntDmhGt6e_4"
+              target="_blank"
+              rel="noopener"
+              class="font-dm-sans text-mini no-underline rounded-lg text-white px-2 py-2 bg-mediumseagreen-200 transition-all w-fit self-start cursor-pointer hover:bg-mediumaquamarine"
+              >Open in new tab</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="relative bg-gray-100 fade-in w-full max-h-fit overflow-x-hidden flex flex-col items-center py-16 justify-between gap-6"
+      >
+        <section
+          class="flex flex-col items-center justify-center py-[25px] px-10 gap-[45px] text-left text-5xl text-gray-400 font-helvetica"
+          id="codes"
+        >
+          <div
+            class="shrink-0 flex flex-row items-start justify-start p-2.5 lg:gap-8 scale-95 xl:scale-100 xl:gap-10"
+          >
+            <div
+              class="openMultiplayerVideoModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border h-[453px] overflow-hidden flex flex-col items-center justify-between py-[26px] px-[22px] relative border-[1px] border-solid border-lightgray"
+            >
+              <iframe
+                width="349"
+                height="247"
+                src="https://www.youtube.com/embed/lDZEU7EoaF0?si=zDXUqntDmhGt6e_4"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                class="rounded-xl"
+              ></iframe>
+
+              <div
+                class="h-[119px] shrink-0 flex flex-col items-start justify-center gap-[11px] z-[1]"
+              >
+                <b class="relative tracking-[0.3px] leading-[27.4px]"
+                  >Multiplayer</b
+                >
+                <div
+                  class="relative text-base tracking-[0.5px] leading-[26.44px]"
+                >
+                  <p class="m-0">Collaborate efficiently with teammates in</p>
+                  <p class="m-0">real time thanks to co-presence indicators,</p>
+                  <p class="m-0">notes, and @mentions.</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="openMultiplayerVideoModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border h-[453px] overflow-hidden flex flex-col items-center justify-between py-[26px] px-[22px] relative border-[1px] border-solid border-lightgray"
+            >
+              <iframe
+                width="349"
+                height="247"
+                src="https://www.youtube.com/embed/lDZEU7EoaF0?si=zDXUqntDmhGt6e_4"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                class="rounded-xl"
+              ></iframe>
+              <div
+                class="h-[119px] shrink-0 flex flex-col items-start justify-center gap-[11px] z-[1]"
+              >
+                <b class="relative tracking-[0.3px] leading-[27.4px]"
+                  >Multiplayer</b
+                >
+                <div
+                  class="relative text-base tracking-[0.5px] leading-[26.44px]"
+                >
+                  <p class="m-0">Collaborate efficiently with teammates in</p>
+                  <p class="m-0">real time thanks to co-presence indicators,</p>
+                  <p class="m-0">notes, and @mentions.</p>
+                </div>
+              </div>
+              <!-- <img
+                class="absolute my-0 mx-[!important] top-[calc(50%_-_146.5px)] left-[calc(50%_-_64.5px)] w-[109px] h-[109px] object-cover z-[2]"
+                alt=""
+                src="/public/frame-Play-btn@2x.png"
+              /> -->
+            </div>
+            <div
+              class="openMultiplayerVideoModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border h-[453px] overflow-hidden flex flex-col items-center justify-between py-[26px] px-[22px] relative border-[1px] border-solid border-lightgray"
+            >
+              <iframe
+                width="349"
+                height="247"
+                src="https://www.youtube.com/embed/lDZEU7EoaF0?si=zDXUqntDmhGt6e_4"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                class="rounded-xl"
+              ></iframe>
+              <div
+                class="h-[119px] shrink-0 flex flex-col items-start justify-center gap-[11px] z-[1]"
+              >
+                <b class="relative tracking-[0.3px] leading-[27.4px]"
+                  >Multiplayer</b
+                >
+                <div
+                  class="relative text-base tracking-[0.5px] leading-[26.44px]"
+                >
+                  <p class="m-0">Collaborate efficiently with teammates in</p>
+                  <p class="m-0">real time thanks to co-presence indicators,</p>
+                  <p class="m-0">notes, and @mentions.</p>
+                </div>
+              </div>
+              <!-- <img
+                class="absolute my-0 mx-[!important] top-[calc(50%_-_146.5px)] left-[calc(50%_-_64.5px)] w-[109px] h-[109px] object-cover z-[2]"
+                alt=""
+                src="/public/frame-Play-btn@2x.png"
+              /> -->
+            </div>
+          </div>
+          <a
+            href="#page1"
+            class="shrink-0 flex flex-row items-center justify-start p-1.5 gap-[7px] text-[20px] text-colors-black-100 font-dm-sans"
+          >
+            <div
+              class="relative tracking-[0.5px] leading-[26.44px] font-medium"
+            >
+              Go back
+            </div>
+            <img
+              class="relative w-[14.7px] h-[27px] object-contain"
+              alt=""
+              src="/public/arrow-1-stroke@2x.png"
+            />
+          </a>
+        </section>
+      </div>
+    </div>
+
+    <!-- <button
+      id="closeModals"
+      class="fixed top-[10%] right-1/2 z-10 px-4 py-2 bg-red-500 text-white rounded"
+    >
+      Close Modals
+    </button> -->
   </body>
+  <script>
+    const c1 = document.getElementById("page1");
+    const c2 = document.getElementById("page2");
+    const c3 = document.getElementById("page3");
+    document.addEventListener("DOMContentLoaded", (event) => {
+      c2.classList.add("!hidden");
+      c3.classList.add("!hidden");
+      document.getElementById("ticketModal").classList.add("hidden");
+      document.getElementById("multiplayerModal").classList.add("hidden");
+      document.getElementById("configureModal").classList.add("hidden");
+      document.getElementById("multiplayerVideoModal").classList.add("hidden");
+      document.getElementById("notionModal").classList.add("hidden");
+      console.log("Page is fully loaded");
+    });
+
+    document.getElementById("link1").addEventListener("click", function () {
+      c2.classList.remove("!hidden");
+      c3.classList.add("!hidden");
+      setTimeout(function () {
+        c2.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    });
+    document.getElementById("link2").addEventListener("click", function () {
+      c3.classList.remove("!hidden");
+      c2.classList.add("!hidden");
+      setTimeout(function () {
+        c3.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    });
+
+    // Ticket Modal
+    // document
+    //   .getElementById("openTicketModal")
+    //   .addEventListener("click", function () {
+    //     document.getElementById("ticketModal").classList.remove("hidden");
+    //   });
+
+    // document
+    //   .getElementById("ticketModal")
+    //   .addEventListener("click", function (e) {
+    //     if (e.target.id === "ticketModal") {
+    //       document.getElementById("ticketModal").classList.add("hidden");
+    //     }
+    //   });
+
+    // Multiplayer Modals
+    // Select all buttons with the class "openMultiplayerModal"
+    // const multiplayerButtons = document.getElementsByClassName(
+    //   "openMultiplayerModal"
+    // );
+
+    // // Select the modal with the id "multiplayerModal"
+    // const multiplayerModal = document.getElementById("multiplayerModal");
+
+    // // Loop through all multiplayerButtons and add an event listener to each
+    // for (let i = 0; i < multiplayerButtons.length; i++) {
+    //   multiplayerButtons[i].addEventListener("click", function () {
+    //     // Toggle the modal
+    //     multiplayerModal.classList.toggle("hidden");
+    //   });
+    // }
+
+    // // Add an event listener to the multiplayerModal for closing it when clicking outside of it
+    // multiplayerModal.addEventListener("click", function (e) {
+    //   if (e.target === multiplayerModal) {
+    //     multiplayerModal.classList.add("hidden");
+    //   }
+    // });
+
+    // // Configure modal
+    // const configureModal = document.getElementById("configureModal");
+    // const configureButtons =
+    //   document.getElementsByClassName("openConfigureModal");
+    // for (let i = 0; i < configureButtons.length; i++) {
+    //   configureButtons[i].addEventListener("click", function () {
+    //     configureModal.classList.remove("hidden");
+    //   });
+    // }
+
+    // configureModal.addEventListener("click", function (e) {
+    //   if (e.target === configureModal) {
+    //     configureModal.classList.add("hidden");
+    //   }
+    // });
+
+    // // Multiplayer Video modal
+    // const multiplayerVideoModal = document.getElementById(
+    //   "multiplayerVideoModal"
+    // );
+    // const multiplayerVideoButtons = document.getElementsByClassName(
+    //   "openMultiplayerVideoModal"
+    // );
+
+    // for (let i = 0; i < multiplayerVideoButtons.length; i++) {
+    //   multiplayerVideoButtons[i].addEventListener("click", function () {
+    //     multiplayerVideoModal.classList.toggle("hidden");
+    //   });
+    // }
+
+    // multiplayerVideoModal.addEventListener("click", function (e) {
+    //   if (e.target === multiplayerVideoModal) {
+    //     multiplayerVideoModal.classList.add("hidden");
+    //   }
+    // });
+
+    // Notion Modal
+    const notionModal = document.getElementById("notionModal");
+    const notionButtons = document.getElementsByClassName("openNotionModal");
+    const closeNotionModal = document.getElementById("closeNotionModal");
+    for (let i = 0; i < notionButtons.length; i++) {
+      notionButtons[i].addEventListener("click", function () {
+        window.open(
+          "https://fanatical-iodine-239.notion.site/Product-Requirement-Document-PRD-a01e03c963154745a96d8e8b52829f7a",
+          "_blank"
+        );
+      });
+    }
+
+    // notionModal.addEventListener("click", function (e) {
+    //   if (e.target === notionModal) {
+    //     notionModal.classList.add("hidden");
+    //   }
+
+    // });
+
+    // closeNotionModal.addEventListener("click", function () {
+    //   notionModal.classList.add("hidden");
+    // });
+  </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
 </html>

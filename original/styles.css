@@ -1,8 +1,8 @@
 :root { 
     font-family: 'Inter', sans-serif; 
     --primary-color: black;
-    --highlight: #3498db;
-    --background: #eaeaea
+    --highlight: #5d8a8f;
+    --background: #f1eee8;
 }
 @supports (font-variation-settings: normal) {
   :root { font-family: 'Inter var', sans-serif; }
@@ -18,7 +18,7 @@ body {
 
 .special-sentence {
     font-size: 40px; /* Adjust the font size as needed */
-    font-weight: 400; /* 600 is typically used for semi-bold */
+    font-weight: 400; 
 }
 
 .underline-link {
@@ -29,7 +29,7 @@ body {
 }
 
 .underline-link:hover {
-    color: #2980b9; /* Change color on hover */
+    color: #2980b9; 
 }
 
 .underline-link::after {
@@ -138,9 +138,12 @@ li.underline-link::after {
 
 
 .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: transparent;
     padding: 10px 0;
-    text-align: right; /* Align links to the right */
+    /* text-align: right;  */
 }
 
 .navbar ul {
@@ -159,7 +162,7 @@ li.underline-link::after {
     font-size: 20px; /* Adjust the font size as needed */
     color: var(--primary-color); /* Text color */
     text-decoration: none;
-    float: left;
+    /* float: left; */
 }
 
 .navbar a {
