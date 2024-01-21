@@ -39,7 +39,7 @@
           class="relative flex flex-col lg:scale-75 xl:scale-100 max-w-screen-xl xl:max-w-screen-2xl 2xl:w-full items-center justify-center py-0 px-[30px]"
         >
           <header
-            class="w-full flex flex-row flex-wrap items-center max-w-screen-xl px-4 justify-between text-right text-[36px] text-colors-black-100 font-inknut-antiqua"
+          class="w-full flex flex-col md:flex-row flex-wrap items-center max-w-screen-xl px-4 justify-between text-right text-[36px] text-colors-black-100 font-inknut-antiqua"
           >
             <div
               class="shrink-0 flex flex-row items-center scale-[0.8] justify-center gap-[10px]"
@@ -99,15 +99,15 @@
             </div>
           </header>
           <section
-            class="relative w-[1197px] h-[570px] -mt-4 flex flex-col items-center justify-center text-center text-[70px] text-colors-black-100 font-inter"
-            id="homepage"
+          class="relative w-full lg:w-[1197px] h-96 lg:h-[570px] -mt-4 flex flex-col items-center justify-center text-center text-[70px] text-colors-black-100 font-inter"
+          id="homepage"
           >
-            <div class="w-fit flex flex-col items-center justify-center">
+            <div class="w-fit flex flex-col items-center -space-y-10 md:-space-y-4 lg:space-y-0 justify-center">
               <div
-                class="shrink-0 flex flex-row items-center justify-center gap-4"
+              class="shrink-0 w-full lg:w-auto flex flex-row scale-[43%] md:scale-75 lg:scale-100 items-center justify-center gap-4"
               >
                 <h3
-                  class="m-0 relative text-inherit tracking-[-3.2px] font-normal font-inherit"
+                class="m-0 relative text-inherit tracking-[-3.2px] min-w-fit lg:w-auto font-normal font-inherit"
                 >
                   I like telling
                 </h3>
@@ -121,13 +121,13 @@
                 /> -->
 
                 <h3
-                  class="m-0 relative text-inherit tracking-[-3.2px] leading-[88px] font-normal font-inherit"
+                class="m-0 relative text-inherit tracking-[-3.2px] lg:leading-[88px] font-normal font-inherit"
                 >
                   through
                 </h3>
               </div>
               <div
-                class="shrink-0 flex flex-row items-center justify-center gap-[20px] text-mediumaquamarine"
+              class="shrink-0 flex scale-50 md:scale-75 lg:scale-100 flex-row items-center justify-center gap-[20px] text-mediumaquamarine"
               >
                 <div
                   class="shrink-0 flex flex-row items-center justify-center gap-[15px]"
@@ -166,38 +166,38 @@
                 </div>
               </div>
               <h5
-                class="m-0 relative text-15xl tracking-[-3.2px] leading-[88px] font-normal font-inherit"
+              class="m-0 relative text-5xl md:text-15xl tracking-tighter md:tracking-[-3.2px] leading-[88px] font-normal font-inherit"
               >
                 (and also listening to them.)
               </h5>
             </div>
             <img
-              class="absolute h-[19.68%] w-auto top-[14.54%] left-[85%] max-w-full overflow-hidden max-h-full object-cover"
-              alt=""
+            class="absolute scale-50 md:scale-75 lg:scale-100 h-[19.68%] w-auto top-[14.54%] left-[70%] md:left-[85%] max-w-full overflow-hidden max-h-full object-cover"
+            alt=""
               src="/public/stars2@2x.png"
             />
 
             <img
-              class="absolute top-2/4 left-[10%] w-[130px] h-[130px] overflow-hidden object-cover"
-              alt=""
+            class="absolute scale-50 md:scale-75 lg:scale-100 md:top-2/4 top-[45%] left-[15%] md:left-[10%] w-[130px] h-[130px] overflow-hidden object-cover"
+            alt=""
               src="/public/arrow-051@2x.png"
             />
 
             <img
-              class="absolute top-[75%] left-3/4 w-[139.1px] h-[154.3px] overflow-hidden object-contain"
-              alt=""
+            class="absolute scale-50 md:scale-75 hidden md:block lg:scale-100 top-2/4 lg:top-[75%] left-3/4 w-[139.1px] h-[154.3px] overflow-hidden object-contain"
+            alt=""
               src="/public/arrow-021@2x.png"
             />
           </section>
           <footer
-            class="2xl:w-5/6 lg:w-full text-[20px] flex flex-row items-start justify-between font-dm-sans"
+          class="2xl:w-5/6 md:w-full scale-90 lg:scale-100 text-[20px] flex flex-col gap-10 md:flex-row items-center lg:items-start justify-between font-dm-sans"
           >
             <a
-              class="[text-decoration:none] hover:bg-mediumaquamarine transition-all duration-150 font-medium rounded-31xl bg-whitesmoke shrink-0 flex flex-row items-center justify-center py-2 px-[25px] gap-[11px] [transform:_rotate(-1.12deg)] text-[inherit]"
+              class="[text-decoration:none] hover:bg-mediumaquamarine transition-all duration-150 font-medium rounded-31xl bg-whitesmoke shrink-0 flex flex-row items-center justify-center py-2 px-[25px] gap-[11px] text-[inherit]"
               href="mailto:medini.chopra11@gmail.com"
             >
               <img
-                class="relative w-auto h-12 object-contain [transform:_rotate(1.12deg)]"
+                class="relative w-auto h-12 object-contain"
                 alt=""
                 src="/public/btnIcon.png"
               />
@@ -207,7 +207,7 @@
             <a
               target="_blank"
               rel="noopener"
-              class="[text-decoration:none] rounded-6xl transition-all hover:bg-whitesmoke hover:text-colors-black-100 bg-mediumaquamarine w-[213px] py-4 overflow-hidden shrink-0 flex flex-row items-center justify-center text-5xl text-gray-300 font-plus-jakarta-sans"
+              class="[text-decoration:none] rounded-31xl transition-all hover:bg-whitesmoke hover:text-colors-black-100 bg-mediumaquamarine w-[213px] py-4 overflow-hidden shrink-0 flex flex-row items-center justify-center text-5xl text-gray-300 font-plus-jakarta-sans"
               href="https://open.spotify.com/playlist/2BhyP3hC1RiYwadM0icNT9?si=9f1cabab73cd42e5&pt=5d8ecce1092080ce4c6dd4ee0b846235"
             >
               Send a song!
@@ -388,19 +388,19 @@
         class="relative bg-gray-100 fade-in w-full h-fit overflow-hidden flex flex-col items-center justify-start pt-1 px-0 gap-0 box-border"
       >
         <main
-          class="flex flex-col scale-90 items-center justify-center gap-9 text-left text-4xl text-gray-400 font-inter"
-          id="data"
+        class="flex flex-col scale-90 items-center justify-center gap-12 lg:gap-9 text-left text-4xl text-gray-400 font-inter"
+        id="data"
         >
           <div
-            class="shrink-0 flex flex-row items-center justify-center max-h-fit lg:gap-11 xl:gap-10"
+          class="shrink-0 flex flex-col lg:flex-row gap-7 items-center justify-center max-h-fit lg:gap-11 xl:gap-10"
           >
           <a
           href="https://medinichopra.notion.site/4031-574d8ecba3b043d8b82cf7edf808b051?pvs=74"
           target="_blank"
           rel="noopener"
           id="openTicketModal"
-          class="openNotionModal no-underline text-black !cursor-pointer rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] overflow-hidden flex flex-col items-center justify-start py-[50px] px-[33px] gap-[21px] border-[1px] border-solid border-lightgray"
-        >
+          class="openNotionModal no-underline max-w-xs md:max-w-sm lg:max-w-3xl text-black w-full !cursor-pointer rounded-[20.03px] [background:linear-gradient(180.08deg,_#f4f4f4,_#effffa)] overflow-hidden flex flex-col items-center justify-start p-8 lg:py-[50px] lg:px-[33px] gap-[21px] border-[1px] border-solid border-lightgray"
+          >
               <div
                 class="shrink-0 flex flex-col !cursor-pointer items-start justify-start gap-[11px]"
               >
@@ -418,7 +418,8 @@
                   <p class="m-0 !cursor-pointer">and technology,</p>
                 </div>
               </div>
-              <div class="relative !cursor-pointer w-[527px] h-[174px]">
+              <div                 class="relative !cursor-pointer w-full max-w-sm lg:max-w-xl lg:w-[527px] h-[174px]"
+              >
                 <img
                   class="absolute !cursor-pointer h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
                   alt=""
@@ -436,24 +437,24 @@
               </div>
             </a>
             <div
-              class="lg:gap-11 xl:gap-12 shrink-0 flex flex-col !cursor-pointer items-start justify-between py-0 box-border text-15xl font-inter"
+            class="lg:gap-11 xl:gap-12 w-full lg:w-auto shrink-0 flex flex-col gap-7 no-underline text-black items-start justify-between py-0 box-border text-12xl lg:text-15xl"
             >
             <a
             href="https://drive.google.com/file/d/1uhOkIeETsgcgcdBRx-dgTD7oTUmaUvsk/view?usp=sharing"
             target="_blank"
             rel="noopener"
-            class="openNotionModal no-underline text-black !cursor-pointer openConfigureModal rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] shrink-0 flex flex-col items-center justify-center py-[70px] px-5 border-[1px] border-solid border-lightgray"
-          >
+            class="openNotionModal no-underline w-full lg:w-auto text-black !cursor-pointer openConfigureModal rounded-[20.03px] [background:linear-gradient(180.08deg,_#f4f4f4,_#effffa)] shrink-0 flex flex-col items-center justify-center py-14 lg:py-[70px] px-0 lg:px-5 border-[1px] border-solid border-lightgray"
+            >
                 <div
-                  class="shrink-0 flex flex-col !cursor-pointer items-start justify-center gap-[10px]"
+                class="shrink-0 flex flex-col max-w-xs md:max-w-sm lg:max-w-3xl !cursor-pointer items-start justify-center gap-[10px]"
                 >
                   <div
-                    class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px] flex items-center w-72"
+                  class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px] flex items-center w-full lg:w-72"
                   >
                     Reddit Analysis
                   </div>
                   <div
-                    class="relative !cursor-pointer text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-[561px]"
+                  class="relative !cursor-pointer text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-full lg:w-[561px]"
                   >
                     Is r/askEngineers more toxic than r/askWomenEngineers? 
                   </div>
@@ -463,10 +464,10 @@
                 href="https://drive.google.com/file/d/1wIFXM52qYWoRnYQj5uzDINO7x7HeIsuk/view"
                 target="_blank"
                 rel="noopener"
-                class="openNotionModal no-underline text-black !cursor-pointer openConfigureModal rounded-[20.03px] [background:linear-gradient(180.08deg,_#62cbab,_#effffa)] shrink-0 flex flex-col items-center justify-center py-[70px] px-5 border-[1px] border-solid border-lightgray"
+                class="openNotionModal no-underline w-full lg:w-auto text-black !cursor-pointer openConfigureModal rounded-[20.03px] [background:linear-gradient(180.08deg,_#f4f4f4,_#effffa)] shrink-0 flex flex-col items-center justify-center py-14 lg:py-[70px] px-0 lg:px-5 border-[1px] border-solid border-lightgray"
               >
                 <div
-                  class="shrink-0 flex flex-col !cursor-pointer items-start justify-center gap-[10px]"
+                class="shrink-0 flex flex-col max-w-xs md:max-w-sm lg:max-w-3xl !cursor-pointer items-start justify-center gap-[10px]"
                 >
                   <div
                     class="relative !cursor-pointer tracking-[0.3px] leading-[27.4px] flex items-center w-72"
@@ -474,7 +475,7 @@
                     Visualize AMR
                   </div>
                   <div
-                    class="relative !cursor-pointer text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-[561px]"
+                  class="relative !cursor-pointer text-mini tracking-[0.5px] leading-[26.4px] flex items-center w-full lg:w-[561px]"
                   >
                     Interactive web-app to graph antimicrobial resistance trends.
                   </div>
@@ -483,7 +484,7 @@
             </div>
           </div>
           <div
-            class="w-full shrink-0 flex flex-row items-center justify-between text-5xl"
+          class="w-full shrink-0 flex flex-col gap-8 lg:gap-0 lg:flex-row items-center justify-between text-5xl"
           >
           <a
           href="https://medinichopra.notion.site/medinichopra/tihai-99ed48d6c10d4acfa361a3f3e05a4d2a"
@@ -664,11 +665,11 @@
         class="relative bg-gray-100 fade-in w-full max-h-fit overflow-x-hidden flex flex-col items-center py-16 justify-between gap-6"
       >
         <section
-          class="flex flex-col items-center justify-center py-[25px] px-10 gap-[45px] text-left text-5xl text-gray-400 font-helvetica"
-          id="codes"
+        class="flex flex-col items-center justify-center py-[25px] px-10 gap-1 lg:gap-[45px] text-left text-5xl text-gray-400 font-helvetica"
+        id="codes"
         >
           <div
-            class="shrink-0 flex flex-row items-start justify-start p-2.5 lg:gap-8 scale-95 xl:scale-100 xl:gap-10"
+          class="shrink-0 flex flex-col lg:flex-row items-start justify-start p-2.5 gap-8 scale-90 lg:scale-95 xl:scale-100 xl:gap-10"
           >
             <div
               class="openMultiplayerVideoModal rounded-[20.03px] [background:linear-gradient(180deg,_#effef4,_#eefffa)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] box-border h-[453px] overflow-hidden flex flex-col items-center justify-between py-[26px] px-[22px] relative border-[1px] border-solid border-lightgray"
@@ -720,9 +721,9 @@
                 <div
                   class="relative text-base tracking-[0.5px] leading-[26.44px]"
                 >
-                  <p class="m-0">Collaborate efficiently with teammates in</p>
-                  <p class="m-0">real time thanks to co-presence indicators,</p>
-                  <p class="m-0">notes, and @mentions.</p>
+                  <p class="m-0">Musical rhythms looped over a consistent</p>
+                  <p class="m-0">metronome to create intricate sounds,</p>
+                  <p class="m-0">followed by a fusion of 4 dance forms.</p>
                 </div>
               </div>
               <!-- <img
