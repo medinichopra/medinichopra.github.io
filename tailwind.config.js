@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["*"],
   theme: {
     extend: {
@@ -20,6 +20,8 @@ module.exports = {
         cadetblue: "#5d8a8f",
         lightseagreen: "#57bba9",
         mediumaquamarine: "#62cbab",
+        purple: "#4E2A84",
+        lavender: "#7A5C91"
       },
       spacing: {},
       fontFamily: {
