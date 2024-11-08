@@ -16,35 +16,24 @@ body {
   -webkit-animation: fade-in 1.5s cubic-bezier(0.47, 0, 0.745, 0.715) both;
   animation: fade-in 1.5s cubic-bezier(0.47, 0, 0.745, 0.715) both;
 }
-.project-card-wrapper {
-  transition: all 0.3s ease;
+
+#openTicketModal {
+  border: 1px solid #d3d3d3;
+  transition: border-color 0.3s ease;
 }
 
-.project-image {
-  position: relative;
-  overflow: hidden;
+#openTicketModal:hover {
+  border-color: #4E2A84;
 }
 
-.project-image::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.openNotionModal {
+  transition: border-color 0.3s ease;
 }
 
-.project-card-wrapper:hover .project-image::after {
-  opacity: 1;
+.openNotionModal:hover {
+  border-color: #4E2A84;
 }
 
-.project-title,
-.project-description {
-  transition: opacity 0.3s ease;
-}
 @-webkit-keyframes fade-in {
   0% {
     opacity: 0;
