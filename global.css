@@ -19,7 +19,7 @@ body {
 
 #openTicketModal {
   border: 1px solid #d3d3d3;
-  transition: border-color 0.3s ease, border-width 0.3s ease;
+  transition: border-color 0.3s ease, border-width 0.1s ease;
 }
 
 #openTicketModal:hover {
@@ -28,7 +28,7 @@ body {
 }
 
 .openNotionModal {
-  transition: border-color 0.3s ease, border-width 0.3s ease;
+  transition: border-color 0.3s ease, border-width 0.1s ease;
 }
 
 .openNotionModal:hover {
@@ -37,7 +37,7 @@ body {
 }
 
 .openMultiplayerVideoModal {
-  transition: border-color 0.3s ease, border-width 0.3s ease;
+  transition: border-color 0.3s ease, border-width 0.1s ease;
 }
 
 .openMultiplayerVideoModal:hover {
