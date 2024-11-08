@@ -19,19 +19,30 @@ body {
 
 #openTicketModal {
   border: 1px solid #d3d3d3;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, border-width 0.3s ease;
 }
 
 #openTicketModal:hover {
   border-color: #4E2A84;
+  border-width: 2px;
 }
 
 .openNotionModal {
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, border-width 0.3s ease;
 }
 
 .openNotionModal:hover {
   border-color: #4E2A84;
+  border-width: 2px;
+}
+
+.openMultiplayerVideoModal {
+  transition: border-color 0.3s ease, border-width 0.3s ease;
+}
+
+.openMultiplayerVideoModal:hover {
+  border-color: #4E2A84;
+  border-width: 2px;
 }
 
 @-webkit-keyframes fade-in {
