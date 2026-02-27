@@ -3,14 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Medini Chopra</title>
+  <title>Medini Chopra — Research Engineer & AI Researcher</title>
+  <meta name="description" content="Medini Chopra is a Research Engineer at Northwestern Institute on Complex Systems, working on human-centered AI systems, language model fine-tuning, and generative AI for music and creativity." />
+  <meta name="author" content="Medini Chopra" />
+  <meta name="keywords" content="Medini Chopra, Research Engineer, AI Researcher, Northwestern, Human-Centered AI, Machine Learning" />
+  <link rel="canonical" href="https://medinichopra.github.io/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://medinichopra.github.io/" />
+  <meta property="og:title" content="Medini Chopra — Research Engineer & AI Researcher" />
+  <meta property="og:description" content="Research Engineer at Northwestern Institute on Complex Systems, working on human-centered AI systems." />
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Medini Chopra",
+    "url": "https://medinichopra.github.io/",
+    "jobTitle": "Research Engineer",
+    "worksFor": { "@type": "Organization", "name": "Northwestern Institute on Complex Systems" },
+    "sameAs": [
+      "https://linkedin.com/in/medinichopra",
+      "https://github.com/medinichopra"
+    ]
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <link rel="icon" type="image/svg+xml" href="/public/favicon-mc.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
   <link rel="stylesheet" href="./index.css" />
 </head>
 <body>
@@ -20,6 +44,15 @@
     <a href="/" class="nav-name">Medini <em>Chopra</em></a>
     <ul class="nav-links">
       <li><a href="/work.html">Projects</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Jump to <span class="nav-dropdown-caret" aria-hidden="true">▾</span>
+        </button>
+        <ul class="nav-dropdown-menu" role="menu">
+          <li role="none"><a href="#" id="nav-jump-about" role="menuitem">About</a></li>
+          <li role="none"><a href="https://drive.google.com/file/d/11qlCo4298TirdCjQydvVnAydewmXdqMi/view?usp=sharing" id="nav-jump-resume" role="menuitem" target="_blank" rel="noopener">Resume</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 
@@ -51,38 +84,58 @@
 
   <div id="content">
 
+    <div id="portrait-section">
     <section id="about-strip">
-      <p class="about-body fade-up">
-        Hi, I'm Medini <em>(pronounced: may-the-knee)</em>, a Research Engineer @ <a href="https://nico.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Northwestern Institute on Complex Systems</a>,
-        working with <a href="https://scholar.google.com/citations?user=uGJ_6aQAAAAJ&hl=en" class="inline-link" target="_blank" rel="noopener">Brian Uzzi</a> and <a href="https://mattgroh.com" class="inline-link" target="_blank" rel="noopener">Matt Groh</a>.
-        I'm passionate about designing human-centered AI systems. Some of my recent work includes fine-tuning language models for financial expert alignment, studying how generative models shape user creativity in music creation, and building a tool that summarizes and surfaces hundreds of daily press releases for journalists.
-        <br><br>
-        I graduated from Northwestern in December 2025 with a Master's degree in Computer Science. During my time there, I worked under the <a href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/" class="inline-link" target="_blank" rel="noopener">Human-AI Collaboration Lab</a> and the <a href="https://dtr.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Design, Technology, Research Lab</a>, interned at <a href="https://www.cboe.com" class="inline-link" target="_blank" rel="noopener">Cboe Global Markets'</a> AI Center of Excellence, and helped build <a href="https://vouchd.us/" class="inline-link" target="_blank" rel="noopener">Vouchd LLC</a> @ <a href="https://thegarage.northwestern.edu" class="inline-link" target="_blank" rel="noopener">The Garage</a>.
-        <br><br>
-        I'm also a semi-professional Kathak dancer, coffee connoisseur, and plant enthusiast.
-        <br>
-        Reach out if you'd like to learn more about my work, collaborate on a project, or simply talk about open-ended questions in <em>markets, music, media and machines</em>.
-      </p>
 
-      <div class="about-contact fade-up">
-        <!-- <p class="about-contact-line">
-          Let's explore <em>something open-ended.</em> Research, collaboration,<br>
-          or just a good conversation about music and machines.
-        </p> -->
-        <div class="connect-stack">
-          <a href="mailto:medinichopra11@gmail.com" class="connect-label-link">Email</a>
-          <a href="https://linkedin.com/in/medinichopra" class="connect-label-link" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/medinichopra" class="connect-label-link" target="_blank" rel="noopener">Github</a>
-          <a href="mailto:medinichopra11@gmail.com" class="connect-label-link">Resume</a>
+      <!-- Group 1: always visible, stays static -->
+      <div id="about-group-1">
+        <p class="about-body">
+          Hi, I'm Medini <em>(pronounced: may-the-knee)</em>, a Research Engineer @ <a href="https://nico.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Northwestern Institute on Complex Systems</a>,
+          working with <a href="https://scholar.google.com/citations?user=uGJ_6aQAAAAJ&hl=en" class="inline-link" target="_blank" rel="noopener">Brian Uzzi</a> and <a href="https://mattgroh.com" class="inline-link" target="_blank" rel="noopener">Matt Groh</a>.
+          I'm passionate about designing human-centered AI systems. Some of my recent work includes fine-tuning language models for financial expert alignment, studying how generative models shape user creativity in music creation, and building a tool that summarizes and surfaces hundreds of daily press releases for journalists.
+        </p>
+        <!-- Bridge line: fades out as portraitProgress advances -->
+        <p id="about-bridge">For more, explore my network of interests:</p>
+      </div>
+
+      <!-- Group 2: rises in sync with portrait, driven by portraitProgress -->
+      <div id="about-group-2">
+        <p class="about-body">
+          I graduated from Northwestern in December 2025 with a Master's degree in Computer Science. During my time there, I worked under the <a href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/" class="inline-link" target="_blank" rel="noopener">Human-AI Collaboration Lab</a> and the <a href="https://dtr.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Design, Technology, Research Lab</a>, interned at <a href="https://www.cboe.com" class="inline-link" target="_blank" rel="noopener">Cboe Global Markets'</a> AI Center of Excellence, and helped build <a href="https://vouchd.us/" class="inline-link" target="_blank" rel="noopener">Vouchd LLC</a> @ <a href="https://thegarage.northwestern.edu" class="inline-link" target="_blank" rel="noopener">The Garage</a>.
+        </p>
+        <p class="about-body">
+          I'm also a semi-professional Kathak dancer, coffee connoisseur, and plant enthusiast.
+          <br>
+          Reach out if you'd like to learn more about my work, collaborate on a project, or simply talk about open-ended questions in <em>markets, music, media and machines</em>.
+        </p>
+        <div class="about-contact">
+          <div class="connect-stack">
+            <a href="mailto:medinichopra11@gmail.com" class="connect-label-link">Email</a>
+            <a href="https://linkedin.com/in/medinichopra" class="connect-label-link" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/medinichopra" class="connect-label-link" target="_blank" rel="noopener">Github</a>
+            <a href="https://drive.google.com/file/d/11qlCo4298TirdCjQydvVnAydewmXdqMi/view?usp=sharing" class="connect-label-link" target="_blank" rel="noopener">Resume</a>
+          </div>
         </div>
       </div>
+
+      <!-- Mobile-only portrait: shown inline below text, hidden on desktop -->
+      <div id="portrait-mobile">
+        <img src="/PORTFOLIO PICTURE.png" alt="Medini Chopra" />
+      </div>
+
     </section>
+    </div><!-- /#portrait-section -->
 
     <!-- Footer -->
     <footer>
       <span>Choreographed by Medini Chopra @ 2026</span>
     </footer>
 
+  </div>
+
+  <!-- Portrait: shown during state 3 scroll -->
+  <div id="portrait-panel">
+    <img id="portrait-img" src="/PORTFOLIO PICTURE.png" alt="Medini Chopra" />
   </div>
 
   <script type="module" src="./index.js"></script>

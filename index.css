@@ -90,6 +90,7 @@ body::after {
   display: flex;
   gap: 36px;
   list-style: none;
+  align-items: center;
 }
 
 .nav-links a {
@@ -105,6 +106,83 @@ body::after {
 
 .nav-links a:hover {
   color: var(--cream);
+}
+
+/* ─── Nav Dropdown ─── */
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 236, 215, 0.65);
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s ease;
+}
+
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle[aria-expanded="true"] {
+  color: var(--cream);
+}
+
+.nav-dropdown-caret {
+  font-size: 0.65rem;
+  transition: transform 0.18s ease;
+}
+
+.nav-dropdown-toggle[aria-expanded="true"] .nav-dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  background: var(--wine);
+  border: 1px solid rgba(245, 236, 215, 0.12);
+  border-radius: 4px;
+  list-style: none;
+  min-width: 130px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  z-index: 200;
+}
+
+.nav-dropdown-menu.open {
+  display: block;
+}
+
+.nav-dropdown-menu li a {
+  display: block;
+  padding: 11px 18px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 236, 215, 0.65);
+  text-decoration: none;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-dropdown-menu li a:hover {
+  color: var(--cream);
+  background: rgba(245, 236, 215, 0.07);
 }
 
 /* ─── Hero Section ─── */
@@ -212,14 +290,47 @@ body::after {
 }
 
 
+/* ─── Portrait panel (state 3) ─── */
+#portrait-panel {
+  position: fixed;
+  /* position is set precisely by JS at runtime to align center-to-center with about text */
+  top: 0;
+  left: 0;
+  transform: translateY(100vh);
+  width: 24vw;
+  max-width: 300px;
+  aspect-ratio: 3341 / 4312;
+  height: auto;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity, transform;
+}
+
+#portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 /* ─── Sections below hero ─── */
 #content {
   position: relative;
   z-index: 1;
 }
 
+/* ─── Portrait scroll section ─── */
+#portrait-section {
+  position: relative;
+  height: 300vh; /* generous scroll distance so state 3 plays slowly */
+}
+
 /* ─── About Strip ─── */
 #about-strip {
+  position: sticky;
+  top: 64px; /* clear the navbar */
   padding: 120px 48px 100px;
   max-width: 50%;
   margin: 0;
@@ -257,6 +368,37 @@ body::after {
   line-height: 1.8;
   max-width: 640px;
   margin-bottom: 0;
+}
+
+/* ─── About text transition groups ─── */
+
+/* Bridge line below para 1 */
+#about-bridge {
+  margin-top: 32px;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 300;
+  font-size: clamp(1rem, 1.6vw, 1.5rem);
+  color: rgba(245, 236, 215, 0.55);
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  will-change: opacity;
+}
+
+/* Group 2: starts invisible and translated down; JS drives per frame */
+#about-group-2 {
+  opacity: 0;
+  transform: translateY(48px);
+  will-change: opacity, transform;
+  margin-top: 0;
+}
+
+#about-group-2 .about-body + .about-body {
+  margin-top: 24px;
+}
+
+#about-group-2 .about-contact {
+  margin-top: 48px;
 }
 
 
@@ -377,10 +519,69 @@ footer span {
   transform: translateY(0);
 }
 
-/* ─── Responsive ─── */
-@media (max-width: 640px) {
+/* ─── Mobile portrait (inline, below text) ─── */
+#portrait-mobile {
+  display: none; /* hidden on desktop; shown via mobile breakpoint */
+}
+
+/* ─── Responsive: Tablet (768–1024px) ─── */
+@media (max-width: 1024px) {
+  #about-strip {
+    max-width: 60%;
+    padding: 80px 36px 80px;
+  }
+  #portrait-panel {
+    width: 30vw;
+  }
+}
+
+/* ─── Responsive: Mobile (≤768px) ─── */
+@media (max-width: 768px) {
   #navbar { padding: 0 24px; }
-  #about-strip { padding-left: 24px; padding-right: 24px; max-width: 100%; margin-left: 0; }
   .nav-links { gap: 20px; }
+
+  /* Canvas/hero: ensure it fills correctly on small screens */
+  #hero { height: 300vh; }
+  #waveform-canvas { touch-action: none; }
+
+  /* Full-width single column text, no sticky needed */
+  #about-strip {
+    position: static;
+    max-width: 100%;
+    margin-left: 0;
+    padding: 60px 24px 60px;
+  }
+
+  /* Collapse extra scroll height — portrait enters inline, not fixed */
+  #portrait-section {
+    height: auto;
+  }
+
+  /* Hide the fixed-position portrait panel */
+  #portrait-panel {
+    display: none;
+  }
+
+  /* Show inline portrait below text */
+  #portrait-mobile {
+    display: block;
+    margin: 56px 24px 48px;
+  }
+  #portrait-mobile img {
+    width: 100%;
+    max-width: 280px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* On mobile, group 2 is always visible — no scroll animation */
+  #about-group-2 {
+    opacity: 1 !important;
+    transform: none !important;
+    margin-top: 24px;
+  }
+  /* Bridge line not relevant without network panel */
+  #about-bridge { display: none; }
+
   footer { flex-direction: column; gap: 8px; text-align: center; }
 }

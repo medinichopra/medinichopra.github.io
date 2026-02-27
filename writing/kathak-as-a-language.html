@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kathak as a Language — Medini Chopra</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wine:         #722F37;
+      --cream:        #F5ECD7;
+      --gold:         #C9A84C;
+      --sienna:       #B85C3A;
+      --ink:          #2C1810;
+      --ink-soft:     rgba(44, 24, 16, 0.6);
+      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(44,24,16,0.08);
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .nav-name em { font-style: italic; color: var(--gold); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); gap: 10px; }
+
+    /* ── Article layout ── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 48px 120px;
+    }
+
+    /* ── Header ── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(44,24,16,0.10);
+    }
+
+    .article-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sienna);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .article-eyebrow span + span::before {
+      content: '·';
+      margin-right: 16px;
+      opacity: 0.4;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .article-title em { font-style: italic; color: var(--wine); }
+
+    .article-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ink-soft);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    /* Course context box */
+    .course-context {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+      background: rgba(44,24,16,0.04);
+      border: 1px solid rgba(44,24,16,0.09);
+      border-radius: 4px;
+      padding: 14px 18px;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+    .course-context strong {
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    /* ── Body content ── */
+    .article-body { font-size: 1rem; line-height: 1.85; color: var(--ink); }
+
+    .article-body p { margin-bottom: 1.6em; }
+
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 2.4em 0 0.8em;
+    }
+    .article-body h2 em { font-style: italic; color: var(--wine); }
+
+    .article-body h3 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 2em 0 0.6em;
+    }
+
+    .article-body a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-color: rgba(114,47,55,0.3);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--wine); }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--gold);
+      margin: 2em 0;
+      padding: 4px 0 4px 24px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .article-body ol {
+      margin: 0 0 1.6em 1.4em;
+      counter-reset: none;
+    }
+    .article-body ol li { margin-bottom: 0.5em; }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid rgba(44,24,16,0.10);
+      margin: 3em 0;
+    }
+
+    .callout {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin: 2em 0;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    /* Postscript / poem */
+    .postscript {
+      margin-top: 2.4em;
+      padding: 24px 28px;
+      background: rgba(114,47,55,0.04);
+      border: 1px solid rgba(114,47,55,0.10);
+      border-radius: 4px;
+    }
+    .postscript-label {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+    }
+    .postscript-poem {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      line-height: 2;
+    }
+
+    /* References */
+    .references {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid rgba(44,24,16,0.10);
+    }
+    .references h3 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1em;
+    }
+    .references ol {
+      margin-left: 1.2em;
+    }
+    .references li {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      margin-bottom: 0.8em;
+      line-height: 1.6;
+    }
+    .references a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-color: rgba(114,47,55,0.25);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .references a:hover { text-decoration-color: var(--wine); }
+
+    /* ── Footer ── */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(44,24,16,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .back-link:hover { color: var(--ink); gap: 13px; }
+
+    .article-byline {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      #navbar { padding: 0 24px; }
+      .article-wrap { padding: 100px 24px 80px; }
+      .article-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <ul class="nav-links">
+      <li>
+        <a href="/work.html" class="nav-back">← All projects</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span>Indian Classical Dance · Philosophy of Language</span>
+        <span>Blogs</span>
+        <span>Spring 2024</span>
+      </div>
+      <h1 class="article-title">Kathak as a <em>Language</em></h1>
+      <div class="course-context">
+        <span><strong>Course</strong> — Philosophy of Language</span>
+        <span><strong>Instructor</strong> — Prof. Arindam Chakrabarti</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <h2>Introduction</h2>
+
+      <p>In this paper, I will evaluate the arguments provided by Margolis and Bannerman on the notion of art and dance as a language respectively when applied to codified dance. Following this, I will give evidence of instances where we can perform an action through codified dance, specifically Kathak, stating examples of locutionary, illocutionary, and perlocutionary acts. Through this paper, I attempt to strengthen the case for codified dance being a language by illustrating that it not only has linguistic features for communication but functionality for speech acts as defined by Austin.</p>
+
+      <p>Given the minimal requirements for a language, Margolis contends that works of art cannot be a language as it lacks syntactic structure, conventions, vocabulary, and speech acts. On the other hand, Bannerman takes the example of Western theatre dance to argue in favor of dance having a similar structure to language — despite the limitations dance has in expressing meaning as opposed to spoken language. If arguments in favor of codified dance as a language are stronger than those against, then according to J.L. Austin's speech act theory, it should be possible to distinguish different speech acts performed by codified dance.</p>
+
+      <h2>Codified dance <em>as a language</em></h2>
+
+      <p>Margolis argues against art as a language by comparing its functions to that of everyday language (spoken or written), citing the absence of the minimal requirements needed for it to be deemed a language. Those requirements are as follows:</p>
+
+      <h3>1. Language has conventions</h3>
+
+      <p>According to Margolis, works of art have expressive qualities due to their nature of being able to invoke emotions in the audience, and may exhibit an emotion without referring to it. However, works of art do not directly communicate and are not a convention for expressing emotions (Margolis, 181). Due to this, works of art are not linguistic utterances for emotions and do not exhibit isomorphism. One feels emotions as a consequence of what the artist is trying to convey and what we infer based on our past experiences; it is not because art can explicitly symbolize an emotion. Further, Margolis gives an example that if cats have a certain way of expressing irritation, that does not imply that this way is the convention to express irritation.</p>
+
+      <p>Bannerman agrees with the limitation of dance in conveying literal messages, even though dance communicates through cultural and intra-dance codes as language does. Expressions in dance have a "looser" relationship with meaning compared to that in everyday language, which means that denotations and references to meaning in dance are weak. The scope of what we can directly express is limited — for example, we cannot literally say "I am going to my house now" through dance. However, Kathak allows for some literal communication (a constructed relationship between movement and meaning). For example, I can say "This is my cup" through mudras (symbolic hand gestures) even though that is not the norm, and it is understandable to those who know Kathak. Bannerman mentions that "aside from the specialist code of various styles of mime and of ordinary gesture, there is little in the way of publicly agreed meaning for dance movement" (Bannerman, 77), and for Kathak, there is an agreed-upon meaning of the movements. If I perform the gesture for "I" and "plucking a flower", it is possible to say that there is literal communication.</p>
+
+      <p>Nonetheless, communication through movements in Kathak is still a limited representation when paralleled with the literal communication achieved by everyday language. This is where Bannerman may argue that sections of movement are utterances instead of sentences (Bannerman, 71). One understands the full extent of the literal communication by movement only when it is accompanied by, say, a summarizing introduction, the tone of the singer, the topical nature of issues represented, etc. The associative meaning we understand through dance is comparable to the literal meaning we understand in language, but there is no direct mapping from movements to sentences. Therefore, we observe that in codified dance there is a stronger relationship between expressions and meaning than in Western dance or works of art. This is not to say that codified dance is now a language, but that the more codified the gestures become, the more 'everyday language-like functions' dance can mimic.</p>
+
+      <h3>2. Language has vocabulary and grammar</h3>
+
+      <p>According to Margolis, a language requires a finite and formal grammar and a vocabulary of designatory symbols. In art, there is no vocabulary or grammar, especially because of the generalized scope of what art means. We cannot establish set linguistic units across dance, music, poetry, etc. However, for the example of Kathak, this is fairly straightforward — the Nāṭyaśāstra lays out an exhaustive list of mudras, body movements, gaits, gestures, etc. that form the repository and basic units for Indian classical dances. This grammar is finite and generating because you can make any dance utterance by the use of these symbolic units.</p>
+
+      <p>Furthermore, Bannerman argues that syntax and semantics are related, where the order of words will change the meaning of the sense, and this is true for codified dance as well. If we say "Marcus played with the ball" versus "The ball played with Marcus", we see the difference in semantics. In dance as well, if one performs a flower blooming and then the flower dying, versus the flower dying first and then blooming, the interpretations are opposite. One evokes sadness and the other, rebirth. Bannerman highlights how dance is structured like a language — with adherence to a code-based system — and this stands for codified dance as well.</p>
+
+      <h3>3. Language has speech acts</h3>
+
+      <p>Lastly, Margolis denies the existence of speech acts such as querying and demanding in works of art: we cannot 'utter' an instance of art that performs an act; they are standalone objects. However, if you can't marry someone (or state or promise etc.) through dance, that is simply its limitation. While it doesn't guarantee dance as a language, it definitely does not disprove it as a language. Moreover, it is not sufficient reason to claim that dance does not have speech acts at all. Having clarified that, I will now provide examples of speech acts in codified dance.</p>
+
+      <h2>Speech acts <em>in codified dance</em></h2>
+
+      <p>Austin's speech act theory claims that with words, one can either state something to describe their reality or perform an action. The <em>locutionary act</em> is the act of saying something, which in the case of Kathak, is the dance itself. If I am uttering in Kathak, I am performing facial expressions, mudras, and movements from the repository provided to me, and I am executing a locutionary act. For example, performing a stylized gait to reach my destination.</p>
+
+      <p><em>Illocutionary acts</em> are trickier to identify. Illocutionary is the act performed in saying something, that the speaker intends to fulfill, such as making a promise or arguing. A common example of the illocutionary act is that of telling a story: the dancer runs to the corner of the stage and makes gestures indicating that she is waiting for her lover, and through these gestures, she is performing the act of storytelling. An objection to this argument could be that all codified dance is storytelling or third-person narrative. However, there are more examples of illocutionary speech acts, such as the invocation of God. A dancer can perform the act of 'invoking God' by dancing a Ganesh Vandana (or any Hindu God) in Kathak. The intention to invoke Lord Ganesh is present when the dancer performs this act.</p>
+
+      <p><em>Perlocutionary</em> is the effect felt by the audience — for example, fear, being convincing, excitement, etc. It is the act performed as a result of saying something. Perlocutionary acts in Kathak can be derived from the concept of rasa (aesthetic flavor of a dance that evokes emotion in the audience) which is defined by the Nāṭyaśāstra. The emotion elicited in the audience from the performance is separate from the dancer's intentions, qualifying the performance as a valid perlocutionary act. To trivially view perlocutionary act in codified dance: any performance is going to elicit a reaction from the audience, for example, the audience feeling 'moved'. The performer cannot declare that they are moving an audience with their performance; it is purely attributed to what the audience feels.</p>
+
+      <div class="callout">
+        For something such as codified dance to be considered a language, it can be argued that its purpose should be literal communication. Both everyday language and codified dance have symbols allowing them to poetically and literally communicate. However, it is not sufficient to have the functionality of both types of communication — the purpose of language should be that of the latter. Since the purpose of codified dance is not to literally communicate, one may be able to make a stronger case against codified dance as a language.
+      </div>
+
+      <p>My response is that it can be agreed upon that having linguistic features for communication and functionality for specific speech acts is necessary for something to be a language. Moreover, as demonstrated through evidence provided in the paper, it can be said that both are present in codified dance. However, I do not argue that those are sufficient conditions for codified dance to be deemed a language. This paper is merely an attempt to contribute to the discourse around the linguistic nature of codified dance.</p>
+
+      <div class="postscript">
+        <p class="postscript-label">P.S.</p>
+        <p class="postscript-poem">
+          Margolis and Bannerman debate about dance,<br>
+          Whether it is a language, they both take a stance.<br>
+          When Austin chimes in with his famous speech acts,<br>
+          Adding fuel to the fire, the discourse it impacts.<br>
+          Don't be shy to give poetic communication a chance!
+        </p>
+      </div>
+
+      <div class="references">
+        <h3>References</h3>
+        <ol>
+          <li>Austin, J. L. (1962). <em>How to Do Things with Words: The William James Lectures Delivered in Harvard University in 1955.</em> Oxford University Press.</li>
+          <li>Bannerman, Henrietta. "Is Dance a Language? Movement, Meaning and Communication." <em>Dance Research: The Journal of the Society for Dance Research</em> 32, no. 1 (2014): 65–80. <a href="http://www.jstor.org/stable/43281347" target="_blank" rel="noopener">jstor.org/stable/43281347</a></li>
+          <li>Bharata. (2019). <em>Nāṭyaśāstra: Text with English Translation, Introduction, and Indices.</em> Translated by N. P. Unni. 4 vols. New Delhi: NBBC Publishers.</li>
+          <li>Margolis, J. (1974). "Art as Language." <em>The Monist,</em> 58(2), 175–186. <a href="http://www.jstor.org/stable/27902355" target="_blank" rel="noopener">jstor.org/stable/27902355</a></li>
+        </ol>
+      </div>
+
+    </div>
+
+    <footer class="article-footer">
+      <a href="/work.html" class="back-link">← Back to all projects</a>
+      <span class="article-byline">Medini Chopra · Spring 2024</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>

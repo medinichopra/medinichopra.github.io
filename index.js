@@ -27,11 +27,16 @@ const TAIL_LAG   = 0.22;
    ══════════════════════════════════════════════════════════ */
 
 let canvas, ctx, W, H, dpr;
-let scrollProgress = 0; // 0 → 1 across the hero scroll zone
-let postProgress   = 0; // 0 → 1 as user scrolls through the about section after the hero
+let scrollProgress   = 0; // 0 → 1 across the hero scroll zone
+let postProgress     = 0; // 0 → 1 as user scrolls through the about section after the hero
+let portraitProgress = 0; // 0 → 1 for state 3: network fades, portrait scrolls in
 let mouseX = -9999, mouseY = -9999;
 let mouseDX = 0, mouseDY = 0; // velocity of cursor movement
 let bars = [];
+
+// Cached DOM refs for text transition
+let aboutGroup2El = null;
+let aboutBridgeEl = null;
 
 /* ══════════════════════════════════════════════════════════
    BAR SETUP
@@ -128,9 +133,15 @@ function sampleBezier(ox, oy, cx, cy, dx, dy, p) {
 }
 
 function drawBars(t, time) {
+  const SIDE_MARGIN = Math.min(48, W * 0.08);
   const centerX = W / 2;
   const centerY = H / 2;
-  const totalW  = BAR_COUNT * (BAR_W + BAR_GAP);
+  const availW  = W - SIDE_MARGIN * 2;
+  const fullW   = BAR_COUNT * (BAR_W + BAR_GAP);
+  const scale   = Math.min(1, availW / fullW);
+  const barW    = BAR_W  * scale;
+  const barGap  = BAR_GAP * scale;
+  const totalW  = BAR_COUNT * (barW + barGap);
   const startX  = centerX - totalW / 2;
   const maxH    = H * 0.30;
 
@@ -151,7 +162,7 @@ function drawBars(t, time) {
     const barH     = bar.baseHeight * maxH * (0.35 + 0.65 * Math.abs(osc));
 
     // Base position of this bar in the waveform grid
-    const baseX = startX + i * (BAR_W + BAR_GAP);
+    const baseX = startX + i * (barW + barGap);
 
     // Exit path control points (in screen coords)
     const destX = centerX + bar.exitDX * W;
@@ -167,7 +178,7 @@ function drawBars(t, time) {
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.fillStyle = `rgb(${CREAM.r},${CREAM.g},${CREAM.b})`;
-      roundedRect(baseX - BAR_W / 2, centerY - barH / 2, BAR_W, barH, BAR_RADIUS);
+      roundedRect(baseX - barW / 2, centerY - barH / 2, barW, barH, BAR_RADIUS * scale);
       ctx.fill();
       ctx.restore();
       continue;
@@ -187,7 +198,7 @@ function drawBars(t, time) {
     const cb = Math.round(lerp(CREAM.b, GOLD.b, lead * 0.65));
 
     // Stroke width: fat at full, shrinks as it goes
-    const sw = BAR_W * (1.4 - lead * 0.5);
+    const sw = barW * (1.4 - lead * 0.5);
 
     ctx.save();
     ctx.globalAlpha = alpha;
@@ -275,8 +286,10 @@ function applyScrollState() {
   }
 
   // Network zoom starts at phaseB=0.4, reaches full at phaseB=1.
-  // The scale in drawNetwork is derived from netAlpha via smoothstep.
-  const netAlpha = phaseB < 0.4 ? 0 : easeInOut(clamp((phaseB - 0.4) / 0.6, 0, 1));
+  // Only fades out once postProgress is done and portraitProgress begins.
+  const netAlphaBase = phaseB < 0.4 ? 0 : easeInOut(clamp((phaseB - 0.4) / 0.6, 0, 1));
+  const netFadeOut   = easeInOut(clamp(portraitProgress / 0.45, 0, 1));
+  const netAlpha     = netAlphaBase * (1 - netFadeOut);
   const netEl = document.getElementById('network-layer');
   if (netEl) netEl.style.opacity = netAlpha;
 
@@ -288,24 +301,75 @@ function applyScrollState() {
   // We switch the canvas to position:fixed and animate it to the right half
   // of the viewport as the about section scrolls into view.
   if (scrollProgress >= 1) {
+    const isMobile = window.innerWidth <= 768;
     const p  = easeInOut(postProgress);
-    // Scale: full-screen → ~82% size
-    const sc = lerp(1, 0.82, p);
-    // Translate right (centre shifts to ~75% of viewport width)
-    const tx = lerp(0, W * 0.24, p);
-    // Slight upward nudge so it sits centred vertically in the about area
-    const ty = lerp(0, -H * 0.06, p);
+
+    // On mobile: keep canvas centred, just fade it out. No rightward shift.
+    const sc = isMobile ? lerp(1, 0.92, p) : lerp(1, 0.76, p);
+    const tx = isMobile ? 0 : lerp(0, W * 0.22, p);
+    const ty = isMobile ? 0 : lerp(0, -H * 0.04, p);
+
+    // Network slides upward and out as portraitProgress advances
+    const netExitT  = easeInOut(clamp(portraitProgress / 0.7, 0, 1));
+    const netSlideY = -netExitT * H * 0.65;
 
     canvas.style.position  = 'fixed';
     canvas.style.inset     = '0';
-    canvas.style.transform = `translate(${tx}px, ${ty}px) scale(${sc})`;
+    canvas.style.transform = `translate(${tx}px, ${ty + netSlideY}px) scale(${sc})`;
     canvas.style.transformOrigin = 'center center';
     canvas.style.pointerEvents   = 'none';
+    canvas.style.opacity   = 1 - easeInOut(clamp((portraitProgress - 0.2) / 0.5, 0, 1));
   } else {
     canvas.style.position  = 'absolute';
     canvas.style.inset     = '0';
     canvas.style.transform = 'none';
     canvas.style.transformOrigin = '';
+    canvas.style.opacity   = '1';
+  }
+
+  // Portrait scrolls up from below in sync with the network's upward exit.
+  // Position is computed at runtime so it aligns center-to-center with the about text.
+  const pp = easeInOut(portraitProgress);
+  const portrait = document.getElementById('portrait-panel');
+  const aboutStrip = document.getElementById('about-strip');
+  if (portrait && aboutStrip && window.innerWidth > 768) {
+    const aRect = aboutStrip.getBoundingClientRect();
+    const pW = portrait.offsetWidth;
+    const pH = portrait.offsetHeight;
+
+    // Horizontal: centre of the gap between about strip's right edge and viewport right
+    const rightHalfCx = aRect.right + (window.innerWidth - aRect.right) / 2;
+
+    // Vertical: centre of the actual text content inside the strip,
+    // excluding its padding (120px top, 100px bottom) so we hit the true content midpoint
+    const contentTop    = aRect.top  + 120;
+    const contentBottom = aRect.bottom - 100;
+    const aboutCy = (contentTop + contentBottom) / 2;
+
+    // Position portrait so its centre lands on (rightHalfCx, aboutCy)
+    // Fine-tune offsets: negative = left/up, positive = right/down
+    const nudgeX = -40;  // px toward left
+    const nudgeY = -60;  // px upward
+    portrait.style.left = (rightHalfCx - pW / 2 + nudgeX) + 'px';
+    portrait.style.top  = (aboutCy - pH / 2 + nudgeY) + 'px';
+
+    const slideY = (1 - pp) * 100;
+    portrait.style.opacity   = clamp((portraitProgress - 0.05) / 0.4, 0, 1);
+    portrait.style.transform = `translateY(${slideY}vh)`;
+    portrait.style.pointerEvents = portraitProgress > 0.1 ? 'auto' : 'none';
+  }
+
+  // Text transition: bridge fades out, group 2 rises in — both driven by portraitProgress.
+  // Skipped on mobile where CSS keeps group 2 always visible.
+  if (window.innerWidth > 768) {
+    if (aboutBridgeEl) {
+      aboutBridgeEl.style.opacity = clamp(1 - portraitProgress / 0.4, 0, 1);
+    }
+    if (aboutGroup2El) {
+      const g2 = easeInOut(clamp(portraitProgress / 0.6, 0, 1));
+      aboutGroup2El.style.opacity   = g2;
+      aboutGroup2El.style.transform = `translateY(${(1 - g2) * 48}px)`;
+    }
   }
 
   return { phaseA, phaseB, netAlpha };
@@ -515,14 +579,35 @@ function onScroll() {
   scrollProgress   = clamp(scrolled / scrollable, 0, 1);
 
   // postProgress: 0→1 as the about section scrolls into view after the hero ends.
-  // We map across the first 60% of the about section's height.
   const about = document.getElementById('about-strip');
   if (about) {
-    const aRect    = about.getBoundingClientRect();
-    // aRect.top goes from +window.innerHeight (just appeared) toward 0 (top of viewport)
-    const entered  = window.innerHeight - aRect.top;   // px scrolled into view
-    const zone     = about.offsetHeight * 0.6;          // settle after 60% of section
-    postProgress   = clamp(entered / zone, 0, 1);
+    const aRect   = about.getBoundingClientRect();
+    const entered = window.innerHeight - aRect.top;
+    const zone    = about.offsetHeight * 0.6;
+    postProgress  = clamp(entered / zone, 0, 1);
+  }
+
+  // portraitProgress: on desktop, 0→1 over the bottom 60% of #portrait-section scroll.
+  // On mobile (height:auto), drive it off the about strip leaving the viewport instead.
+  const portraitSection = document.getElementById('portrait-section');
+  if (portraitSection) {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      // Fade network out as the about strip scrolls past the top of the viewport
+      const aRect = document.getElementById('about-strip')?.getBoundingClientRect();
+      if (aRect) {
+        // Start fading when about strip top hits 60% up the screen, finish when it leaves top
+        const fadeStart = window.innerHeight * 0.6;
+        const fadeEnd   = -aRect.height * 0.3;
+        portraitProgress = clamp((fadeStart - aRect.top) / (fadeStart - fadeEnd), 0, 1);
+      }
+    } else {
+      const pRect       = portraitSection.getBoundingClientRect();
+      const totalTravel = portraitSection.offsetHeight - window.innerHeight;
+      const scrolledIn  = -pRect.top;
+      const dwellEnd    = totalTravel * 0.4;
+      portraitProgress  = clamp((scrolledIn - dwellEnd) / (totalTravel * 0.6), 0, 1);
+    }
   }
 }
 
@@ -535,6 +620,33 @@ function setupNavbar() {
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
+
+  // Dropdown toggle
+  const toggle = document.querySelector('.nav-dropdown-toggle');
+  const menu   = document.querySelector('.nav-dropdown-menu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+    document.addEventListener('click', () => {
+      toggle.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+    });
+  }
+
+  // "About" jump: scroll to the very bottom of the page
+  const jumpAbout = document.getElementById('nav-jump-about');
+  if (jumpAbout) {
+    jumpAbout.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      toggle?.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('open');
+    });
+  }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -565,9 +677,9 @@ const NODE_HIT_R = 28; // px in canvas-space (before scale transform)
 function hitTestNodes(cx, cy) {
   if (scrollProgress < 1) return -1; // network not visible yet
   const p = easeInOut(postProgress);
-  const sc = lerp(1, 0.82, p);
-  const tx = lerp(0, W * 0.24, p);
-  const ty = lerp(0, -H * 0.06, p);
+  const sc = lerp(1, 0.76, p);
+  const tx = lerp(0, W * 0.22, p);
+  const ty = lerp(0, -H * 0.04, p);
 
   // Invert the CSS transform: canvas centre = (W/2 + tx, H/2 + ty) on screen
   const originX = W / 2 + tx;
@@ -607,6 +719,9 @@ function init() {
   setupNavbar();
   setupFadeUp();
   setupNetworkInteraction();
+
+  aboutGroup2El = document.getElementById('about-group-2');
+  aboutBridgeEl = document.getElementById('about-bridge');
 
   window.addEventListener('resize', () => { resize(); initNetwork(); }, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
