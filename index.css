@@ -541,7 +541,8 @@ footer span {
   .nav-links { gap: 20px; }
 
   /* Canvas/hero: ensure it fills correctly on small screens */
-  #hero { height: 300vh; }
+  #hero { height: 300vh; touch-action: pan-y; }
+  #hero-sticky { touch-action: pan-y; }
   #waveform-canvas { touch-action: pan-y; }
 
   /* Full-width single column text, no sticky needed */
