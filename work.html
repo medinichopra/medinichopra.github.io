@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work — Medini Chopra</title>
+  <title>Projects — Medini Chopra</title>
+  <meta name="description" content="Projects, research, and writing by Medini Chopra — AI research, social computing, UX, and more." />
+  <meta name="author" content="Medini Chopra" />
+  <link rel="canonical" href="https://medinichopra.github.io/work.html" />
 
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon-mc-bfRjFHk1.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -210,7 +213,7 @@
       padding: 32px 48px;
       border-top: 1px solid rgba(245,236,215,0.06);
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
     }
     footer span {
@@ -220,6 +223,40 @@
       letter-spacing: 0.04em;
     }
 
+    /* ── Filter pills ── */
+    .filter-bar {
+      padding: 0 48px 48px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-pill {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(245,236,215,0.45);
+      background: transparent;
+      border: 1px solid rgba(245,236,215,0.15);
+      border-radius: 100px;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .filter-pill:hover {
+      color: rgba(245,236,215,0.8);
+      border-color: rgba(245,236,215,0.35);
+    }
+
+    .filter-pill.active {
+      color: var(--wine);
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
     /* fade-in on scroll */
     .fade-up {
       opacity: 0;
@@ -227,6 +264,10 @@
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .project-item.hidden {
+      display: none;
+    }
 
     @media (max-width: 640px) {
       #navbar { padding: 0 24px; }
@@ -251,21 +292,101 @@
     <h1 class="page-heading">Things I've made,<br><em>studied, and sat with</em></h1>
   </div>
 
+  <div class="filter-bar">
+    <button class="filter-pill active" data-filter="all">All</button>
+    <button class="filter-pill" data-filter="blogs">Blogs</button>
+    <button class="filter-pill" data-filter="research">Research</button>
+    <button class="filter-pill" data-filter="engineering">Engineering</button>
+    <button class="filter-pill" data-filter="dance">Performance</button>
+  </div>
+
   <div class="projects-list">
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener">
+    <a class="project-item fade-up" href="/writing/kathak-as-a-language.html" data-tags="blogs dance">
       <div class="project-item-inner">
-        <span class="project-num">01</span>
+        <span class="project-num">00</span>
         <div class="project-body">
-          <p class="project-tag">Music · AI · Recommender Systems</p>
-          <h2 class="project-title">Resonance</h2>
-          <p class="project-desc">An AI agent that builds context-aware playlists — not from what you've played, but from where you are and how you feel.</p>
+          <p class="project-tag">Indian Classical Dance · Philosophy of Language</p>
+          <h2 class="project-title">Kathak as a Language</h2>
+          <p class="project-desc">Can codified dance perform speech acts? Commentary on Margolis, Bannerman, and Austin, and Kathak.</p>
         </div>
         <span class="project-arrow">→</span>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener">
+    <a class="project-item fade-up" href="/writing/zomato-socials.html" data-tags="research">
+      <div class="project-item-inner">
+        <span class="project-num">00</span>
+        <div class="project-body">
+          <p class="project-tag">Product · UX · Product</p>
+          <h2 class="project-title">Zomato Socials</h2>
+          <p class="project-desc">Designing a social discovery layer for Zomato — personalized restaurant recommendations through trusted networks.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/digital-exclusion.html" data-tags="blogs">
+      <div class="project-item-inner">
+        <span class="project-num">00</span>
+        <div class="project-body">
+          <p class="project-tag">Technology & Society</p>
+          <h2 class="project-title">Digital Exclusion</h2>
+          <p class="project-desc">On how social hierarchies persist in the digital sphere, and why digitization in India compounds rather than resolves systemic inequalities.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/content-moderation.html" data-tags="blogs">
+      <div class="project-item-inner">
+        <span class="project-num">00</span>
+        <div class="project-body">
+          <p class="project-tag">Technology & Society</p>
+          <h2 class="project-title">Content Moderation</h2>
+          <p class="project-desc">On exploitation, invisible labor, and what the information age costs the people who keep it clean.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/successful-failure.html" data-tags="blogs">
+      <div class="project-item-inner">
+        <span class="project-num">00</span>
+        <div class="project-body">
+          <p class="project-tag">Technology & Society</p>
+          <h2 class="project-title">Successful Failure</h2>
+          <p class="project-desc">What Foucault can teach us about privacy self-management in a world of Facebook and Big Data.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/spotify-recommendation-controls.html" data-tags="engineering">
+      <div class="project-item-inner">
+        <span class="project-num">01</span>
+        <div class="project-body">
+          <p class="project-tag">Product · Human Experience of Music</p>
+          <h2 class="project-title">Weighted Spotify Recommendation Controls</h2>
+          <p class="project-desc">Giving users fine-grained control over what drives their Discover Weekly — without sacrificing the magic of serendipity.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/resonance.html" data-tags="engineering">
+      <div class="project-item-inner">
+        <span class="project-num">01</span>
+        <div class="project-body">
+          <p class="project-tag">Human Experience of Music · AI for Music</p>
+          <h2 class="project-title">Resonance</h2>
+          <p class="project-desc">A recommendation algorithm that builds context-first mini-playlists, not from what you've played, but from where you are and how you feel.</p>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
         <span class="project-num">02</span>
         <div class="project-body">
@@ -277,19 +398,19 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener">
+    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
         <span class="project-num">03</span>
         <div class="project-body">
-          <p class="project-tag">LLM Behavior · Evaluation</p>
-          <h2 class="project-title">Sycophancy & Persuasion in LLMs</h2>
-          <p class="project-desc">Probing how large language models agree, flatter, and persuade — and what that means for trust and safety.</p>
+          <p class="project-tag">AI Safety & Behavior · AI Evaluations</p>
+          <h2 class="project-title">Persuasion in LLMs</h2>
+          <p class="project-desc">Probing how LLM's agree, flatter, and persuade — and what that means for trust and safety.</p>
         </div>
         <span class="project-arrow">→</span>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener">
+    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="research engineering">
       <div class="project-item-inner">
         <span class="project-num">04</span>
         <div class="project-body">
@@ -301,11 +422,11 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener">
+    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="dance engineering">
       <div class="project-item-inner">
         <span class="project-num">05</span>
         <div class="project-body">
-          <p class="project-tag">Classical Dance · Generative Art</p>
+          <p class="project-tag">Indian Classical Dance · AI for Music</p>
           <h2 class="project-title">Tihai</h2>
           <p class="project-desc">A Hindustani rhythm pattern generator. Explores the mathematical structures underlying tala — where music theory meets computation.</p>
         </div>
@@ -313,13 +434,13 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener">
+    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="engineering research">
       <div class="project-item-inner">
         <span class="project-num">06</span>
         <div class="project-body">
           <p class="project-tag">Computer Vision · Indian Art</p>
           <h2 class="project-title">Rasa</h2>
-          <p class="project-desc">CNN-based emotion detection from Indian classical paintings. Training models to read rasa — the aesthetic essence — in visual art.</p>
+          <p class="project-desc">CNN-based emotion detection from Indian classical paintings. Training models to read <em>Rasa</em>, the aesthetic essence, in visual art.</p>
         </div>
         <span class="project-arrow">→</span>
       </div>
@@ -332,6 +453,7 @@
   </footer>
 
   <script>
+    // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
@@ -341,6 +463,27 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Filter pills
+    const pills = document.querySelectorAll('.filter-pill');
+    const items = document.querySelectorAll('.project-item');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const filter = pill.dataset.filter;
+        items.forEach(item => {
+          if (filter === 'all') {
+            item.classList.remove('hidden');
+          } else {
+            const tags = (item.dataset.tags || '').split(' ');
+            item.classList.toggle('hidden', !tags.includes(filter));
+          }
+        });
+      });
+    });
   </script>
 
 </body>

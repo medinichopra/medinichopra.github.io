@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weighted Spotify Recommendation Controls — Medini Chopra</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wine:         #722F37;
+      --cream:        #F5ECD7;
+      --gold:         #C9A84C;
+      --sienna:       #B85C3A;
+      --ink:          #2C1810;
+      --ink-soft:     rgba(44, 24, 16, 0.6);
+      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(44,24,16,0.08);
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .nav-name em { font-style: italic; color: var(--gold); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); gap: 10px; }
+
+    /* ── Article layout ── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 48px 120px;
+    }
+
+    /* ── Header ── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(44,24,16,0.10);
+    }
+
+    .article-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sienna);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .article-eyebrow span + span::before {
+      content: '·';
+      margin-right: 16px;
+      opacity: 0.4;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .article-title em { font-style: italic; color: var(--wine); }
+
+    .article-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ink-soft);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .course-context {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+      background: rgba(44,24,16,0.04);
+      border: 1px solid rgba(44,24,16,0.09);
+      border-radius: 4px;
+      padding: 14px 18px;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+    .course-context strong {
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    /* ── Body ── */
+    .article-body { font-size: 1rem; line-height: 1.85; color: var(--ink); }
+    .article-body p { margin-bottom: 1.6em; }
+
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 2.4em 0 0.8em;
+    }
+    .article-body h2 em { font-style: italic; color: var(--wine); }
+
+    .article-body a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-color: rgba(114,47,55,0.3);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--wine); }
+
+    /* User story callout */
+    .user-story {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin-bottom: 2.4em;
+    }
+    .user-story-label {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .user-story p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin-bottom: 0 !important;
+    }
+
+    /* Requirement sections */
+    .req-section {
+      margin-bottom: 2.4em;
+    }
+
+    .req-label {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .req-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(44,24,16,0.10);
+    }
+
+    .req-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .req-list li {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .req-list li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Acceptance criteria */
+    .criteria-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .criteria-item {
+      background: rgba(44,24,16,0.03);
+      border: 1px solid rgba(44,24,16,0.07);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 0.875rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+    .criteria-item strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* Wireframes */
+    .wireframes {
+      margin: 2.8em 0;
+    }
+    .wireframes-label {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wireframes-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(44,24,16,0.10);
+    }
+    .wireframes-grid {
+      margin-bottom: 12px;
+    }
+    .wireframe-img {
+      width: 140%;
+      margin-left: -20%;
+      border-radius: 6px;
+      border: 1px solid rgba(44,24,16,0.10);
+      background: rgba(44,24,16,0.02);
+    }
+    .wireframes-caption {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(44,24,16,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .back-link:hover { color: var(--ink); gap: 13px; }
+
+    .article-byline {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      #navbar { padding: 0 24px; }
+      .article-wrap { padding: 100px 24px 80px; }
+.article-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <ul class="nav-links">
+      <li>
+        <a href="/work.html" class="nav-back">← All projects</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span>Product · Music · UX</span>
+        <span>Engineering</span>
+        <span>Spring 2024</span>
+      </div>
+      <h1 class="article-title">Weighted Spotify<br><em>Recommendation Controls</em></h1>
+      <p class="article-subtitle">Giving users fine-grained control over what drives their Discover Weekly — without sacrificing the magic of serendipity.</p>
+      <div class="course-context">
+        <span><strong>Course</strong> — Essentials of Technology Product Management</span>
+        <span><strong>Term</strong> — Spring 2024</span>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <div class="user-story">
+        <p class="user-story-label">User Story</p>
+        <p>As a college-going user, I want to frequently find new songs based on what I've listened to in the past, so that I can expand my music taste without manually searching.</p>
+      </div>
+
+      <h2>Design <em>Considerations</em></h2>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>There should be clear navigation to find the playlist on the user profile</li>
+          <li>A notification should remind users of the playlist update</li>
+          <li>An intuitive button should allow for saving songs from the playlist</li>
+          <li>User feedback for individual songs should be incorporated as micro-interactions</li>
+          <li>Special toggles to specify factors the users want to be considered higher when getting recommended a song</li>
+          <li>Lesser known artists and songs should be prioritized higher in the list in a visually appealing manner</li>
+        </ul>
+      </div>
+
+      <h2>Performance <em>Considerations</em></h2>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Backend must handle a simultaneous roll-out of playlists every week without crashing</li>
+          <li>Maintain the database with updated statistics on user data and artist metrics on the app</li>
+          <li>The song recommendation algorithm should be optimized based on user feedback, content-based data, and collaborative filtering in the least time complexity possible</li>
+          <li>A cache should be utilized to reduce latency when processing user interactions</li>
+          <li>Performance testing must be conducted to identify issues in scalability and loading times</li>
+        </ul>
+      </div>
+
+      <h2>Security <em>Considerations</em></h2>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Encrypt user data in the database to protect from unauthorized access</li>
+          <li>Utilize an authentication system to ensure user access to the tailored playlist</li>
+          <li>Implement measures to prevent hackers from generating the playlist more frequently than the designated time</li>
+          <li>Find system vulnerabilities using regular pen-testing and other corner-case testing</li>
+        </ul>
+      </div>
+
+      <h2>Localization &amp; <em>Accessibility</em></h2>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Train the algorithm with a diverse dataset to avoid bias, including factors such as culture, location, language, and artist popularity</li>
+          <li>Incorporate functionalities according to the Web Content Accessibility Guidelines such as voice automation, read-aloud content, and keyboard shortcuts</li>
+        </ul>
+      </div>
+
+      <h2>Wireframes</h2>
+      <div class="wireframes">
+        <p class="wireframes-label">Screens</p>
+        <div class="wireframes-grid">
+          <img class="wireframe-img" src="/spotify_controls.png" alt="Spotify recommendation controls wireframes" />
+        </div>
+        <p class="wireframes-caption">Left to right: Playlist is prominent on the first page, save songs in line, toggle weights for recommendations</p>
+      </div>
+
+      <h2>Acceptance <em>Criteria</em></h2>
+      <div class="req-section">
+        <ul class="criteria-list">
+          <li class="criteria-item"><strong>Given</strong> I have an active subscription, <strong>when</strong> I open the Spotify application, <strong>then</strong> I should view the personalized playlist first at the start of every week.</li>
+          <li class="criteria-item"><strong>Given</strong> my Discover Weekly playlist, <strong>when</strong> I view my current playlist, <strong>then</strong> I should view at least 30 songs across all the languages I am listening to.</li>
+          <li class="criteria-item"><strong>Given</strong> my Discover Weekly playlist, <strong>when</strong> I listen to each song, <strong>then</strong> I should be able to distinctly view the save song button.</li>
+          <li class="criteria-item"><strong>Given</strong> my Discover Weekly playlist, <strong>when</strong> I view my current playlist, <strong>then</strong> I should be able to change which features have more weightage in recommendations for next week's playlist.</li>
+          <li class="criteria-item"><strong>Given</strong> I have an active subscription, <strong>when</strong> I listen to the personalized playlist, <strong>then</strong> I should have all my data securely encrypted.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <footer class="article-footer">
+      <a href="/work.html" class="back-link">← Back to all projects</a>
+      <span class="article-byline">Medini Chopra · Spring 2024</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
