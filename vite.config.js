@@ -11,6 +11,7 @@ export default defineConfig({
         about: resolve(__dirname, "about.html"),
         code: resolve(__dirname, "sectionCode.html"),
         data: resolve(__dirname, "sectionData.html"),
+        portfolio: resolve(__dirname, "index2.html"),
       },
     },
   },
