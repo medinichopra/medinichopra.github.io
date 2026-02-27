@@ -542,7 +542,7 @@ footer span {
 
   /* Canvas/hero: ensure it fills correctly on small screens */
   #hero { height: 300vh; }
-  #waveform-canvas { touch-action: none; }
+  #waveform-canvas { touch-action: pan-y; }
 
   /* Full-width single column text, no sticky needed */
   #about-strip {
