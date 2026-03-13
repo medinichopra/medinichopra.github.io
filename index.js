@@ -344,13 +344,26 @@ function applyScrollState() {
     const ip = easeInOut(clamp(introProgress, 0, 1));
 
     // Scale: starts at 0.65 (clearly visible under text), grows to 1
-    const sc = lerp(0.65, 1, ip);
+    const sc = isMobile ? lerp(0.55, 1, ip) : lerp(0.65, 1, ip);
 
     // Horizontal: left-half centre on desktop (-W/4), centred on mobile → 0
     const tx = isMobile ? 0 : lerp(-W * 0.25, 0, ip);
 
-    // Vertical: just below centre on desktop; pushed toward bottom quarter on mobile → 0
-    const ty = isMobile ? lerp(H * 0.30, 0, ip) : lerp(H * 0.04, 0, ip);
+    // Vertical: on mobile, measure bottom of intro text so waveform sits in the gap below
+    let ty;
+    if (isMobile) {
+      const introText = document.getElementById('intro-text');
+      const contentBottom = introText
+        ? introText.getBoundingClientRect().bottom
+        : H * 0.55;
+      // waveform center: 35% into the gap (biased toward content, above scroll hint)
+      const gapBottom = H - 60; // reserve space for scroll hint
+      const gapCenter = contentBottom + (gapBottom - contentBottom) * 0.35;
+      const targetOffset = gapCenter - H / 2;
+      ty = lerp(targetOffset, 0, ip);
+    } else {
+      ty = lerp(H * 0.04, 0, ip);
+    }
 
     canvas.style.transform = ip >= 1 ? 'none' : `translate(${tx}px, ${ty}px) scale(${sc})`;
     canvas.style.opacity = '1';
