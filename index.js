@@ -30,6 +30,7 @@ let canvas, ctx, W, H, dpr;
 let scrollProgress   = 0; // 0 → 1 across the hero scroll zone
 let postProgress     = 0; // 0 → 1 as user scrolls through the about section after the hero
 let portraitProgress = 0; // 0 → 1 for state 3: network fades, portrait scrolls in
+let introProgress    = 0; // 0 → 1 as user scrolls the intro section (fades out intro, fades in hero)
 let mouseX = -9999, mouseY = -9999;
 let mouseDX = 0, mouseDY = 0; // velocity of cursor movement
 let bars = [];
@@ -77,9 +78,8 @@ function initBars() {
 
 function resize() {
   dpr = window.devicePixelRatio || 1;
-  const el = canvas.parentElement;
-  W = el.clientWidth;
-  H = el.clientHeight;
+  W = window.innerWidth;
+  H = window.innerHeight;
   canvas.style.width  = W + 'px';
   canvas.style.height = H + 'px';
   canvas.width  = W * dpr;
@@ -293,38 +293,67 @@ function applyScrollState() {
   const netEl = document.getElementById('network-layer');
   if (netEl) netEl.style.opacity = netAlpha;
 
+  // Intro section: fades out as introProgress goes 0→1 (bottom half of intro scroll zone)
+  const introEl = document.getElementById('intro-sticky');
+  if (introEl) {
+    // Fade starts when intro is half scrolled, completes just before hero begins
+    const introFade = easeInOut(clamp((introProgress - 0.4) / 0.6, 0, 1));
+    introEl.style.opacity = 1 - introFade;
+    // Also fade the intro scroll hint out early
+    const introHint = document.getElementById('intro-scroll-hint');
+    if (introHint) introHint.style.opacity = introProgress < 0.08 ? 1 : 0;
+  }
+
   // Scroll hint hides once scrolling begins
   const hint = document.getElementById('scroll-hint');
   if (hint) hint.style.opacity = scrollProgress < 0.04 ? 1 : 0;
 
-  // Once the hero is done (scrollProgress=1) the sticky parent scrolls away.
-  // We switch the canvas to position:fixed and animate it to the right half
-  // of the viewport as the about section scrolls into view.
-  if (scrollProgress >= 1) {
-    const isMobile = window.innerWidth <= 768;
-    const p  = easeInOut(postProgress);
+  // ── Canvas positioning ─────────────────────────────────────────────────────
+  // Canvas is always position:fixed. Three phases:
+  //
+  // Phase A — Intro (introProgress 0→1, scrollProgress=0):
+  //   Small waveform, left-aligned under the text, animates to full-center.
+  //
+  // Phase B — Hero (scrollProgress 0→1):
+  //   Full-screen, centred. The existing scatter/tagline/network plays here.
+  //
+  // Phase C — Post-hero (scrollProgress=1):
+  //   Right-shifts to make room for about text, fades with portrait.
+  // ─────────────────────────────────────────────────────────────────────────
 
-    // On mobile: keep canvas centred, just fade it out. No rightward shift.
+  canvas.style.transformOrigin = 'center center';
+  canvas.style.pointerEvents   = 'none';
+
+  const isMobile = window.innerWidth <= 768;
+
+  if (scrollProgress >= 1) {
+    // Phase C: post-hero — shift right and fade out as portrait rises
+    const p  = easeInOut(postProgress);
     const sc = isMobile ? lerp(1, 0.92, p) : lerp(1, 0.76, p);
     const tx = isMobile ? 0 : lerp(0, W * 0.22, p);
     const ty = isMobile ? 0 : lerp(0, -H * 0.04, p);
-
-    // Network slides upward and out as portraitProgress advances
     const netExitT  = easeInOut(clamp(portraitProgress / 0.7, 0, 1));
     const netSlideY = -netExitT * H * 0.65;
-
-    canvas.style.position  = 'fixed';
-    canvas.style.inset     = '0';
     canvas.style.transform = `translate(${tx}px, ${ty + netSlideY}px) scale(${sc})`;
-    canvas.style.transformOrigin = 'center center';
-    canvas.style.pointerEvents   = 'none';
     canvas.style.opacity   = 1 - easeInOut(clamp((portraitProgress - 0.2) / 0.5, 0, 1));
+
   } else {
-    canvas.style.position  = 'absolute';
-    canvas.style.inset     = '0';
-    canvas.style.transform = 'none';
-    canvas.style.transformOrigin = '';
-    canvas.style.opacity   = '1';
+    // Phase A/B blend: while intro is scrolling (introProgress 0→1), the canvas
+    // animates from a small left-aligned position to full-screen center.
+    // Once introProgress=1 (hero begins), it's already at center — stays there.
+    const ip = easeInOut(clamp(introProgress, 0, 1));
+
+    // Scale: starts at 0.65 (clearly visible under text), grows to 1
+    const sc = lerp(0.65, 1, ip);
+
+    // Horizontal: left-half centre on desktop (-W/4), centred on mobile → 0
+    const tx = isMobile ? 0 : lerp(-W * 0.25, 0, ip);
+
+    // Vertical: just below centre on desktop; pushed toward bottom quarter on mobile → 0
+    const ty = isMobile ? lerp(H * 0.30, 0, ip) : lerp(H * 0.04, 0, ip);
+
+    canvas.style.transform = ip >= 1 ? 'none' : `translate(${tx}px, ${ty}px) scale(${sc})`;
+    canvas.style.opacity = '1';
   }
 
   // Portrait scrolls up from below in sync with the network's upward exit.
@@ -346,10 +375,9 @@ function applyScrollState() {
     const contentBottom = aRect.bottom - 100;
     const aboutCy = (contentTop + contentBottom) / 2;
 
-    // Position portrait so its centre lands on (rightHalfCx, aboutCy)
-    // Fine-tune offsets: negative = left/up, positive = right/down
-    const nudgeX = -40;  // px toward left
-    const nudgeY = -60;  // px upward
+    // Position spotify panel so its centre lands on (rightHalfCx, aboutCy)
+    const nudgeX = -20;  // px toward left
+    const nudgeY =   0;  // vertically centred
     portrait.style.left = (rightHalfCx - pW / 2 + nudgeX) + 'px';
     portrait.style.top  = (aboutCy - pH / 2 + nudgeY) + 'px';
 
@@ -560,8 +588,12 @@ function loop(timestamp) {
   stepNetwork(time);
 
   const phaseA = clamp(scrollProgress / 0.5, 0, 1);
+  // Bars hold (pure oscillation) for first 35% of hero scroll, then scatter.
+  // scatterT=0 means bars are fully at rest; scatterT=1 means fully scattered.
+  const DWELL = 0.35;
+  const scatterT = clamp((scrollProgress - DWELL * 0.5) / (0.5 - DWELL * 0.5), 0, 1);
   drawParticles(phaseA, time);
-  drawBars(phaseA, time);
+  drawBars(scatterT, time);
   drawNetwork(netAlpha);
 
   requestAnimationFrame(loop);
@@ -572,6 +604,15 @@ function loop(timestamp) {
    ══════════════════════════════════════════════════════════ */
 
 function onScroll() {
+  // introProgress: 0→1 across the intro section scroll zone
+  const introEl = document.getElementById('intro');
+  if (introEl) {
+    const iRect      = introEl.getBoundingClientRect();
+    const iScrollable = introEl.offsetHeight - window.innerHeight;
+    const iScrolled   = -iRect.top;
+    introProgress     = clamp(iScrolled / iScrollable, 0, 1);
+  }
+
   const hero = document.getElementById('hero');
   const rect = hero.getBoundingClientRect();
   const scrollable = hero.offsetHeight - window.innerHeight;

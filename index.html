@@ -56,17 +56,42 @@
     </ul>
   </nav>
 
+  <!-- ─── Intro (name + headshot, full-screen sticky) ─── -->
+  <section id="intro">
+    <div id="intro-sticky">
+
+      <div id="intro-text">
+        <p id="intro-sentence">
+          Hi, I'm Medini <em>(pronounced: may-the-knee)</em>, a Research Engineer @
+          <a href="https://nico.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Northwestern Institute on Complex Systems</a>,
+          working with <a href="https://scholar.google.com/citations?user=uGJ_6aQAAAAJ&hl=en" class="inline-link" target="_blank" rel="noopener">Brian Uzzi</a>
+          and <a href="https://mattgroh.com" class="inline-link" target="_blank" rel="noopener">Matt Groh</a>.
+        </p>
+      </div>
+
+      <div id="intro-photo">
+        <img src="/PORTFOLIO PICTURE.png" alt="Medini Chopra" />
+      </div>
+
+      <div id="intro-scroll-hint">
+        <span class="scroll-hint-text">scroll</span>
+        <div class="scroll-hint-line"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Canvas: lives at body level, position:fixed, covers intro + hero -->
+  <canvas id="waveform-canvas" aria-hidden="true"></canvas>
+
   <!-- ─── Hero (scroll-driven three-state) ─── -->
   <section id="hero">
     <div id="hero-sticky">
 
-      <!-- Canvas: waveform bars + network (all drawn here) -->
-      <canvas id="waveform-canvas" aria-hidden="true"></canvas>
-
       <!-- Tagline overlay: fades in at state 1 -->
-      <div id="hero-tagline" aria-label="Tuning AI that makes humans better at their craft.">
-        <span class="tagline-line">Tuning AI that makes humans</span>
-        <span class="tagline-line">better at their <em>craft.</em></span>
+      <div id="hero-tagline" aria-label="I'm passionate about tuning AI that makes humans better at their craft.">
+        <span class="tagline-line">I'm passionate about tuning AI</span>
+        <span class="tagline-line">that makes humans better at their <em>craft.</em></span>
       </div>
 
       <!-- Network layer: just a transparent overlay for the canvas network -->
@@ -90,9 +115,7 @@
       <!-- Group 1: always visible, stays static -->
       <div id="about-group-1">
         <p class="about-body">
-          Hi, I'm Medini <em>(pronounced: may-the-knee)</em>, a Research Engineer @ <a href="https://nico.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Northwestern Institute on Complex Systems</a>,
-          working with <a href="https://scholar.google.com/citations?user=uGJ_6aQAAAAJ&hl=en" class="inline-link" target="_blank" rel="noopener">Brian Uzzi</a> and <a href="https://mattgroh.com" class="inline-link" target="_blank" rel="noopener">Matt Groh</a>.
-          I'm passionate about designing human-centered AI systems. Some of my recent work includes fine-tuning language models for financial expert alignment, studying how generative models shape user creativity in music creation, and building a tool that summarizes and surfaces hundreds of daily press releases for journalists.
+          Some of my recent work includes fine-tuning language models for financial expert alignment, studying how generative models shape user creativity in music creation, and building a tool that summarizes and surfaces hundreds of daily press releases for journalists.
         </p>
         <!-- Bridge line: fades out as portraitProgress advances -->
         <p id="about-bridge">For more, explore my network of interests:</p>
@@ -101,12 +124,10 @@
       <!-- Group 2: rises in sync with portrait, driven by portraitProgress -->
       <div id="about-group-2">
         <p class="about-body">
-          I graduated from Northwestern in December 2025 with a Master's degree in Computer Science. During my time there, I worked under the <a href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/" class="inline-link" target="_blank" rel="noopener">Human-AI Collaboration Lab</a> and the <a href="https://dtr.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Design, Technology, Research Lab</a>, interned at <a href="https://www.cboe.com" class="inline-link" target="_blank" rel="noopener">Cboe Global Markets'</a> AI Center of Excellence, and helped build <a href="https://vouchd.us/" class="inline-link" target="_blank" rel="noopener">Vouchd LLC</a> @ <a href="https://thegarage.northwestern.edu" class="inline-link" target="_blank" rel="noopener">The Garage</a>.
+          MS in Computer Science from Northwestern ('25), where I worked across the <a href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/" class="inline-link" target="_blank" rel="noopener">Human-AI Collaboration Lab</a>, <a href="https://dtr.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Design, Technology, Research Lab</a>, <a href="https://www.cboe.com" class="inline-link" target="_blank" rel="noopener">Cboe Global Markets</a>, and <a href="https://vouchd.us/" class="inline-link" target="_blank" rel="noopener">Vouchd LLC</a> @ <a href="https://thegarage.northwestern.edu" class="inline-link" target="_blank" rel="noopener">The Garage</a>. I'm also a semi-professional Kathak dancer, coffee connoisseur, and plant enthusiast.
         </p>
         <p class="about-body">
-          I'm also a semi-professional Kathak dancer, coffee connoisseur, and plant enthusiast.
-          <br>
-          Reach out if you'd like to learn more about my work, collaborate on a project, or simply talk about open-ended questions in <em>markets, music, media and machines</em>.
+          Reach out if you'd like to learn more about my work, collaborate on a project, or simply talk about <em>markets, music, media and machines</em>.
         </p>
         <div class="about-contact">
           <div class="connect-stack">
@@ -118,9 +139,19 @@
         </div>
       </div>
 
-      <!-- Mobile-only portrait: shown inline below text, hidden on desktop -->
+      <!-- Mobile-only spotify: shown inline below text, hidden on desktop -->
       <div id="portrait-mobile">
-        <img src="/PORTFOLIO PICTURE.png" alt="Medini Chopra" />
+        <p id="portrait-mobile-label">lately listening to</p>
+        <iframe
+          style="border-radius: 12px"
+          src="https://open.spotify.com/embed/track/0CS28Nfq8ZiVhwQrZpE85X?utm_source=generator"
+          width="100%"
+          height="152"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
       </div>
 
     </section>
@@ -133,9 +164,20 @@
 
   </div>
 
-  <!-- Portrait: shown during state 3 scroll -->
+  <!-- Portrait panel: shown during state 3 scroll (desktop) -->
   <div id="portrait-panel">
-    <img id="portrait-img" src="/PORTFOLIO PICTURE.png" alt="Medini Chopra" />
+    <p id="portrait-spotify-label">lately listening to</p>
+    <iframe
+      id="portrait-spotify-frame"
+      style="border-radius: 12px"
+      src="https://open.spotify.com/embed/track/0CS28Nfq8ZiVhwQrZpE85X?utm_source=generator"
+      width="100%"
+      height="152"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"
+    ></iframe>
   </div>
 
   <script type="module" src="./index.js"></script>
