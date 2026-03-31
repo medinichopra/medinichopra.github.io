@@ -20,6 +20,7 @@ export default defineConfig({
         writingSpotifyRecommendationControls: resolve(__dirname, "writing/spotify-recommendation-controls.html"),
         writingDigitalExclusion: resolve(__dirname, "writing/digital-exclusion.html"),
         writingZomatoSocials: resolve(__dirname, "writing/zomato-socials.html"),
+        writingLiveleaf: resolve(__dirname, "writing/liveleaf.html"),
       },
     },
   },
