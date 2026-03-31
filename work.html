@@ -141,9 +141,9 @@
 
     .project-item-inner {
       display: grid;
-      grid-template-columns: 56px 1fr auto;
+      grid-template-columns: 56px 1fr auto 240px;
       gap: 0 28px;
-      align-items: start;
+      align-items: center;
     }
 
     /* Large ordinal */
@@ -206,6 +206,62 @@
     .project-item:hover .project-arrow {
       color: var(--gold);
       transform: translateX(4px);
+    }
+
+    /* ── Project thumbnail ── */
+    .project-thumb {
+      width: 240px;
+      height: 154px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+         object-fit: cover;
+      display: block;
+      filter: saturate(0.55) brightness(0.82);
+      transition: filter 0.4s ease;
+    }
+
+    .project-item:hover .project-thumb img {
+      filter: saturate(0.75) brightness(0.92);
+    }
+
+    /* Placeholder for projects without images */
+    .project-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245,236,215,0.06);
+      border: 1px solid rgba(245,236,215,0.10);
+      border-radius: 4px;
+    }
+
+    .project-thumb-placeholder span {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 2rem;
+      color: rgba(245,236,215,0.18);
+      line-height: 1;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+              user-select: none;
+    }
+
+    .project-item:hover .project-thumb-placeholder {
+      border-color: rgba(201,168,76,0.25);
+    }
+
+    .project-item:hover .project-thumb-placeholder span {
+      color: rgba(201,168,76,0.35);
     }
 
     /* ── Footer ── */
@@ -274,6 +330,7 @@
       .page-header, .projects-list { padding-left: 24px; padding-right: 24px; }
       .nav-links { gap: 20px; }
       .project-item-inner { grid-template-columns: 40px 1fr auto; gap: 0 16px; }
+      .project-thumb { display: none; }
       footer { flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
@@ -302,147 +359,213 @@
 
   <div class="projects-list">
 
-    <a class="project-item fade-up" href="/writing/kathak-as-a-language.html" data-tags="blogs dance">
+    <a class="project-item fade-up" href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/ai-creativity" target="_blank" rel="noopener" data-tags="research engineering">
       <div class="project-item-inner">
-        <span class="project-num">00</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Indian Classical Dance · Philosophy of Language</p>
-          <h2 class="project-title">Kathak as a Language</h2>
-          <p class="project-desc">Can codified dance perform speech acts? Commentary on Margolis, Bannerman, and Austin, and Kathak.</p>
+          <p class="project-tag">Human-Centered AI Systems · AI for Music</p>
+          <h2 class="project-title">Make It Different</h2>
+          <p class="project-desc">Developing generative AI as an experimental interface for studying creative thinking in music. Can we coach people to further their musical ideas when using AI?</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+            <img src="/ai-creativity.png" alt="Generative AI & Creative Thinking in Music" loading="lazy" style="object-position: left center;" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/zomato-socials.html" data-tags="research">
+    <a class="project-item fade-up" href="https://github.com/medinichopra/persuasion-classification" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
-        <span class="project-num">00</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Product · UX · Product</p>
-          <h2 class="project-title">Zomato Socials</h2>
-          <p class="project-desc">Designing a social discovery layer for Zomato — personalized restaurant recommendations through trusted networks.</p>
+          <p class="project-tag">AI Safety & Behavior · AI Evaluations</p>
+          <h2 class="project-title">Persuasion in LLMs</h2>
+          <p class="project-desc">Used a custom BERT to classify persuasive text and used attention masks for explainability.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/persuasion_detection_banner.png" alt="Persuasion in LLMs" loading="lazy" style="object-fit: cover;" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/digital-exclusion.html" data-tags="blogs">
+    <a class="project-item fade-up" href="https://drive.google.com/file/d/1RalggMDoroGVOdkRYlI2pWJnNYnaxCPm/view" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
-        <span class="project-num">00</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Technology & Society</p>
-          <h2 class="project-title">Digital Exclusion</h2>
-          <p class="project-desc">On how social hierarchies persist in the digital sphere, and why digitization in India compounds rather than resolves systemic inequalities.</p>
+          <p class="project-tag">NLP · AI Evaluations</p>
+          <h2 class="project-title">Reasoning & Role-playing in LLMs</h2>
+          <p class="project-desc">Experimented with adversarial vs. helpful personas for teaching math.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/adversarial_personas_banner.png" alt="Reasoning & Role-playing in LLMs" loading="lazy" style="object-fit: cover;" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/content-moderation.html" data-tags="blogs">
+    <a class="project-item fade-up" href="/writing/liveleaf.html" data-tags="engineering research">
       <div class="project-item-inner">
-        <span class="project-num">00</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Technology & Society</p>
-          <h2 class="project-title">Content Moderation</h2>
-          <p class="project-desc">On exploitation, invisible labor, and what the information age costs the people who keep it clean.</p>
+          <p class="project-tag">HCI · Behavior Design</p>
+          <h2 class="project-title">Adaptive Plant Care</h2>
+          <p class="project-desc">A BeReal-inspired app exploring how social pressure and personalized notifications can (and can't) motivate plant care.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/liveleaf.png" alt="Adaptive Plant Care" loading="lazy" style="object-position: left center;" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/successful-failure.html" data-tags="blogs">
+    <a class="project-item fade-up" href="https://aclanthology.org/2024.nlp4dh-1.15/" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
-        <span class="project-num">00</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Technology & Society</p>
-          <h2 class="project-title">Successful Failure</h2>
-          <p class="project-desc">What Foucault can teach us about privacy self-management in a world of Facebook and Big Data.</p>
+          <p class="project-tag">NLP · Digital Humanities</p>
+          <h2 class="project-title">Deciphering psycho-social effects of Eating Disorder</h2>
+          <p class="project-desc">EMNLP Workshop 2024. A large-scale analysis of social media data using LLMs to study the psychological impacts of ED patients and those who live in their proximity.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/Topicpercentage.png" alt="Deciphering psycho-social effects of Eating Disorder" loading="lazy" style="object-fit: cover; object-position: left top;" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/spotify-recommendation-controls.html" data-tags="engineering">
+    <a class="project-item fade-up" href="https://drive.google.com/file/d/1f_nC7QIS-K0g0MqgFR0_c3pp1QBwS5Ix/view" target="_blank" rel="noopener" data-tags="engineering">
       <div class="project-item-inner">
-        <span class="project-num">01</span>
-        <div class="project-body">
-          <p class="project-tag">Product · Human Experience of Music</p>
-          <h2 class="project-title">Weighted Spotify Recommendation Controls</h2>
-          <p class="project-desc">Giving users fine-grained control over what drives their Discover Weekly — without sacrificing the magic of serendipity.</p>
-        </div>
-        <span class="project-arrow">→</span>
-      </div>
-    </a>
-
-    <a class="project-item fade-up" href="/writing/resonance.html" data-tags="engineering">
-      <div class="project-item-inner">
-        <span class="project-num">01</span>
+        <span class="project-num"></span>
         <div class="project-body">
           <p class="project-tag">Human Experience of Music · AI for Music</p>
           <h2 class="project-title">Resonance</h2>
           <p class="project-desc">A recommendation algorithm that builds context-first mini-playlists, not from what you've played, but from where you are and how you feel.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/resonance.png" alt="Resonance" loading="lazy" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="research">
+    <a class="project-item fade-up" href="/writing/spotify-recommendation-controls.html" data-tags="engineering">
       <div class="project-item-inner">
-        <span class="project-num">02</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">NLP · Digital Humanities</p>
-          <h2 class="project-title">Language & the Literary Mind</h2>
-          <p class="project-desc">NLP4DH workshop (EMNLP 2024). Exploring what computational models can reveal about how literature shapes cognition.</p>
+          <p class="project-tag">Product · Human Experience of Music</p>
+          <h2 class="project-title">Weighted Spotify Recommendation Controls</h2>
+          <p class="project-desc">Giving users fine-grained control over what drives their Discover Weekly — without sacrificing the magic of serendipity.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/spotify_controls.png" alt="Spotify Recommendation Controls" loading="lazy" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="research">
+    <a class="project-item fade-up" href="/writing/zomato-socials.html" data-tags="research">
       <div class="project-item-inner">
-        <span class="project-num">03</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">AI Safety & Behavior · AI Evaluations</p>
-          <h2 class="project-title">Persuasion in LLMs</h2>
-          <p class="project-desc">Probing how LLM's agree, flatter, and persuade — and what that means for trust and safety.</p>
+          <p class="project-tag">Product · UX</p>
+          <h2 class="project-title">Zomato Socials</h2>
+          <p class="project-desc">Designing a social discovery layer for Zomato — personalized restaurant recommendations through trusted networks.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/zomato_cover.png" alt="Zomato Socials" loading="lazy" style="object-fit: contain;" />
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="research engineering">
+    <a class="project-item fade-up" href="/writing/kathak-as-a-language.html" data-tags="blogs dance">
       <div class="project-item-inner">
-        <span class="project-num">04</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">HCI · Skill Development</p>
-          <h2 class="project-title">AI for Craft</h2>
-          <p class="project-desc">How AI can act as a partner in skill development — helping people learn to cook, trade, dance, make music — without replacing the human doing.</p>
+          <p class="project-tag">Indian Classical Dance · Philosophy of Language</p>
+          <h2 class="project-title">Kathak as a Language</h2>
+          <p class="project-desc">Can codified dance perform speech acts? Commentary on Margolis, Bannerman, and Austin, and Kathak.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>Kl</span></div>
+        </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="dance engineering">
+    <a class="project-item fade-up" href="/writing/successful-failure.html" data-tags="blogs">
       <div class="project-item-inner">
-        <span class="project-num">05</span>
+        <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Indian Classical Dance · AI for Music</p>
-          <h2 class="project-title">Tihai</h2>
-          <p class="project-desc">A Hindustani rhythm pattern generator. Explores the mathematical structures underlying tala — where music theory meets computation.</p>
+          <p class="project-tag">Technology & Society</p>
+          <h2 class="project-title">Successful Failure</h2>
+          <p class="project-desc">What Foucault can teach us about privacy self-management in a world of Facebook and Big Data.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>Sf</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/content-moderation.html" data-tags="blogs">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Technology & Society</p>
+          <h2 class="project-title">Content Moderation</h2>
+          <p class="project-desc">On exploitation, invisible labor, and what the information age costs the people who keep it clean.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>Cm</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="/writing/digital-exclusion.html" data-tags="blogs">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Technology & Society</p>
+          <h2 class="project-title">Digital Exclusion</h2>
+          <p class="project-desc">On how social hierarchies persist in the digital sphere, and why digitization in India compounds rather than resolves systemic inequalities.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <div class="project-thumb-placeholder"><span>De</span></div>
+        </div>
       </div>
     </a>
 
     <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="engineering research">
       <div class="project-item-inner">
-        <span class="project-num">06</span>
+        <span class="project-num"></span>
         <div class="project-body">
           <p class="project-tag">Computer Vision · Indian Art</p>
           <h2 class="project-title">Rasa</h2>
           <p class="project-desc">CNN-based emotion detection from Indian classical paintings. Training models to read <em>Rasa</em>, the aesthetic essence, in visual art.</p>
         </div>
         <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/indian art.jpg" alt="Rasa — Indian classical painting" loading="lazy" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="dance engineering">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Indian Classical Dance · AI for Music</p>
+          <h2 class="project-title">Tihai</h2>
+          <p class="project-desc">A Hindustani rhythm pattern generator. Explores the mathematical structures underlying tala — where music theory meets computation.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/musicians.png" alt="Tihai" loading="lazy" style="object-fit: cover;" />
+        </div>
       </div>
     </a>
 
@@ -453,6 +576,11 @@
   </footer>
 
   <script>
+    // Auto-number project items
+    document.querySelectorAll('.project-num').forEach((el, i) => {
+      el.textContent = String(i + 1).padStart(2, '0');
+    });
+
     // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
