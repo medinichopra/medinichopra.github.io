@@ -266,6 +266,7 @@ body::after {
   align-items: center;
   gap: 8px;
   pointer-events: none;
+  z-index: 2;
 }
 
 /* ─── Hero Section ─── */
@@ -670,7 +671,8 @@ footer span {
   }
   #intro-scroll-hint {
     left: 50%;
-    bottom: 24px;
+    bottom: env(safe-area-inset-bottom, 0px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
   }
 
   /* Canvas/hero: ensure it fills correctly on small screens */

@@ -26,3 +26,4 @@ dist-ssr
 dist/
 
 writing/_template.html
+.gitignore
