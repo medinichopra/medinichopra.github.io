@@ -17,9 +17,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:   #722F37;
-      --cream:  #F5ECD7;
-      --gold:   #C9A84C;
+      --wine:   #7A8862;
+      --cream:  #F3E8D3;
+      --gold:   #E8A33D;
       --sienna: #B85C3A;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
@@ -60,7 +60,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--wine);
-      border-bottom: 1px solid rgba(245,236,215,0.12);
+      border-bottom: 1px solid rgba(243,232,211,0.12);
     }
 
     .nav-name {
@@ -71,7 +71,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
@@ -80,7 +79,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(245,236,215,0.65);
+      color: rgba(243,232,211,0.65);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -90,7 +89,7 @@
     /* ── Page header ── */
     .page-header {
       padding: 140px 48px 64px;
-      max-width: 900px;
+      max-width: 1200px;
     }
 
     .page-eyebrow {
@@ -110,39 +109,38 @@
       line-height: 1.1;
       color: var(--cream);
     }
-    .page-heading em { font-style: italic; color: var(--gold); }
 
     /* ── Project list ── */
     .projects-list {
       padding: 0 48px 120px;
-      max-width: 900px;
+      max-width: 1200px;
     }
 
     .project-item {
       display: block;
       text-decoration: none;
       color: inherit;
-      padding: 36px 0;
-      border-top: 1px solid rgba(245,236,215,0.10);
+      padding: 24px 0;
+      border-top: 1px solid rgba(243,232,211,0.10);
       position: relative;
       transition: border-color 0.3s;
     }
 
     .project-item:last-child {
-      border-bottom: 1px solid rgba(245,236,215,0.10);
+      border-bottom: 1px solid rgba(243,232,211,0.10);
     }
 
     .project-item:hover {
-      border-top-color: rgba(201,168,76,0.35);
+      border-top-color: rgba(232,163,61,0.35);
     }
     .project-item:last-child:hover {
-      border-bottom-color: rgba(201,168,76,0.35);
+      border-bottom-color: rgba(232,163,61,0.35);
     }
 
     .project-item-inner {
       display: grid;
-      grid-template-columns: 56px 1fr auto 240px;
-      gap: 0 28px;
+      grid-template-columns: 56px minmax(0, 560px) auto 200px;
+      gap: 0 20px;
       align-items: center;
     }
 
@@ -152,7 +150,7 @@
       font-style: italic;
       font-weight: 300;
       font-size: 2.2rem;
-      color: rgba(245,236,215,0.30);
+      color: rgba(243,232,211,0.30);
       line-height: 1;
       padding-top: 4px;
       transition: color 0.3s;
@@ -161,7 +159,7 @@
               user-select: none;
     }
     .project-item:hover .project-num {
-      color: rgba(201,168,76,0.65);
+      color: rgba(232,163,61,0.65);
     }
 
     .project-body { flex: 1; }
@@ -190,7 +188,7 @@
     .project-desc {
       font-size: 0.875rem;
       font-weight: 300;
-      color: rgba(245,236,215,0.78);
+      color: rgba(243,232,211,0.95);
       line-height: 1.75;
       max-width: 580px;
     }
@@ -198,7 +196,7 @@
     /* Arrow indicator */
     .project-arrow {
       font-size: 1.2rem;
-      color: rgba(245,236,215,0.0);
+      color: rgba(243,232,211,0.0);
       transition: color 0.3s, transform 0.3s;
       padding-top: 6px;
       align-self: center;
@@ -210,8 +208,8 @@
 
     /* ── Project thumbnail ── */
     .project-thumb {
-      width: 240px;
-      height: 154px;
+      width: 200px;
+      height: 128px;
       border-radius: 4px;
       overflow: hidden;
       flex-shrink: 0;
@@ -239,8 +237,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(245,236,215,0.06);
-      border: 1px solid rgba(245,236,215,0.10);
+      background: rgba(243,232,211,0.06);
+      border: 1px solid rgba(243,232,211,0.10);
       border-radius: 4px;
     }
 
@@ -249,7 +247,7 @@
       font-style: italic;
       font-weight: 300;
       font-size: 2rem;
-      color: rgba(245,236,215,0.18);
+      color: rgba(243,232,211,0.18);
       line-height: 1;
       -webkit-user-select: none;
          -moz-user-select: none;
@@ -257,17 +255,17 @@
     }
 
     .project-item:hover .project-thumb-placeholder {
-      border-color: rgba(201,168,76,0.25);
+      border-color: rgba(232,163,61,0.25);
     }
 
     .project-item:hover .project-thumb-placeholder span {
-      color: rgba(201,168,76,0.35);
+      color: rgba(232,163,61,0.35);
     }
 
     /* ── Footer ── */
     footer {
       padding: 32px 48px;
-      border-top: 1px solid rgba(245,236,215,0.06);
+      border-top: 1px solid rgba(243,232,211,0.06);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -275,13 +273,14 @@
     footer span {
       font-size: 0.75rem;
       font-weight: 300;
-      color: rgba(245,236,215,0.3);
+      color: rgba(243,232,211,0.3);
       letter-spacing: 0.04em;
     }
 
     /* ── Filter pills ── */
     .filter-bar {
       padding: 0 48px 48px;
+      max-width: 1200px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -293,9 +292,9 @@
       font-size: 0.68rem;
       letter-spacing: 0.13em;
       text-transform: uppercase;
-      color: rgba(245,236,215,0.65);
+      color: rgba(243,232,211,0.95);
       background: transparent;
-      border: 1px solid rgba(245,236,215,0.25);
+      border: 1px solid rgba(243,232,211,0.6);
       border-radius: 100px;
       padding: 6px 16px;
       cursor: pointer;
@@ -304,22 +303,15 @@
 
     .filter-pill:hover {
       color: var(--cream);
-      border-color: rgba(245,236,215,0.5);
+      border-color: rgba(243,232,211,0.5);
     }
 
     .filter-pill.active {
-      color: var(--wine);
-      background: var(--gold);
-      border-color: var(--gold);
+      color: var(--cream);
+      background: #8A1422;
+      border-color: #8A1422;
     }
 
-    /* fade-in on scroll */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     .project-item.hidden {
       display: none;
@@ -338,15 +330,15 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li><a href="/work.html" class="active">Projects</a></li>
     </ul>
   </nav>
 
-  <div class="page-header fade-up">
+  <div class="page-header">
     <!-- <p class="page-eyebrow">Selected Work</p> -->
-    <h1 class="page-heading">Things I've made,<br><em>studied, and sat with</em></h1>
+    <h1 class="page-heading">Things I've made,<br>studied, and sat with</h1>
   </div>
 
   <div class="filter-bar">
@@ -359,7 +351,7 @@
 
   <div class="projects-list">
 
-    <a class="project-item fade-up" href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/ai-creativity" target="_blank" rel="noopener" data-tags="research engineering">
+    <a class="project-item" href="https://human-ai-collaboration-lab.kellogg.northwestern.edu/ai-creativity" target="_blank" rel="noopener" data-tags="research engineering">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -374,11 +366,26 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="https://github.com/medinichopra/persuasion-classification" target="_blank" rel="noopener" data-tags="research">
+    <a class="project-item" href="/writing/topshelf.html" data-tags="engineering">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">AI Safety & Behavior · AI Evaluations</p>
+          <p class="project-tag">Product Design & Management</p>
+          <h2 class="project-title">Topshelf</h2>
+          <p class="project-desc">Meal planning app that starts with grocery store sales and optimizes ingredient purchases for maximum meal variety at minimum cost and waste, so you plan around what's cheap, not the other way around.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/topshelf/image11.png" alt="Topshelf" loading="lazy" style="object-fit: cover; object-position: center top;" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item" href="https://github.com/medinichopra/persuasion-classification" target="_blank" rel="noopener" data-tags="research">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">AI Safety</p>
           <h2 class="project-title">Persuasion in LLMs</h2>
           <p class="project-desc">Used a custom BERT to classify persuasive text and used attention masks for explainability.</p>
         </div>
@@ -389,11 +396,11 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="https://drive.google.com/file/d/1RalggMDoroGVOdkRYlI2pWJnNYnaxCPm/view" target="_blank" rel="noopener" data-tags="research">
+    <a class="project-item" href="/When_Clumsy_Teachers_Outperform.pdf" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">NLP · AI Evaluations</p>
+          <p class="project-tag">AI Safety</p>
           <h2 class="project-title">Reasoning & Role-playing in LLMs</h2>
           <p class="project-desc">Experimented with adversarial vs. helpful personas for teaching math.</p>
         </div>
@@ -404,11 +411,26 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/liveleaf.html" data-tags="engineering research">
+    <a class="project-item" href="https://vouchd.us/" target="_blank" rel="noopener" data-tags="engineering">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">HCI · Behavior Design</p>
+          <p class="project-tag">Product Design & Management</p>
+          <h2 class="project-title">Vouchd</h2>
+          <p class="project-desc">Tech lead @ startup where we connected high school students with volunteer opportunities at nonprofit organizations, making it easy to find, track, and verify community service hours.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/vouchd.png" alt="Vouchd" loading="lazy" style="object-fit: cover;" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item" href="/writing/liveleaf.html" data-tags="engineering research">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Product Design & Management</p>
           <h2 class="project-title">Adaptive Plant Care</h2>
           <p class="project-desc">A BeReal-inspired app exploring how social pressure and personalized notifications can (and can't) motivate plant care.</p>
         </div>
@@ -419,11 +441,11 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="https://aclanthology.org/2024.nlp4dh-1.15/" target="_blank" rel="noopener" data-tags="research">
+    <a class="project-item" href="https://aclanthology.org/2024.nlp4dh-1.15/" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">NLP · Digital Humanities</p>
+          <p class="project-tag">Computational Social Science</p>
           <h2 class="project-title">Deciphering psycho-social effects of Eating Disorder</h2>
           <p class="project-desc">EMNLP Workshop 2024. A large-scale analysis of social media data using LLMs to study the psychological impacts of ED patients and those who live in their proximity.</p>
         </div>
@@ -434,7 +456,7 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="https://drive.google.com/file/d/1f_nC7QIS-K0g0MqgFR0_c3pp1QBwS5Ix/view" target="_blank" rel="noopener" data-tags="engineering">
+    <a class="project-item" href="/Resonance_ Capstone Project.pdf" target="_blank" rel="noopener" data-tags="engineering">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -449,11 +471,26 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/spotify-recommendation-controls.html" data-tags="engineering">
+    <a class="project-item" href="/Toxicity on Reddit.pdf" target="_blank" rel="noopener" data-tags="research">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Product · Human Experience of Music</p>
+          <p class="project-tag">Computational Social Science</p>
+          <h2 class="project-title">Toxicity on Gendered Subreddits</h2>
+          <p class="project-desc">Comparing harmful language and discussion topics across male- and female-dominated STEM communities using Perspective API + LDA.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="/Smartphone Detox_ How To Power Down In A Wired World.jpeg" alt="Toxicity on Gendered Subreddits" loading="lazy" style="object-fit: cover;" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item" href="/writing/spotify-recommendation-controls.html" data-tags="engineering">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Product Design & Management · Human Experience of Music</p>
           <h2 class="project-title">Weighted Spotify Recommendation Controls</h2>
           <p class="project-desc">Giving users fine-grained control over what drives their Discover Weekly — without sacrificing the magic of serendipity.</p>
         </div>
@@ -464,11 +501,11 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/zomato-socials.html" data-tags="research">
+    <a class="project-item" href="/writing/zomato-socials.html" data-tags="research">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Product · UX</p>
+          <p class="project-tag">Product Design & Management</p>
           <h2 class="project-title">Zomato Socials</h2>
           <p class="project-desc">Designing a social discovery layer for Zomato — personalized restaurant recommendations through trusted networks.</p>
         </div>
@@ -479,7 +516,7 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/kathak-as-a-language.html" data-tags="blogs dance">
+    <a class="project-item" href="/writing/kathak-as-a-language.html" data-tags="blogs">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -489,12 +526,12 @@
         </div>
         <span class="project-arrow">→</span>
         <div class="project-thumb">
-          <div class="project-thumb-placeholder"><span>Kl</span></div>
+          <img src="/mudra.jpeg" alt="Kathak as a Language" loading="lazy" style="object-fit: cover;" />
         </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/successful-failure.html" data-tags="blogs">
+    <a class="project-item" href="/writing/successful-failure.html" data-tags="blogs">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -504,12 +541,12 @@
         </div>
         <span class="project-arrow">→</span>
         <div class="project-thumb">
-          <div class="project-thumb-placeholder"><span>Sf</span></div>
+          <img src="/foucault.jpeg" alt="Successful Failure" loading="lazy" style="object-fit: cover;" />
         </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/content-moderation.html" data-tags="blogs">
+    <a class="project-item" href="/writing/content-moderation.html" data-tags="blogs">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -519,12 +556,12 @@
         </div>
         <span class="project-arrow">→</span>
         <div class="project-thumb">
-          <div class="project-thumb-placeholder"><span>Cm</span></div>
+          <img src="/Magdalena Pankiewicz – World Illustration Awards  – The AOI.jpeg" alt="Content Moderation" loading="lazy" style="object-fit: cover;" />
         </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="/writing/digital-exclusion.html" data-tags="blogs">
+    <a class="project-item" href="/writing/digital-exclusion.html" data-tags="blogs">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -534,16 +571,61 @@
         </div>
         <span class="project-arrow">→</span>
         <div class="project-thumb">
-          <div class="project-thumb-placeholder"><span>De</span></div>
+          <img src="/digi exclusion.jpeg" alt="Digital Exclusion" loading="lazy" style="object-fit: cover;" />
         </div>
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="engineering research">
+    <a class="project-item" href="https://www.youtube.com/watch?v=gJjOwlU63nc" target="_blank" rel="noopener" data-tags="dance" data-year="2023">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
-          <p class="project-tag">Computer Vision · Indian Art</p>
+          <p class="project-tag">Indian Classical Dance</p>
+          <h2 class="project-title">A Celebration of Kathak</h2>
+          <p class="project-desc">Stillness & movement, power & grace, rhythm & silence: translated into visual geometries and the sculpting of space.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="https://img.youtube.com/vi/gJjOwlU63nc/hqdefault.jpg" alt="A Celebration of Kathak" loading="lazy" style="object-fit: cover;" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item" href="https://www.youtube.com/watch?v=RCTwQQrqNGo" target="_blank" rel="noopener" data-tags="dance" data-year="2023">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Indian Classical Dance</p>
+          <h2 class="project-title">An Acapella With Bodies</h2>
+          <p class="project-desc">Musical rhythms looped over a consistent metronome to create intricate sounds, followed by a fusion of 4 dance forms.</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="https://img.youtube.com/vi/RCTwQQrqNGo/hqdefault.jpg" alt="An Acapella With Bodies" loading="lazy" style="object-fit: cover;" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item" href="https://www.youtube.com/watch?v=-KRDuXOqIcc" target="_blank" rel="noopener" data-tags="dance" data-year="2023">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Indian Classical Dance</p>
+          <h2 class="project-title">Two Rivers of Movement</h2>
+          <p class="project-desc">Some follow a straight path, others meander gracefully. How would these two distinct bodies come together?</p>
+        </div>
+        <span class="project-arrow">→</span>
+        <div class="project-thumb">
+          <img src="https://img.youtube.com/vi/-KRDuXOqIcc/hqdefault.jpg" alt="Two Rivers of Movement" loading="lazy" style="object-fit: cover;" />
+        </div>
+      </div>
+    </a>
+
+    <a class="project-item" href="https://medinichopra.notion.site/rasa-142ad643875342f68a8660a02829c554" target="_blank" rel="noopener" data-tags="engineering research">
+      <div class="project-item-inner">
+        <span class="project-num"></span>
+        <div class="project-body">
+          <p class="project-tag">Human-Centered AI Systems</p>
           <h2 class="project-title">Rasa</h2>
           <p class="project-desc">CNN-based emotion detection from Indian classical paintings. Training models to read <em>Rasa</em>, the aesthetic essence, in visual art.</p>
         </div>
@@ -554,7 +636,7 @@
       </div>
     </a>
 
-    <a class="project-item fade-up" href="#" target="_blank" rel="noopener" data-tags="dance engineering">
+    <a class="project-item" href="https://medinichopra.notion.site/tihai-99ed48d6c10d4acfa361a3f3e05a4d2a?pvs=74" target="_blank" rel="noopener" data-tags="engineering">
       <div class="project-item-inner">
         <span class="project-num"></span>
         <div class="project-body">
@@ -581,16 +663,6 @@
       el.textContent = String(i + 1).padStart(2, '0');
     });
 
-    // Fade-in observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          e.target.style.transitionDelay = `${i * 0.06}s`;
-          e.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     // Filter pills
     const pills = document.querySelectorAll('.filter-pill');

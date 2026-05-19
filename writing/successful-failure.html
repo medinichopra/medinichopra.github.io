@@ -14,14 +14,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:         #722F37;
-      --cream:        #F5ECD7;
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
       --cream-dark:   #EDE0C4;
-      --gold:         #C9A84C;
+      --gold:         #7A8862;
       --sienna:       #B85C3A;
-      --ink:          #2C1810;
-      --ink-soft:     rgba(44, 24, 16, 0.6);
-      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
     }
@@ -59,7 +59,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--cream);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .nav-name {
@@ -70,7 +70,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-back {
@@ -99,7 +98,7 @@
     .article-header {
       margin-bottom: 56px;
       padding-bottom: 40px;
-      border-bottom: 1px solid rgba(44,24,16,0.10);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
     }
 
     .article-eyebrow {
@@ -108,7 +107,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       margin-bottom: 20px;
       display: flex;
       gap: 16px;
@@ -128,7 +127,7 @@
       color: var(--ink);
       margin-bottom: 20px;
     }
-    .article-title em { font-style: italic; color: var(--wine); }
+    .article-title em { font-style: normal; color: inherit; }
 
     .article-subtitle {
       font-family: var(--font-display);
@@ -152,7 +151,7 @@
       color: var(--ink);
       margin: 2.4em 0 0.8em;
     }
-    .article-body h2 em { font-style: italic; color: var(--wine); }
+    .article-body h2 em { font-style: normal; color: inherit; }
 
     .article-body h3 {
       font-family: var(--font-ui);
@@ -167,7 +166,7 @@
     .article-body a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.3);
+      text-decoration-color: rgba(138,20,34,0.3);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -191,13 +190,13 @@
 
     .article-body hr {
       border: none;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       margin: 3em 0;
     }
 
     .callout {
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(122,136,98,0.08);
+      border: 1px solid rgba(122,136,98,0.25);
       border-radius: 4px;
       padding: 20px 24px;
       margin: 2em 0;
@@ -209,7 +208,7 @@
     .article-footer {
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -248,7 +247,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li>
         <a href="/work.html" class="nav-back">← All projects</a>
@@ -264,7 +263,7 @@
         <span>Blogs</span>
         <span>February 2023</span>
       </div>
-      <h1 class="article-title">Successful <em>Failure</em></h1>
+      <h1 class="article-title">Successful Failure</h1>
       <p class="article-subtitle">What Foucault can teach us about privacy self-management in a world of Facebook and Big Data.</p>
     </header>
 
@@ -280,7 +279,7 @@
 
       <p>Hull gives a particular example of Facebook (now Meta), a company where the users themselves are the product. Since their business model depends on selling user information to third parties, they would not jeopardize that by having more people <em>not</em> consent to give their data. Consequently, the users are not privy to the privacy policies of said third-party sites, and so they never have accurate knowledge of what's being done with their data. These companies have an advantage over customers because only they are aware of the cost structure and technology used, and factors such as stock market valuation drive their intentions. This allows companies to make more money off of users than users would like. Therefore, information asymmetry is structural and inherent to the way online trade is set up.</p>
 
-      <h2>The Structural <em>Problem</em></h2>
+      <h2>The Structural Problem</h2>
 
       <p>As an extension, the structural problem begins with the mere assumption that the user data possessed by tech companies is theirs to manipulate. Unstructured data is harmless, but the potential for harm arises in structured data. We know that unstructured user data is created as a by-product of online interaction, but the problem arises when tech companies <em>assume</em> that they can use this data for reasons beyond what the actual online ecosystem requires — including structuring said data, finding insights into human behavior, and sharing them with third parties.</p>
 

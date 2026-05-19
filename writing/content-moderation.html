@@ -14,13 +14,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:         #722F37;
-      --cream:        #F5ECD7;
-      --gold:         #C9A84C;
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
       --sienna:       #B85C3A;
-      --ink:          #2C1810;
-      --ink-soft:     rgba(44, 24, 16, 0.6);
-      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
     }
@@ -58,7 +58,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--cream);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .nav-name {
@@ -69,7 +69,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-back {
@@ -98,7 +97,7 @@
     .article-header {
       margin-bottom: 56px;
       padding-bottom: 40px;
-      border-bottom: 1px solid rgba(44,24,16,0.10);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
     }
 
     .article-eyebrow {
@@ -107,7 +106,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       margin-bottom: 20px;
       display: flex;
       gap: 16px;
@@ -127,7 +126,7 @@
       color: var(--ink);
       margin-bottom: 20px;
     }
-    .article-title em { font-style: italic; color: var(--wine); }
+    .article-title em { font-style: normal; color: inherit; }
 
     .article-subtitle {
       font-family: var(--font-display);
@@ -151,7 +150,7 @@
       color: var(--ink);
       margin: 2.4em 0 0.8em;
     }
-    .article-body h2 em { font-style: italic; color: var(--wine); }
+    .article-body h2 em { font-style: normal; color: inherit; }
 
     .article-body h3 {
       font-family: var(--font-ui);
@@ -166,7 +165,7 @@
     .article-body a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.3);
+      text-decoration-color: rgba(138,20,34,0.3);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -190,13 +189,13 @@
 
     .article-body hr {
       border: none;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       margin: 3em 0;
     }
 
     .callout {
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(122,136,98,0.08);
+      border: 1px solid rgba(122,136,98,0.25);
       border-radius: 4px;
       padding: 20px 24px;
       margin: 2em 0;
@@ -208,7 +207,7 @@
     .references {
       margin-top: 3em;
       padding-top: 2em;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
     }
     .references h3 {
       font-family: var(--font-ui);
@@ -232,7 +231,7 @@
     .references a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.25);
+      text-decoration-color: rgba(138,20,34,0.25);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -242,7 +241,7 @@
     .article-footer {
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -281,7 +280,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li>
         <a href="/work.html" class="nav-back">← All projects</a>
@@ -297,7 +296,7 @@
         <span>Blogs</span>
         <span>January 2023</span>
       </div>
-      <h1 class="article-title">Content <em>Moderation</em></h1>
+      <h1 class="article-title">Content Moderation</h1>
       <p class="article-subtitle">On exploitation, invisible labor, and what the information age costs the people who keep it clean.</p>
     </header>
 
@@ -307,19 +306,19 @@
 
       <p>In the current information age, our priority would be to build infrastructure for laws, healthcare, and human rights to navigate the novel digital space. People have become resources that are infamously misused, and I argue that the innovation of technology has trapped us in a realm of exploitation and unhappiness.</p>
 
-      <h2>What is <em>content moderation?</em></h2>
+      <h2>What is content moderation?</h2>
 
       <p>It is the safeguarding of the internet from harmful user-generated content — a job that is notoriously detrimental to the individual performing it. It is modern-day slavery: people are closely monitored, made to keep their work confidential, and as a result, discouraged from seeking external assistance. Facebook, for instance, only provides a 9-minute wellness break per day. Given the content being reviewed, the compensation is insufficient in providing help, and so workers seek comfort in drugs and other activities. This stands in stark contrast to the benefits offered to Facebook's software developers, highlighting a lack of consistency in how different job roles are valued. While those building the technology are well-compensated, those responsible for maintaining the safety of users are not given the same recognition.</p>
 
-      <h2>Who are <em>content moderators?</em></h2>
+      <h2>Who are content moderators?</h2>
 
       <p>They are typically individuals from various backgrounds, many of whom are motivated by financial need, given that the pay is typically just above minimum wage. In recent years, Facebook has increasingly relied on contract labor for this role. While some may argue that individuals have the option to simply not apply for these jobs, the reality is that many people are compelled to accept any job available in order to sustain themselves. As contract workers often face poor working conditions, this issue persists — with these individuals being relegated to a certain lifestyle with limited security and rights.</p>
 
-      <h2>Why can't we use <em>artificial intelligence?</em></h2>
+      <h2>Why can't we use artificial intelligence?</h2>
 
       <p>Moderators require cultural context to assess region-specific content, and the work demands sophisticated natural language processing to understand the meaning behind what is being flagged. Since all types of violence are not universal, there is no generalizable set of rules to follow. Despite Facebook making efforts in this direction, artificial general intelligence is still a far-fetched notion — meaning that automated moderation is not a feasible option in the near future.</p>
 
-      <h2>How are <em>we trapped?</em></h2>
+      <h2>How are we trapped?</h2>
 
       <p>Moderators recognize the critical role they play in ensuring Facebook remains a safe platform, given its vast user base. Despite users being unaware of who is responsible for this work, moderators strive to do their best — because they realize the importance of their work when they interact with the content they are protecting users from.</p>
 
@@ -327,7 +326,7 @@
         Though artificial intelligence is not a viable solution, Facebook does have the ability to improve the working conditions of its content moderators. This would require regulations that safeguard both ghost workers and content moderators — although there is little incentive for Facebook to pursue such measures.
       </div>
 
-      <h2>What kind of society <em>are we creating?</em></h2>
+      <h2>What kind of society are we creating?</h2>
 
       <p>Individuals find themselves trapped by these companies with regard to their employment, well-being, freedom of expression, and other areas. The information age has introduced a new challenge: while artificial intelligence is rapidly reshaping our world, it has yet to develop the capacity to protect users from its own shortcomings. As long as this disparity remains the case, we will continue to remain trapped.</p>
 

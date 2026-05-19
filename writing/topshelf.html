@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topshelf — Medini Chopra</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --cream-dark:   #EDE0C4;
+      --gold:         #7A8862;
+      --sienna:       #B85C3A;
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); gap: 10px; }
+
+    /* ── Article layout ── */
+    .article-layout {
+      display: grid;
+      /* article column is fixed at 720px + 48px padding on each side;
+         TOC fills whatever space is left of that on the left */
+      grid-template-columns: 1fr 560px 1fr;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      align-items: start;
+    }
+
+    /* Article in col 2 */
+    .article-wrap {
+      grid-column: 2;
+      max-width: 560px;
+      margin: 0;
+      padding: 120px 0 120px;
+      min-width: 0;
+    }
+
+    /* ── TOC Sidebar ── */
+    #toc {
+      grid-column: 1;
+      justify-self: start;
+      position: sticky;
+      top: 84px;
+      padding-top: 120px;
+      padding-left: 48px;
+      max-height: calc(100vh - 84px);
+      overflow-y: auto;
+      scrollbar-width: none;
+      width: 180px;
+    }
+    #toc::-webkit-scrollbar { display: none; }
+
+    .toc-label {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-list li { margin: 0; }
+
+    .toc-link {
+      display: block;
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink-muted);
+      padding: 5px 0 5px 10px;
+      border-left: 2px solid transparent;
+      line-height: 1.4;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .toc-link:hover {
+      color: var(--ink-soft);
+      border-left-color: rgba(0, 0, 0, 0.15);
+    }
+    .toc-link.is-active {
+      color: var(--ink);
+      border-left-color: var(--wine);
+      font-weight: 500;
+    }
+
+    /* ── Header ── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.10);
+    }
+
+    .article-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .article-eyebrow span + span::before {
+      content: '·';
+      margin-right: 16px;
+      opacity: 0.4;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .article-title em { font-style: normal; color: inherit; }
+
+    .article-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ink-soft);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    /* ── Body content ── */
+    .article-body { font-size: 1rem; line-height: 1.85; color: var(--ink); }
+    .article-body p { margin-bottom: 1.6em; }
+
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 2.4em 0 0.8em;
+      scroll-margin-top: 84px;
+    }
+    .article-body h2 em { font-style: normal; color: inherit; }
+
+    .article-body h3 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: 2em 0 0.6em;
+    }
+
+    .article-body h4 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin: 1.4em 0 0.4em;
+    }
+
+    .article-body a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-color: rgba(138,20,34,0.3);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+    }
+    .article-body a:hover { text-decoration-color: var(--wine); }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--gold);
+      margin: 2em 0;
+      padding: 4px 0 4px 24px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .article-body ul, .article-body ol {
+      margin: 0 0 1.6em 1.4em;
+    }
+    .article-body li { margin-bottom: 0.5em; }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.10);
+      margin: 3em 0;
+    }
+
+    .callout {
+      background: rgba(122,136,98,0.08);
+      border: 1px solid rgba(122,136,98,0.25);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin: 2em 0;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    .req-section {
+      background: rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin: 0 0 1.6em;
+    }
+    .req-list { margin-left: 1.2em; }
+    .req-list li { margin-bottom: 0.6em; font-size: 0.93rem; }
+
+    .criteria-list { list-style: none; margin: 0; }
+    .criteria-item {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .criteria-item:last-child { border-bottom: none; }
+    .criteria-item strong { font-weight: 500; color: var(--ink); }
+
+    .persona-card {
+      background: rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 4px;
+      padding: 20px 24px;
+      margin: 0 0 1.6em;
+    }
+    .persona-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .persona-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      border-left: 2px solid var(--gold);
+      padding-left: 12px;
+    }
+    .persona-meta {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .persona-card ul { margin-left: 1.2em; margin-bottom: 0.8em; }
+    .persona-card ul li { font-size: 0.93rem; margin-bottom: 0.4em; }
+    .persona-card h4 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin: 1em 0 0.4em;
+    }
+
+    .phase-label {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wine);
+      background: rgba(184,92,58,0.08);
+      border: 1px solid rgba(184,92,58,0.18);
+      border-radius: 3px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+
+    .article-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin: 0.4em auto 2em;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: block;
+    }
+
+    .article-img.phone {
+      max-width: 220px;
+    }
+
+    .article-img.wide {
+      max-width: 100%;
+    }
+
+    .img-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin: 0.4em 0 2em;
+      width: 140%;
+      margin-left: -20%;
+    }
+    .img-row img {
+      flex: 1 1 0;
+      min-width: 0;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.08);
+      display: block;
+    }
+
+    /* Persona section: image alongside header info only, detail flows full-width below */
+    .persona-block {
+      margin-bottom: 2em;
+    }
+    .persona-header-row {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 0;
+    }
+    .persona-header-row .persona-card {
+      flex: 1;
+      margin-bottom: 0;
+    }
+    .persona-header-row img {
+      max-width: 140px;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .persona-detail {
+      margin-top: 10px;
+    }
+    .persona-detail .persona-card {
+      border-radius: 4px;
+      margin-bottom: 0;
+      padding-top: 16px;
+    }
+
+    /* ── Tables ── */
+    .article-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0 0 1.6em;
+      line-height: 1.5;
+    }
+    .article-body th {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .article-body td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      vertical-align: top;
+    }
+    .article-body tr:last-child td { border-bottom: none; }
+
+    /* Wide breakout wrapper for tables */
+    .table-wide {
+      width: 140%;
+      margin-left: -20%;
+      overflow-x: auto;
+      margin-bottom: 1.6em;
+    }
+    .table-wide table { margin: 0; }
+
+    /* ── Footer ── */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(0,0,0,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .back-link:hover { color: var(--ink); gap: 13px; }
+
+    .article-byline {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 768px) {
+      .article-layout {
+        display: block;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      #toc { display: none; }
+      .article-wrap {
+        grid-column: auto;
+        max-width: 720px;
+        padding: 120px 48px 120px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #navbar { padding: 0 24px; }
+      .article-wrap { padding: 100px 24px 80px; }
+      .article-footer { flex-direction: column; align-items: flex-start; }
+      .img-row { width: 100%; margin-left: 0; justify-content: flex-start; }
+      .img-row img { max-width: 120px; flex: 0 0 auto; }
+      .persona-header-row { flex-direction: column; }
+      .persona-header-row img { max-width: 120px; }
+      .table-wide { width: 100%; margin-left: 0; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="/" class="nav-name">Medini Chopra</a>
+    <ul class="nav-links">
+      <li>
+        <a href="/work.html" class="nav-back">← All projects</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-layout">
+
+  <aside id="toc" aria-label="Table of contents">
+    <p class="toc-label">Jump to</p>
+    <nav>
+      <ul class="toc-list">
+        <li><a class="toc-link" href="#vision">Vision</a></li>
+        <li><a class="toc-link" href="#motivation">Motivation</a></li>
+        <li><a class="toc-link" href="#unmet-needs">Unmet Needs</a></li>
+        <li><a class="toc-link" href="#existing-solutions">Existing Solutions</a></li>
+        <li><a class="toc-link" href="#market-sizing">Market Sizing</a></li>
+        <li><a class="toc-link" href="#key-path-scenarios">Key Path Scenarios</a></li>
+        <li><a class="toc-link" href="#detailed-design">Detailed Design</a></li>
+        <li><a class="toc-link" href="#design-specifications">Design Specs</a></li>
+        <li><a class="toc-link" href="#information-architecture">Info Architecture</a></li>
+        <li><a class="toc-link" href="#features">Features</a></li>
+        <li><a class="toc-link" href="#roadmap">Roadmap</a></li>
+        <li><a class="toc-link" href="#milestones">Milestones</a></li>
+        <li><a class="toc-link" href="#go-to-market">Go-to-Market</a></li>
+        <li><a class="toc-link" href="#metrics">Metrics</a></li>
+        <li><a class="toc-link" href="#projected-costs">Projected Costs</a></li>
+        <li><a class="toc-link" href="#operational-needs">Operations</a></li>
+        <li><a class="toc-link" href="#risks">Risks</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span>Product Design · Systems Thinking</span>
+      </div>
+      <h1 class="article-title">Topshelf</h1>
+      <p class="article-subtitle">Meal planning app that starts with grocery store sales and optimizes ingredient purchases for maximum meal variety at minimum cost and waste, so you plan around what's cheap, not the other way around.</p>
+    </header>
+
+    <div class="article-body">
+
+      <h2 id="vision">Vision</h2>
+
+      <p>For young professionals cooking for 1-2 who want to eat well and save money, recipe apps nudge them to blindly buy ingredients, leading to high grocery bills, rotting produce, and the guilt of constant waste. We flip the model: optimize ingredient purchases for maximum variety at minimum cost, then build flexible meals around what you actually bought, your schedule, and your cravings.</p>
+
+      <h2 id="motivation">Motivation</h2>
+
+      <h3>Personas</h3>
+
+      <div class="persona-block">
+        <div class="persona-header-row">
+          <div class="persona-card">
+            <p class="persona-name">#1 The Optimizer</p>
+            <p class="persona-quote">"I know meal planning works and I do it every week, but it takes way too much time to do correctly with a budget-first approach. I'm constantly juggling sales flyers, recipes, what's in my fridge, and what I actually feel like eating. There has to be a better way."</p>
+            <p class="persona-meta">Dahlia, 25 · Rents 1BR loft in Chicago, lives alone · Marketing coordinator at tech company, $62k salary · BA in Communications, 2 years post-grad · First time away from home after in-state school · Type-A, takes pride in being financially responsible · Loves diverse cuisines</p>
+          </div>
+          <img src="/topshelf/image14.jpg" alt="Dahlia persona" />
+        </div>
+        <div class="persona-detail">
+          <div class="persona-card">
+            <h4>Current Behaviors</h4>
+            <ul>
+              <li>Spends 2-4 hours every weekend manually planning meals for the week
+                <ul>
+                  <li>She considers multiple factors: her upcoming schedule, general cravings like being homesick, nutritional balance, what she ate last week so she's not repetitive, grocery store sales so she can save the most, what's already in her fridge or pantry</li>
+                </ul>
+              </li>
+              <li>Shops once weekly at Jewel-Osco and Trader Joe's with a list based on planned recipes</li>
+              <li>Plans meals for 5 times per week when this system is working</li>
+              <li>Orders takeout 2 times weekly, but sometimes 4 times when overwhelmed with work</li>
+              <li>Uses Instagram, Google, YouTube for recipe inspiration</li>
+              <li>Freezes half the food when meal prepping</li>
+              <li>Sometimes forgets what's already in her fridge/freezer, leading to duplicate purchases</li>
+              <li>Uses ChatGPT to ask "what can I make with these ingredients" and for proportions</li>
+              <li>Keeps a mental inventory of 'safe recipes' she can make with pantry staples when system fails</li>
+            </ul>
+
+            <h4>Goals</h4>
+            <ul>
+              <li>Reduce meal planning time from 4 hours to under 20 minutes weekly</li>
+              <li>Maintain eating at home 5 times/week, even during busy periods</li>
+              <li>Continue eating 3+ different cuisines per week/maintain variety</li>
+              <li>Achieve near-zero food waste (especially fresh produce, fruits, milk)</li>
+              <li>Keep total food spending below budget, as much as it can possibly go</li>
+              <li>Avoid multiple trips back to store for forgotten ingredients</li>
+              <li>Reduce the 'Sunday Scaries' of facing another 3-hour meal planning session</li>
+              <li>Feel confident and stress-free about weeknight dinners</li>
+            </ul>
+
+            <h4>Needs</h4>
+            <ul>
+              <li>Needs automation of the optimization work she's already doing manually</li>
+              <li>Needs to have control — she wants to adjust plans when mood or schedule changes</li>
+              <li>Needs optimization around ingredient reuse — she's tired of manually mapping which recipes share ingredients and finding a lowest common denominator</li>
+              <li>Needs food that can hold up in the freezer</li>
+              <li>Needs better quantity calculation — scaling recipes up/down is not linear</li>
+            </ul>
+
+            <h4>Frustrations/Worries</h4>
+            <ul>
+              <li>She's frustrated with how much time it takes to plan meals for the week and feels the mental load because she's looking at too many important variables at once (budget, sales, what shares ingredients, cravings, schedule)</li>
+              <li>Can't remember which recipes use similar ingredients without manually cross-referencing everything</li>
+              <li>Feels stupid doing the same 'optimization math' every single week — 'didn't I already figure out that X and Y share ingredients?</li>
+              <li>Her manual system breaks down when she doesn't have the mental space to do the meal planning for that week, and resorts to ordering out because she didn't plan ahead</li>
+              <li>She feels bad throwing groceries away because she didn't use them enough, since growing up her mom always taught her to never waste food, no matter what</li>
+              <li>She gets bored of eating the same thing 2-3 days in a row</li>
+            </ul>
+
+            <h4>Why is she a challenge?</h4>
+            <ul>
+              <li>She already has a working system — we need to be significantly better (not just marginally) to justify her wanting to onboard</li>
+              <li>She'll quickly identify if our optimization isn't as good as her manual work or doesn't save her enough time — we can't fake the intelligence</li>
+              <li>She needs to feel in control while also trusting automated suggestions</li>
+              <li>She cares deeply but variably about multiple competing priorities: waste, budget, taste, time, variety, nutrition</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-block">
+        <div class="persona-header-row">
+          <div class="persona-card">
+            <p class="persona-name">#2 The Impulsive Experimenter</p>
+            <p class="persona-quote">"I love cooking and trying new things, but I hate planning ahead. I get inspired in the moment — by Instagram, by what's on sale, by what sounds good that day. But this approach means I waste food, order out too much, and feel guilty about both."</p>
+            <p class="persona-meta">Marcus, 27 · Rents studio in Logan Square, Chicago · Graphic designer at agency, $58k salary · BFA in Design, 3.5 years post-grad · Values experiences and spontaneity over optimization · Follows 30+ food accounts on Instagram/TikTok</p>
+          </div>
+          <img src="/topshelf/image25.jpeg" alt="Marcus persona" />
+        </div>
+        <div class="persona-detail">
+          <div class="persona-card">
+            <h4>Current Behaviors</h4>
+            <ul>
+              <li>Doesn't meal prep — "just vibes"</li>
+              <li>Shops 2-3 times per week with loose plan or no plan</li>
+              <li>Decides what to cook based on: Instagram reels, what's on sale, what's in fridge, inspiration</li>
+              <li>Cooks dinner or lunch every other day (half the meals)</li>
+              <li>Orders out the other half when he didn't plan ahead and has no time/energy to shop and cook</li>
+              <li>Finds "back and forth between grocery and recipe" — sees something inspiring, then shops</li>
+              <li>Loves flexibility, hates "meal prep boxing"</li>
+              <li>Buys ingredients for a specific recipe inspiration, makes it once, then the leftover specialty ingredients (gochujang, fish sauce, specialty produce) sit unused</li>
+              <li>Throws away ~20% of groceries</li>
+            </ul>
+
+            <h4>Goals</h4>
+            <ul>
+              <li>Eat more diverse cuisines without the planning burden</li>
+              <li>Cook more consistently without requiring Sunday meal prep discipline</li>
+              <li>Be able to pivot when cravings change mid-week without wasting what he already bought</li>
+              <li>Stop wasting food and money on constant takeout</li>
+              <li>Feel less guilty about his cooking style</li>
+              <li>Find a middle ground — some structure without feeling locked into rigid meal prep</li>
+            </ul>
+
+            <h4>Needs</h4>
+            <ul>
+              <li>Needs guardrails disguised as flexibility — constraints that prevent waste but feel like freedom</li>
+              <li>Needs just-in-time inspiration/suggestions that match his mood</li>
+              <li>Needs guardrails that prevent last-minute grocery buys that won't get used</li>
+              <li>Needs to feel like the system is helping him be more creative, not less</li>
+              <li>Needs a system that doesn't require he change his behavior — it should work with his spontaneous style, not try to reform him into a Sunday meal prepper</li>
+            </ul>
+
+            <h4>Frustrations/Worries</h4>
+            <ul>
+              <li>Knows he should meal plan but finds it boring and can never stick to it for more than 1-2 weeks</li>
+              <li>Feels like meal planning would 'kill the joy' of cooking, but his current approach is also stressful</li>
+              <li>Finds planning time consuming — won't spend hours planning in advance</li>
+              <li>Gets inspired by too many things, leads to buying ingredients for 3 different recipes then only making 1, and the other ingredients expire</li>
+              <li>Wishes he could be spontaneous without the waste and expense</li>
+              <li>Wishes there was a way to cook more without the planning burden</li>
+              <li>Doesn't have time to cook during week so orders out (system failure, not planned indulgence)</li>
+              <li>Sometimes gets decision fatigue the day of — needs help deciding sporadically</li>
+            </ul>
+
+            <h4>Why is he a challenge?</h4>
+            <ul>
+              <li>Won't spend hours planning and won't follow rigid systems</li>
+              <li>Will ghost the product if it requires more than 10 minutes of input</li>
+              <li>Has tried meal planning apps before and abandoned them within 2 weeks once he missed a single day — they also felt like homework</li>
+              <li>He's concluded meal planning 'isn't for him'</li>
+              <li>Most likely to abandon plans mid-week because he saw something that looked good</li>
+              <li>Needs to feel like he's being creative because the system is optimizing behind the scenes — it should enable his spontaneity, not restrict it</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p>Dahlia will be the early adopter who stress-tests the optimization and demands it be smarter than her manual system. She'll tolerate onboarding slow-ness if the payoff is real time savings. Marcus is the growth market — he represents the much larger group who've tried and abandoned meal planning tools. He needs the product to work so effortlessly that he doesn't realize he's meal planning. Dahlia needs to see the optimization, Marcus needs to never see the optimization but somehow feel it.</p>
+
+      <h2 id="unmet-needs">Unmet Needs</h2>
+
+      <p>Based on interviews and online community analysis, both personas experience three interconnected problems stemming from a fundamental gap: existing tools force users to choose between budget optimization or meal planning, never both simultaneously.</p>
+
+      <div class="req-section">
+        <ul class="criteria-list">
+          <li class="criteria-item">
+            <strong>1. Sales-to-recipe optimization gap:</strong> Users need to connect grocery sales to recipes and ingredient reuse opportunities when planning weekly meals.
+            <p style="margin-top:0.8em; margin-bottom:0;">I believe young professionals cooking for 1-2 experience food waste and budget overruns when planning weekly groceries because they lack tools to connect sale ingredients to compatible recipes AND cross-reference recipes for ingredient overlap, forcing them to choose between buying what's on sale without a plan (waste) or planning meals first and paying full price (budget overruns). Efficient grocery shopping requires bi-directional optimization: seeing peppers on sale and knowing "I could make stuffed peppers, pepper tacos, and roasted pepper pasta," while also planning three recipes and recognizing "all three need bell peppers, so I can buy one large pack." Users experience cognitive overload mapping dozens of ingredients and recipes simultaneously, leading them to over-buy, under-buy, or skip sales entirely. There is a need for work in two modes: proactive (Sunday planning: 'chicken is on sale this week, what meals can I build?') and reactive (in-store: 'chicken is half-off right now, should I buy it and what would I make?'). Both require the same underlying capability — instant mapping between ingredients and compatible meal combinations — but triggered at different moments in the shopping journey.</p>
+            <ul style="margin-top:0.8em; margin-left:1.2em;">
+              <li>Interview: Dahlia explicitly shifted from "get groceries and then make some stuff — but then there was a lot of wastage" to "get groceries based on recipes," demonstrating learned behavior that the connection drives efficiency</li>
+              <li>Interview: "A lot of processing — finding recipes and optimizing ingredients. There's a back and forth between grocery and meal planning", an interview explicitly describes manual bi-directional optimization</li>
+              <li>Interview: "Goes to at least two stores in one run — normal store plus Indian store to get green chillies, curry leaves"</li>
+              <li>Interview: Dahlia "shops once weekly at Jewel-Osco and Trader Joe's"</li>
+              <li>Reddit: Users describe buying specialty ingredients that expire unused (fish sauce, harissa), showing failure to plan for full usage</li>
+              <li>Reddit: "Prep ingredients instead of meals" and "keep common ingredients on hand" are common workarounds, proving users have learned to optimize through experience but it requires conscious effort</li>
+            </ul>
+          </li>
+          <li class="criteria-item">
+            <strong>2. Multivariable planning without tool support:</strong> Users need meal plans that automatically balance constraints — sales, ingredient reuse, cuisine variety, schedule, nutrition, pantry inventory — without requiring hours of manual effort.
+            <p style="margin-top:0.8em; margin-bottom:0;">I believe young professionals cooking for 1-2 abandon systematic meal planning or compromise on variety and nutrition weekly because they must simultaneously optimize across too many variables (sales, ingredient reuse, cuisine variety, schedule, nutrition, pantry inventory, freezer-friendliness) without integrated support. Current apps handle one constraint (sales OR recipes OR pantry) or two at most. Users manually connect everything across 3-4 different tools. Dahlia spends 2-4 hours weekly juggling sales flyers, recipe sites, ChatGPT, and inventory checks. Marcus abandons planning entirely because "it takes too long" and orders out instead. This fragmented process is exhausting and leads to compromise on variety and nutrition. Worse, users repeat this mental work every week without tools to remember what actually worked. One interviewee tracks 'how much it costs per meal — like when less than $5' and judges success by 'how good the food tastes four days later,' but this learning stays in his head. Every Sunday, users start from scratch asking the same questions: Which recipes stayed under budget? Which ones did I actually finish? Which created too many leftovers? The lack of memory compounds the planning burden — users can't build on past successes, they just re-optimize blindly each cycle.</p>
+            <ul style="margin-top:0.8em; margin-left:1.2em;">
+              <li>Interview: Dahlia lists variables she considers: "schedule, cravings, nutritional balance, what she ate last week, sales, what's already in fridge"</li>
+              <li>Interview: Planning "takes a lot of time and effort" using "multiple disconnected tools (ChatGPT, Instacart, Notes app, store websites)"</li>
+              <li>Reddit: "Kitchen management, not cooking. It's a skill... that people hate" and "most households only make 5-10 different meals regularly" suggests complexity limits repertoire</li>
+              <li>Reddit: Blogger's "frugal meal planning" guide requires 7 separate manual steps</li>
+              <li>Interview: Tracks "how much it costs per meal — likes when less than $5" and measures success by "how good the food tastes four days later"</li>
+              <li>Interview: "A lot of processing is being done — finding recipes and optimizing ingredients" — describes repetitive mental work without tools to capture learnings</li>
+              <li>Competitive analysis: All existing apps are single-dimension</li>
+            </ul>
+          </li>
+          <li class="criteria-item">
+            <strong>3. Rigid Plans vs. Dynamic Life:</strong> Users need meal planning systems that adapt to mid-week changes in energy level, schedule, and cravings without making them feel like they've "failed" or wasted their planning effort.
+            <p style="margin-top:0.8em; margin-bottom:0;">I believe young professionals cooking for 1-2 experience guilt and frustration with pre-planned meals because their mood and schedule change mid-week, but meal planning tools require upfront weekly commitment without adaptability. Users plan meals on Sunday, but by Thursday they want something different — tired, bad day, or craving different food. Pre-planned meals feel like obligations. Users either force themselves to eat unwanted food or abandon the plan and order delivery, wasting both planning time and groceries. Traditional meal planning operates on rigid weekly commitment (Sunday: plan all meals, Monday-Sunday: execute faithfully). This works for highly disciplined users but breaks down for most. Life is inherently dynamic: schedules change, energy levels fluctuate, coworkers' lunches trigger cravings, weather shifts preferences.</p>
+            <ul style="margin-top:0.8em; margin-left:1.2em;">
+              <li>Reddit: "I often feel the same way on Thursdays or after a few days of eating off the same pot of beans" (6 upvotes)</li>
+              <li>Reddit: "Not fun coming home to leftovers when I was smelling someone else's pad thai at the office"</li>
+              <li>Reddit: "I like to plan for about 3 meals in a row, then if I decide I'm too lazy to cook, I order in" — users self-limit planning window to avoid long-term commitment</li>
+              <li>Interview: Dahlia considers "menstrual cycle cravings, homesick for Indian food, wanted quicker meals if busy week"</li>
+              <li>Interview: Marcus "decides what to cook based on Instagram reels, what's on sale, what's in fridge, inspiration" — incompatible with rigid planning</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <p>Dahlia's system breaks down when she lacks mental space; Marcus never adopts rigid systems. Both need flexible structure — guardrails that guide without constraining.</p>
+
+      <h2 id="existing-solutions">Existing Solutions</h2>
+
+      <p>The market fragments into four categories, each addressing one or two dimensions while missing the complete optimization puzzle:</p>
+
+      <h3>Price-first apps (Flipp, Ibotta)</h3>
+      <p>These apps are good at aggregating weekly sales flyers from multiple stores in one place, giving push notifications when favorite items go on sale, and cashback rewards drive engagement and loyalty.</p>
+      <p>However, they miss: Zero connection to what users can actually cook with sale items. Users see "chicken thighs $1.99/lb" but don't know if they'll use the full package or what meals to make. No recipe suggestions, no ingredient optimization across meals. Users are left to mentally bridge the gap between "good deal" and "actual usage."</p>
+      <p>This fragmentation intensifies for users who shop at multiple stores to access both mainstream and specialty ingredients. One interviewee shops at 'normal store plus Indian store to get green chillies, curry leaves' — two separate trips requiring two mental maps of what's available where. Another interviewee shops at both Jewel-Osco and Trader Joe's. The sales-to-recipe gap becomes: 'Trader Joe's has cheap chicken, Patel Bros has cheap spices — what meals use both efficiently?' Current apps show sales from one store at a time; none optimize ingredient purchases across multiple stores simultaneously. An interview subject uses store websites to check sales but describes it as disconnected from meal planning. Reddit users describe buying items on sale that expire unused because they lacked a plan.</p>
+
+      <h3>Recipe-first meal planners (Plan to Eat, Paprika, EatStash)</h3>
+      <p>These apps have really good recipe organization and discovery, automatic shopping list generation from selected recipes, nutrition tracking and dietary filters, saving favorite recipes for repeat use.</p>
+      <p>However, they are price-blind. Users select recipes and generate grocery lists without any awareness of whether ingredients are on sale or at full price. They have no optimization for ingredient reuse across multiple recipes — users might plan three recipes that each use ½ bell pepper, buying three peppers that partially spoil. They offer static weekly plans that don't adapt to mid-week changes. The competitive analysis shows no integration with pricing data. The interview subject describes abandoning recipe apps because "they don't help with budget" and "don't show me what ingredients share."</p>
+
+      <h3>Pantry-first waste reducers (SuperCook, Eat This Much, Crumb, Food Simp, Cooklist)</h3>
+      <p>These apps do many things well: SuperCook searches 11+ million recipes across existing ingredients in your pantry with voice dictation; Eat This Much claims algorithms prioritize existing pantry items to prevent spoilage; Crumb uses AI to learn taste preferences and auto-loads existing purchases from connected grocery accounts; Cooklist connects loyalty cards and uses automatic pantry scanning for real-time inventory tracking. All emphasize "use what you have, so nothing goes to waste" messaging that resonates with target users.</p>
+      <p>However, these apps help after the shopping decision is made, not before. Users must have already bought ingredients (often inefficiently) before the app adds value. SuperCook and Food Simp require manual ingredient input before showing any recipes. Interview evidence shows users abandon apps that demand extensive setup. There's also no proactive planning — they're reactive tools for "what can I make with this?" not strategic tools for "what should I buy this week?". And, like recipe-first apps, they ignore whether ingredients were purchased efficiently or at full price. Reddit threads show users praising these apps in concept but admitting they stopped using them after initial setup burden. One interviewee described forgetting what's in the fridge/freezer and making duplicate purchases — pantry tracking only works if consistently maintained, which users struggle with.</p>
+
+      <h3>Waste-optimized meal planners (Mealime, Jow)</h3>
+      <p>This category represents the closest competition — apps that plan meals while explicitly minimizing waste through ingredient overlap.</p>
+      <p>Mealime plans weekly meals that reuse ingredients across recipes to eliminate waste, gives 30-minute recipes designed for 2-4 servings (ideal for couples), auto-generates shopping lists organized by store aisle. Jow, a French startup, automatically adjusts quantities when ingredients appear in multiple recipes with "used in multiple meals" labeling, has direct Kroger, H-E-B, Ralphs, and Instacart integration for smart cart creation. They are good at ingredient overlap optimization — the core insight we share, having low friction — users browse recipes and get optimized lists automatically, proven waste reduction and cost savings with real user testimonials, and store integrations for seamless shopping.</p>
+      <p>Jow is the closest to solving the complete problem but still isn't optimized for budget. Their workflow: give preferences → get recipe recommendations → choose from those → get grocery list → connect directly to stores. Budget optimization happens only at the grocery list stage, after recipes are already selected. Our approach embeds the ingredient sales step before recipe recommendations — so when you're choosing recipes, you're already browsing options built around what's on sale. Users don't pick recipes blindly and hope the total stays under budget; they choose from recipes that were generated specifically because they use sale ingredients efficiently. Mealime also creates weekly plans users must commit to. Jow allows more flexibility but doesn't adapt mid-week when cravings or schedules change. Users shopping at both mainstream and ethnic grocery stores (evidenced in interviews) can't optimize across both.</p>
+
+      <h3>Adjacent competition: AI Assistants (ChatGPT, Claude)</h3>
+      <p>They are: a flexible conversational interface — users can describe constraints naturally; good at recipe scaling and substitutions; have a zero learning curve. However, they lack memory or optimization across multiple queries — every interaction starts from scratch and can't be continued for too long due to chat length limitation. They have no one-shot awareness of prices, sales, or user's actual inventory. They also lack proactive suggestions or structure. The interview subject uses ChatGPT for ingredient substitutions and proportions but still spends 2-4 hours planning manually. ChatGPT supplements but doesn't replace her system. Another interview subject doesn't use ChatGPT because they think it doesn't give correct information.</p>
+
+      <h3>Key market gap</h3>
+      <p>None of these solutions answer: "What's on sale this week that I can efficiently use across multiple meals I actually want to eat?" Tools are built either price-first (find deals → manually figure out usage), recipe-first (pick meals → generate list), or pantry-first (already bought → figure out usage). Even Mealime and Jow, which optimize ingredients overlap intelligently, start with recipe browsing and ignore pricing entirely. What's needed is bidirectional optimization that starts with sale constraints, pantry inventory, and meal preferences simultaneously, then generates plans that satisfy all three. This requires an ingredient-level perspective that treats ingredients as the atomic unit of optimization, not recipes. When chicken and peppers are on sale at Store A and curry spices are cheap at Store B, the system should instantly suggest: "Make chicken tikka masala, stuffed peppers, and chicken tacos — buy 3 lbs chicken (Store A), 5 peppers (Store A), curry spices (Store B), total cost $28, zero waste."</p>
+
+      <h3>Differentiation</h3>
+      <p>We're the only platform that optimizes at the ingredient level rather than recipe level. Our algorithm would identify which ingredient purchases maximize variety while minimizing cost and waste, then builds meal suggestions around those optimized purchases. Further, the same engine powers both a detailed planning mode and a "just tell me what to buy and make" mode. Finally, plans aren't locked on Sunday. When users' schedules or cravings change Thursday, they see what else they can make with ingredients already purchased, preserving the grocery efficiency while allowing flexibility. Over time we would also develop a proprietary database of recipes optimized for real-time prices. User preference data would also be useful to grocery stores to help plan deals and other decisions, opening up an opportunity for direct store partnerships.</p>
+
+      <h3>Why Now?</h3>
+      <p>Three converging factors make this opportunity available now:</p>
+
+      <p><strong>1. Economic Pressure</strong><br>
+      Grocery prices are up almost 30% in 5 years. Young professionals feel this acutely — they're early in careers with limited income growth while facing the highest food costs in decades. Food spending guilt is at an all-time high. 54% of young Americans say food costs are the biggest strain on their finances. Reddit communities like r/EatCheapAndHealthy and r/Frugal have 540K to 1.1M weekly visitors. One of the interview subjects explicitly mentioned wanting to keep "food spending below budget, as much as it can possibly go" as a primary goal. Users are now willing to invest time in solutions that credibly reduce food costs. The previous decade's abundance made budget-first planning feel unnecessary; today's constraints make it essential.</p>
+
+      <p><strong>2. Technology</strong><br>
+      Modern agentic systems now make it feasible to build such a complex multi-constraint engine. Two years ago, LLM's wouldn't have been as accurate for the task of making recipe suggestions and generating shopping lists that are truly optimized. The state of technology on a given day will consistently be better than it has ever been in the past.</p>
+
+      <p><strong>3. Market Timing</strong><br>
+      The global Meal Planning App market is anticipated to expand from approximately USD 2.45 billion in 2025 to about USD 2.71 billion in 2026, and further to nearly USD 6.77 billion by 2034, growing at a CAGR of 10.5% during 2025–2034. Despite these projections, interviewees such as Marcus represent a cohort who "tried meal planning apps and abandoned them within 2 weeks." This isn't a cold market — it's a warm market dissatisfied with existing options. Reddit threads on meal planning apps are filled with "I've tried X, Y, Z and none work for me." We're not creating a new behavior; we're solving for users who already understand they need meal planning help but haven't found a tool that works. Additionally, the Food Waste App Market industry is also expected to expand from 33.6 Billion in 2025 to $182.4 Billion in 2034, with a compound annual growth rate of 25.85%.</p>
+
+      <h2 id="market-sizing">Market Sizing</h2>
+
+      <p>We target young professionals (ages 20-35) who cook at home and actively manage their budgets:</p>
+      <ul>
+        <li>73.6 million Americans aged 20-35</li>
+        <li>57% of Gen Z and 63% of Millennials prefer to cook at home</li>
+        <li>Thus, approximately 45 million cook at home and have to manage their budget in our target demographic</li>
+        <li>68% of Gen Z and 83% of Millennials maintain monthly budgets = ~75% actively budget</li>
+      </ul>
+      <p>45 million (TAM) × 75% (actively concerned about food waste/budgeting) = <strong>33.75 million users</strong> consist of the serviceable addressable market who cook at home and actively track budgets, as well as fall in the target consumer age group. The serviceable obtainable market consists of 3% of SAM, which is ~1M users. From the unit economics calculated below, we can estimate revenue per user as $144/year, and total annual revenue $145.8 million. After cutting costs of $21.3 million, the final profit would be $124.5 million.</p>
+      <p>Macroeconomic trends also support projected growth. 84% of Americans experienced elevated grocery costs in recent months, and food waste costs the average American $728 per year. In response, 78% of consumers now eat at home more frequently to save money. Further, user demographics are particularly favorable. Our target users are budget-conscious: 41-43% of Gen Z and Millennials spend significantly more on groceries year-over-year, and 73% have changed lifestyle habits to reduce grocery spending.</p>
+      <p>The market for grocery savings tools demonstrates proven willingness to pay. The cash-back app market was valued at $3.1 billion in 2021 and is growing to $4.7 billion by 2027. Leading apps like Ibotta (40+ million downloads) show strong consumer engagement and shed light on some willingness-to-pay. Finally, the meal planning app market is anticipated to expand to about USD 2.71 billion in 2026 and the food waste app market industry is also expected to expand to $182.4 Billion in 2034.</p>
+
+      <h2 id="key-path-scenarios">Key Path Scenarios</h2>
+
+      <p>The product modality is a progressive web app (mobile-optimized responsive website, installable to home screen).</p>
+
+      <h3>Scenario 1: Dahlia's Sunday planning session</h3>
+      <p>Sunday morning, 10am. Dahlia opens her laptop dreading her usual 3-hour meal planning ordeal. Busy work week ahead with evening events Tuesday and Thursday. Craving comfort food after a stressful week.</p>
+
+      <p><strong>Step 1:</strong> Dahlia navigates to the app and lands on the weekly planner home screen. Dahlia taps the Schedule card and marks Tuesday/Thursday as "Busy nights (20 min max)". Taps Cravings card, selects "Mediterranean" and "High-protein" from preset tags. Sets budget slider to $45.</p>
+      <p>App aggregates her location (Chicago) with her selected stores (Jewel-Osco, Trader Joe's) and fetches this week's sales data. Matching algorithm identifies sale items that align with tags.</p>
+
+      <div class="img-row">
+        <img src="/topshelf/image2.png" alt="Schedule picker — busy nights" />
+        <img src="/topshelf/image8.png" alt="Mood and cravings selector" />
+      </div>
+
+      <p><strong>Step 2:</strong> After inputs complete, "Build My Week" button activates. Dahlia clicks it. Dahlia reviews, keeps all items checked, taps "Generate meals."<br>
+      Algorithm runs optimization: identifies recipes that maximize ingredient reuse across selected sales items, other filters and respects time constraints.</p>
+
+      <p><strong>Step 3:</strong> The meal plan results screen appears. Dahlia notices Wednesday's meal doesn't satisfy her craving. She taps the swap button on that meal card, then confirms the plan. Server re-optimizes grocery list.</p>
+
+      <div class="img-row">
+        <img src="/topshelf/image13.png" alt="Your weekly plan with meal cards and swap" />
+        <img src="/topshelf/image3.png" alt="Shopping list organized by category" />
+      </div>
+
+      <p><strong>Step 4:</strong> Dahlia has an updated weekly calendar, grocery list with organized sections and export options: "Print schedule" / "Send to phone" / "Download shopping list". She clicks "Print schedule." She sticks it on the fridge. Time elapsed: &lt;18 minutes.</p>
+
+      <h3>Scenario 2: Marcus's spontaneous Wednesday</h3>
+      <p>Wednesday, 6pm. Marcus leaving work, hungry, no plan. Usual pattern: scroll Instagram, get overwhelmed, order Chipotle. He has random ingredients at home from a previous grocery list but doesn't know what they add up to.</p>
+
+      <p><strong>Step 1:</strong> Marcus opens the app on his phone and lands on Home Screen — Cook Tonight. Marcus is intrigued and taps "See recipe." App cross-references his purchase history from Monday, assumes 80% still available. Matched these to the highest-rated quick recipe in the database.</p>
+
+      <div class="img-row">
+        <img src="/topshelf/image10.png" alt="Recipes home screen" />
+        <img src="/topshelf/image11.png" alt="Recipe detail with ingredient substitutes" />
+      </div>
+
+      <p><strong>Step 2:</strong> Marcus sees the recipe and still decides this isn't intriguing enough. He looks at other recipes in the database and lands on one. He chooses the one he likes and is surprisingly delighted to see that the recipes provide substitute ingredients to help make this a success.</p>
+
+      <h3>Scenario 3: Dahlia's monthly budget crisis</h3>
+      <p>Third week of the month. Dahlia checks credit card, realizes she's overspent on food. Too much takeout during a stressful work sprint.</p>
+
+      <p><strong>Step 1:</strong> Dahlia opens the app, navigates to Profile or sees "Budget Mode" promoted on the home screen. Algorithms shift optimization priorities.</p>
+
+      <div class="img-row">
+        <img src="/topshelf/image15.png" alt="Budget Crisis Mode — input form" />
+        <img src="/topshelf/image1.png" alt="Budget Crisis Mode — your breakdown" />
+      </div>
+
+      <p><strong>Step 2:</strong> Budget crisis results screen appears. She reviews. Not exciting, but strategic. She builds the emergency plan.</p>
+
+      <div class="img-row">
+        <img src="/topshelf/image5.png" alt="Your Emergency Plan — meals" />
+        <img src="/topshelf/image9.png" alt="Your Emergency Plan — weekly timeline" />
+        <img src="/topshelf/image7.png" alt="Your Emergency Plan — shopping list confirm" />
+      </div>
+
+      <p><strong>Step 3:</strong> After reviewing, Dahlia can confirm the suggestions, export the grocery list and do a quick shopping run.</p>
+
+      <p>Note: Before any key scenario, the users will run through the following onboarding steps:</p>
+
+      <div class="img-row">
+        <img src="/topshelf/image12.png" alt="Login screen" />
+        <img src="/topshelf/image6.png" alt="Dietary restrictions — onboarding step 2" />
+        <img src="/topshelf/image4.png" alt="Weekly grocery budget — onboarding step 3" />
+      </div>
+
+      <h2 id="detailed-design">Detailed Design &amp; Features Description</h2>
+
+      <h3>Design Principles</h3>
+
+      <div class="req-section">
+        <ol class="req-list">
+          <li><strong>Invisible intelligence</strong> — Complex optimization — balancing sales, ingredient reuse, variety, schedule — happens behind the scenes. Users see outcomes, not process.</li>
+          <li><strong>Immediate utility</strong> — Value on first use, without setup tax. No onboarding or data entry burden. The product works immediately with minimal input and improves as it learns.</li>
+          <li><strong>Graceful adaptation</strong> — Life changes mid-week — energy drops, cravings shift, schedules evolve. The system adapts without penalty or waste, never making users feel they've "failed."</li>
+          <li><strong>Smart defaults with easy overrides</strong> — Provide intelligent recommendations by default, but make customization frictionless. Power users can see the optimization, casual users never need to.</li>
+          <li><strong>Respect constraints but enable freedom</strong> — Budget and waste aren't restrictions — they're guardrails that enable creativity. Optimization should feel like liberation, not limitation.</li>
+          <li><strong>Transparency</strong> — Show impact where it counts (cost saved, waste avoided, time reclaimed).</li>
+        </ol>
+        <p style="margin-top:1em; margin-bottom:0; font-size:0.93rem;">Inspiration: iPhone (intelligence without friction), Apple Watch (adaptive goals), Spotify (opinionated curation with control)</p>
+      </div>
+
+      <h2 id="design-specifications">Design Specifications</h2>
+
+      <h3>Typography</h3>
+      <ul>
+        <li>Primary: SF Pro / Inter (clean, readable sans-serif)</li>
+        <li>Headers: Medium weight, 24-32pt</li>
+        <li>Body: Regular weight, 16-18pt</li>
+        <li>System feel: approachable but professional</li>
+      </ul>
+
+      <h3>Color Palette</h3>
+      <ul>
+        <li>Primary: Soft sage green (#A8C5B5) — calming, fresh, ingredient-focused</li>
+        <li>Accent: Warm terracotta (#E07A5F) — appetite appeal, action items</li>
+        <li>Background: Off-white (#F8F9F7) — clean canvas</li>
+        <li>Text: Charcoal (#2D3142) — high readability</li>
+        <li>Success/metrics: Muted teal for efficiency scores</li>
+      </ul>
+
+      <h3>Visual Style</h3>
+      <ul>
+        <li>Conversational UI with chat bubbles for onboarding (friendly, low-pressure)</li>
+        <li>Generous white space — never cluttered</li>
+        <li>Rounded corners (12-16px radius) throughout</li>
+        <li>Soft shadows, no harsh edges</li>
+        <li>Ingredient photography: natural light, farmers market aesthetic</li>
+        <li>Icons: minimal line style (like SF Symbols)</li>
+      </ul>
+
+      <h3>Interaction Patterns</h3>
+      <ul>
+        <li>Pill-shaped buttons for quick selections</li>
+        <li>Swipe gestures for meal swaps</li>
+        <li>Progressive disclosure: show complexity only when needed</li>
+      </ul>
+
+      <h2 id="information-architecture">Suggested Information Architecture</h2>
+
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Model (DB)</th>
+              <th>View (UI)</th>
+              <th>Controller (Algorithms)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Users: user_id, email, name, dietary_restrictions, household_size, budget_target, preferred_stores[]</td>
+              <td>Quick setup for budget, dietary needs, zip code.</td>
+              <td>Validates input, sets defaults. Maps zip code to local stores. Initializes user preferences</td>
+            </tr>
+            <tr>
+              <td>Sales: sale_id, store_name, ingredient_id, price, unit, start_date, end_date, zip_code</td>
+              <td>Planning mode: Weekly sales display by store. Sale expiration indicators</td>
+              <td>Scrapes/pulls weekly sales from store APIs. Filters by user zip code. Ranks deals by discount % and versatility</td>
+            </tr>
+            <tr>
+              <td>Ingredients: ingredient_id, name, category, avg_shelf_life, typical_package_size, compatible_cuisines[]</td>
+              <td>Visual ingredient cards with prices. Multi-select for user preferences. "Used in X recipes" preview</td>
+              <td>Pre-computes which ingredients appear together in recipes. Scores ingredients by cuisine overlap. Suggests complementary purchases</td>
+            </tr>
+            <tr>
+              <td>Recipes: recipe_id, name, cuisine, cook_time, difficulty, servings, ingredient_list[], instructions, freezer_friendly, mood_tags[]</td>
+              <td>5-7 recipe cards with photos. Cook time, difficulty, cuisine tags. Ingredient overlap visualization ("Uses chicken, peppers from your list")</td>
+              <td>Input is selected/sale ingredients plus user preferences. Constraint: ≥60% ingredients overlap across recipes. Filters by cook time, cuisine variety, dietary restrictions. Ranks by overlap score, mood tags, user history</td>
+            </tr>
+            <tr>
+              <td>Meal_plans: plan_id, user_id, week_start_date, total_cost, recipes[], grocery_list[], schedule{}, status</td>
+              <td>Day-by-day meal assignments. Auto-scheduled by complexity (busy days get quick meals). Ingredient efficiency score displayed ("78% reused")</td>
+              <td>Input is the selected recipes plus user calendar. Logic assigns quick meals to busy days, batch-cooking to weekends. Output is optimized weekly schedule</td>
+            </tr>
+            <tr>
+              <td>Meal_plans (grocery_list[] field)</td>
+              <td>Grocery list: Organized by store/aisle. Quantities with reuse indicators (e.g., "Carrots ×3 — used in Mon, Tue, Wed meals"). Total cost vs. budget shown</td>
+              <td>Aggregates ingredients across all recipes. Calculates quantities (scales for servings, household size). Groups by store plus aisle. Displays cost breakdown</td>
+            </tr>
+            <tr>
+              <td>User_inventory: user_id, ingredient_id, quantity, purchase_date, expiry_estimate, source</td>
+              <td>"What can I make now?" interface. Shows inferred inventory with manual edit option. Recipe suggestions using available ingredients</td>
+              <td>Tracks purchase history to estimate current availability. Decay function: shelf_life minus (today minus purchase_date). Flags expiring items. Allows manual overrides</td>
+            </tr>
+            <tr>
+              <td>Meal_plans (status, schedule{} fields)</td>
+              <td>"What else can I make?" button. Alternative recipes using purchased ingredients. Drag-and-drop reschedule</td>
+              <td>Input is swap request plus current plan. Retrieves recipes compatible with purchased ingredients. Preserves grocery efficiency. Updates schedule without re-shopping</td>
+            </tr>
+            <tr>
+              <td>Optimization_history: user_id, plan_id, ingredient_reuse_score, cost_efficiency, variety_score, adherence_rate</td>
+              <td>Plan summary card: Efficiency metrics display. "78% ingredients reused". "$15 under budget". Completion tracking prompt</td>
+              <td>Logs which plans users complete. Tracks swap frequency, adherence rates. Refines future recommendations based on past behavior. Calculates reuse/efficiency scores</td>
+            </tr>
+            <tr>
+              <td>Recipes (ingredient_list[] field)</td>
+              <td>Budget crisis mode: Input form for remaining budget, days, meals needed. Output shows bulk-cookable meal list. Per-meal cost breakdown</td>
+              <td>Input is tight budget plus time constraint. Filters for shelf-stable, bulk-cookable, low-cost recipes. Maximizes servings per dollar. Prioritizes pantry staples</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="req-section">
+        <p style="margin-bottom:0.8em;"><strong>Key Architecture Notes:</strong></p>
+        <ul class="req-list">
+          <li>Ingredients are the atomic unit, recipes are secondary combinations</li>
+          <li>Bidirectional flow: Sales to ingredients to recipes (planning mode) AND inventory to recipes (inspiration mode)</li>
+          <li>User input &gt; Controller processing &gt; Model updates &gt; View refresh data flow</li>
+        </ul>
+      </div>
+
+      <h2 id="features">Features</h2>
+
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Description</th>
+              <th>Dependencies</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sales aggregation</strong></td>
+              <td>Pull weekly sales from user's local stores (Jewel-Osco, Trader Joe's, ethnic grocers) and display top deals</td>
+              <td>Store API integrations, user zip code</td>
+              <td>v1</td>
+            </tr>
+            <tr>
+              <td><strong>Ingredient-first planning</strong></td>
+              <td>User selects sale ingredients = system generates 5-7 meal suggestions maximizing reuse</td>
+              <td>Recipe database, optimization engine</td>
+              <td>v1</td>
+            </tr>
+            <tr>
+              <td><strong>Smart scheduling</strong></td>
+              <td>Auto-assign meals to days based on cook time vs. user's weekly calendar</td>
+              <td>Recipe cook time data, user calendar input (optional)</td>
+              <td>v1</td>
+            </tr>
+            <tr>
+              <td><strong>Grocery list generation</strong></td>
+              <td>Consolidated list with quantities, organized by store/aisle</td>
+              <td>Recipe ingredient lists, store mapping data</td>
+              <td>v1</td>
+            </tr>
+            <tr>
+              <td><strong>Mid-week swap</strong></td>
+              <td>"What else can I make?" shows alternatives using purchased ingredients</td>
+              <td>User inventory table, recipe search</td>
+              <td>v1</td>
+            </tr>
+            <tr>
+              <td><strong>Inferred inventory</strong></td>
+              <td>Track purchases to estimate current availability without manual scanning</td>
+              <td>Purchase history, shelf-life database</td>
+              <td>vNext</td>
+            </tr>
+            <tr>
+              <td><strong>Just-in-time mode</strong></td>
+              <td>Marcus's "I'm hungry now, what can I make?" flow with quick-add shopping</td>
+              <td>Inventory inference, recipe quick filters</td>
+              <td>vNext</td>
+            </tr>
+            <tr>
+              <td><strong>Budget crisis mode</strong></td>
+              <td>Input remaining budget + days = get bulk-cookable, cost-optimized plan</td>
+              <td>Recipe cost database, portion calculations</td>
+              <td>vNext</td>
+            </tr>
+            <tr>
+              <td><strong>Multi-store routing</strong></td>
+              <td>Optimize ingredient purchases across 2+ stores (mainstream + ethnic)</td>
+              <td>Store location data, drive time API</td>
+              <td>vNext</td>
+            </tr>
+            <tr>
+              <td><strong>Learning system</strong></td>
+              <td>Track which plans users complete, which meals get swapped, refine future suggestions</td>
+              <td>Optimization history table, ML model</td>
+              <td>vLongterm</td>
+            </tr>
+            <tr>
+              <td><strong>Mood-based suggestions</strong></td>
+              <td>"Feeling homesick?" = suggests comfort food using available ingredients</td>
+              <td>Mood tag taxonomy, user feedback</td>
+              <td>vLongterm</td>
+            </tr>
+            <tr>
+              <td><strong>Leftover tracking</strong></td>
+              <td>"You made stuffed peppers Monday, use leftovers for pepper quesadillas Thursday"</td>
+              <td>Recipe component mapping, portion tracking</td>
+              <td>vLongterm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="roadmap">Roadmap</h2>
+
+      <div class="phase-label">v1 — Minimum Viable Product</div>
+
+      <div class="req-section">
+        <p style="margin-bottom:0.6em;"><strong>Prove the optimization engine works and saves time</strong></p>
+        <ul class="req-list">
+          <li>Sales aggregation from 2-3 major chains per market</li>
+          <li>Ingredient-first meal planning (select sales → get optimized week)</li>
+          <li>5-7 meal suggestions per plan with ingredient overlap visualization</li>
+          <li>Grocery list with quantities and basic store organization</li>
+          <li>Mid-week swap functionality</li>
+          <li>Manual inventory input (optional)</li>
+          <li>Email-based authentication</li>
+        </ul>
+      </div>
+
+      <div class="phase-label">vNext</div>
+
+      <div class="req-section">
+        <p style="margin-bottom:0.6em;"><strong>Working for spontaneous users + reduce friction</strong></p>
+        <ul class="req-list">
+          <li>Inferred inventory from purchase history</li>
+          <li>Just-in-time "what can I make now?" mode</li>
+          <li>Budget crisis mode</li>
+          <li>Multi-store routing optimization</li>
+          <li>Calendar integration for smart scheduling</li>
+          <li>Push notifications for mid-week swaps when ingredients expiring</li>
+          <li>Expanded store coverage (ethnic grocers, wholesale clubs)</li>
+        </ul>
+      </div>
+
+      <div class="phase-label">vLongterm</div>
+
+      <div class="req-section">
+        <p style="margin-bottom:0.6em;"><strong>Personalization and ecosystem lock-in</strong></p>
+        <ul class="req-list">
+          <li>Learning system that improves suggestions based on user behavior</li>
+          <li>Mood/craving-based recipe discovery</li>
+          <li>Leftover component tracking and suggestions</li>
+          <li>Direct grocery delivery integrations (Instacart, store apps)</li>
+          <li>Nutritional analysis and goal tracking</li>
+          <li>Social features (share plans, rate recipes)</li>
+          <li>Grocery store partnership revenue (anonymized preference data sales)</li>
+        </ul>
+      </div>
+
+      <h2 id="milestones">Milestones / Timing</h2>
+
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Milestones</th>
+              <th>M1 Jan</th>
+              <th>M2 Feb</th>
+              <th>M3 Mar</th>
+              <th>M4 Apr</th>
+              <th>M5 May</th>
+              <th>M6 Jun</th>
+              <th>M7 Jul</th>
+              <th>M8 Aug</th>
+              <th>M9 Sep</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Optimization algorithm</td><td>██</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>DB &amp; technical architecture</td><td>██</td><td>██</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Find &amp; contract developers</td><td>██</td><td>██</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>UI/UX wireframes &amp; mockups</td><td></td><td>██</td><td>██</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Recipe database curation</td><td>██</td><td>██</td><td>██</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>User auth &amp; database setup</td><td></td><td>██</td><td>██</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Manual sales input interface</td><td></td><td></td><td>██</td><td>██</td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Optimization engine</td><td></td><td></td><td>██</td><td>██</td><td>██</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Meal suggestions &amp; grocery list</td><td></td><td></td><td></td><td>██</td><td>██</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Mid-week swap functionality</td><td></td><td></td><td></td><td></td><td>██</td><td>██</td><td></td><td></td><td></td></tr>
+            <tr><td>Basic scheduling logic</td><td></td><td></td><td></td><td></td><td>██</td><td>██</td><td></td><td></td><td></td></tr>
+            <tr><td>Internal testing &amp; demo</td><td></td><td></td><td></td><td></td><td>██</td><td>██</td><td></td><td></td><td></td></tr>
+            <tr><td>Alpha testing (30 users)</td><td></td><td></td><td></td><td></td><td></td><td>██</td><td>██</td><td></td><td></td></tr>
+            <tr><td>Algorithm refinement</td><td></td><td></td><td></td><td></td><td></td><td></td><td>██</td><td>██</td><td></td></tr>
+            <tr><td>Beta launch (500 users)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>██</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Beta</h3>
+
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Milestones</th>
+              <th>M10 Oct</th>
+              <th>M11 Nov</th>
+              <th>M12 Dec</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Daily monitoring &amp; weekly surveys</td><td>████</td><td>████</td><td></td></tr>
+            <tr><td>Algorithm tuning</td><td>████</td><td>████</td><td></td></tr>
+            <tr><td>Recipe expansion (200→400)</td><td>████</td><td>████</td><td></td></tr>
+            <tr><td>Add 2-3 store API integrations</td><td>████</td><td>████</td><td></td></tr>
+            <tr><td>Success gate evaluation</td><td></td><td>████</td><td></td></tr>
+            <tr><td>Final polish &amp; bug fixes</td><td></td><td>████</td><td>████</td></tr>
+            <tr><td>Launch marketing campaign</td><td></td><td></td><td>████</td></tr>
+            <tr><td>Public launch</td><td></td><td></td><td>████</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>vNext</h3>
+
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Milestones</th>
+              <th>M13-14</th>
+              <th>M15-16</th>
+              <th>M17-18</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Automated sales APIs &amp; store integrations</td><td>████</td><td></td><td></td></tr>
+            <tr><td>Inventory inference engine</td><td>████</td><td>████</td><td></td></tr>
+            <tr><td>Just-in-time mode</td><td></td><td>████</td><td></td></tr>
+            <tr><td>Budget crisis mode</td><td></td><td>████</td><td></td></tr>
+            <tr><td>Calendar integration &amp; multi-store routing</td><td></td><td></td><td>████</td></tr>
+            <tr><td>Testing &amp; iteration</td><td>████</td><td>████</td><td>████</td></tr>
+            <tr><td>vNext release</td><td></td><td></td><td>████</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>vLongterm</strong> includes learning system &amp; personalization, mood-based recipe discovery, leftover tracking &amp; suggestions, grocery delivery integrations (Instacart), social features &amp; store partnerships.</p>
+
+      <h2 id="go-to-market">Go-to-Market</h2>
+
+      <p><strong>Pre-Launch:</strong> Landing page with waitlist building, targeted Facebook/Instagram ads ($1,500) to budget-conscious 20-35 year olds, organic presence in r/EatCheapAndHealthy and r/MealPrepSunday. Goal is to reach 500+ waitlist signups</p>
+
+      <p><strong>Alpha:</strong> Recruit 30 testers from waitlist, collect testimonials and success metrics, refine messaging based on what resonates</p>
+
+      <p><strong>Beta Launch:</strong> Email waitlist for 500 beta users, launch referral program ($10 credit both ways), weekly Reddit engagement and content, user-generated social sharing (Instagram meal plan templates)</p>
+
+      <p><strong>Public Launch:</strong> PR outreach to food/finance bloggers, micro-influencer partnerships, continue referral program as primary growth driver</p>
+
+      <p>Need to lead with concrete value (time/money saved), target "Dahlia" optimizer persona first for validation, rely heavily on referrals and organic to keep overall CAC low.</p>
+
+      <h2 id="metrics">Metrics</h2>
+
+      <h3>Planning efficiency</h3>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Time to first plan: &lt;5 minutes from signup to complete meal plan (by logging timestamps)</li>
+          <li>Planning time saved: 70% report &gt;=50% reduction vs. manual planning (in 4-week survey)</li>
+        </ul>
+      </div>
+
+      <h3>Product engagement</h3>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Weekly active users (WAU): Month 1: 100 — Month 6: 500 — Year 1: 1K</li>
+          <li>Plans generated per user: 3.5/month average (weekly usage with occasional skips)</li>
+          <li>Plan completion rate: 60% cook &gt;= 3 meals from generated plan (weekly in-app prompt)</li>
+        </ul>
+      </div>
+
+      <h3>Value delivery</h3>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Budget adherence: 90% of grocery lists =&lt; user's stated budget</li>
+          <li>Waste reduction: 60% self-report less food waste (monthly survey)</li>
+          <li>Mid-week swap rate: 35-45% use "What else can I make?" feature (healthy adaptation without indicating bad plans)</li>
+        </ul>
+      </div>
+
+      <h3>Algorithm quality metrics</h3>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Ingredient reuse score: 60-70% of ingredients used in 2+ meals per plan (validates optimization without repetition)</li>
+          <li>Recommendation acceptance: 75% of suggested meals accepted vs. swapped during plan creation</li>
+        </ul>
+      </div>
+
+      <h3>Trouble indicators</h3>
+      <div class="req-section">
+        <ul class="req-list">
+          <li>Plan abandonment: &lt;15% start but don't complete plan creation (UX friction)</li>
+          <li>Zero-completion plans: &lt;10% cook 0 meals from plan (complete failure — exit survey required)</li>
+          <li>Support ticket volume: &lt;5% of active users submit negative feedback per month</li>
+        </ul>
+      </div>
+
+      <p>6-month success: 70% time savings, 60% completion rate, 25% conversion, 85% month-1 retention.</p>
+
+      <hr />
+
+      <h2 id="projected-costs">Projected Costs</h2>
+
+      <h3>Unit Economics</h3>
+      <p>The unit we are offering is an <strong>optimized grocery plan</strong> which includes an associated recipe list, as well as ingredient optimization statistics.</p>
+
+      <p>Costs to generate one grocery plan:</p>
+      <ul>
+        <li>Cloud compute: ~$0.05</li>
+        <li>AI: $0.33</li>
+        <li>Grocery data APIs: $0.1</li>
+        <li>Miscellaneous: ~$0.02</li>
+        <li>Total: $0.50/grocery plan</li>
+      </ul>
+
+      <p>What users pay:</p>
+      <ul>
+        <li>Subscription cost: $12/month</li>
+        <li>Average user generates: 3.5 meal plans/month</li>
+        <li>Revenue/grocery plan: $3.43</li>
+        <li><strong>Profit/grocery plan: $2.95</strong></li>
+      </ul>
+
+      <p>At scale, the costs will decrease as user base grows:</p>
+      <ul>
+        <li>AI costs: $0.33/plan → $0.20/plan at 10K users (with batch processing)</li>
+        <li>Grocery APIs: $0.10/plan → $0.05/plan (with potential bulk rates with data providers)</li>
+        <li>Cloud compute: $0.05/plan → $0.03/plan (with economies of scale and better caching)</li>
+      </ul>
+
+      <p>Thus, at 10K users: $0.28/plan cost, $3.15/plan profit (8% margin improvement). Revenue per plan stays constant at $3.43 with the subscription. Once 20-50k users are retained, then subscription = $10/month.</p>
+
+      <h3>Engineering Costs</h3>
+      <p>One-time development costs:</p>
+      <ul>
+        <li>MVP: $10,000-$15,000 with 2 developers, focusing on database architecture, optimization engine, UI/UX etc</li>
+        <li>vNext: $8,000-$10,000 focusing on inventory inference, calendar integration</li>
+      </ul>
+
+      <p>Recurring infrastructure costs are as follows: Primary cost driver is AI/LLM API calls: $500 (1K users) → $3,000 (10K users), which scale with usage. Cloud hosting (AWS) $300-500, database (PostgreSQL + Redis): $200-300, grocery data APIs for $200, and analytics/monitoring for $100 scale more gradually. Recurring infrastructure costs at scale are:</p>
+      <ul>
+        <li>500 users: $900/month</li>
+        <li>1K users: $1,300/month</li>
+        <li>5K users: $2,550/month</li>
+        <li>10K users: $3,800/month</li>
+      </ul>
+
+      <p>Recurring maintenance includes $1,000/month retainer (bug fixes, algorithm tuning). Thus, the year 1 infrastructure approximate total amounts to <strong>~$18,000-$22,000.</strong></p>
+
+      <h3>Marketing / Other Costs</h3>
+
+      <p><strong>One-Time Costs</strong></p>
+      <ul>
+        <li>Landing page and branding: $1,500/month</li>
+        <li>Beta user recruitment ads: $1,500/month</li>
+        <li>Launch PR campaign: $2,000</li>
+        <li>Total: $5,000</li>
+      </ul>
+
+      <p><strong>Recurring Costs</strong></p>
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Phase</th>
+              <th>Paid Ads</th>
+              <th>Influencers</th>
+              <th>Referrals</th>
+              <th>Monthly Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Pre-launch</td><td>$250</td><td>$0</td><td>$0</td><td>$250</td></tr>
+            <tr><td>Beta</td><td>$1,000</td><td>$500</td><td>$300</td><td>$1,800</td></tr>
+            <tr><td>Post-launch</td><td>$3,000</td><td>$1,500</td><td>$500</td><td>$5,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Growth incentives:</strong></p>
+      <ul>
+        <li>Referral program: $10 credit for both parties</li>
+        <li>Organic presence: Reddit (r/EatCheapAndHealthy, r/MealPrepSunday, r/Frugal) — $0 cost</li>
+        <li>User-generated content: Instagram shareable templates, monthly contest ($50-100/month)</li>
+        <li>Content marketing (Year 2+): Blog + YouTube ($500-1,000/month, 6-12 month ROI)</li>
+      </ul>
+
+      <p><strong>At scale:</strong> Paid ads decrease as % of budget while organic/social sharing increases. Influencer partnerships shift from flat fees ($200-500/post) to performance-based (10-15% commission).</p>
+
+      <ul>
+        <li>Beta (100 users) monthly marketing would amount to $1,800 with cost per user at $18.00. Focus is on heavy acquisition, testing channels.</li>
+        <li>1k users would have monthly marketing $5,000 with cost per user $5.00 where referrals start to work due to network effects, optimizing ad spend.</li>
+        <li>10k users would have monthly marketing $12,000 with cost per user $1.20 where network effects are kicking in, organic growth would be accelerating.</li>
+      </ul>
+
+      <h2 id="operational-needs">Operational Needs</h2>
+
+      <h3>Customer support</h3>
+      <p>In the first 6 months, founder(s) will handle support via email and in-app chat, expecting 5-10 tickets/day covering onboarding questions, recipe feedback, and grocery list corrections. Once volume exceeds 20 tickets/day, we'll hire a part-time support specialist ($3K/month) to maintain response quality and gather feedback for algorithm improvements.</p>
+
+      <h3>Recipe database maintenance</h3>
+      <p>The recipe database requires ongoing curation to ensure quality and variety. Founders will handle initial recipe testing, tagging (cuisine type, cook time, mood tags, freezer-friendly), and ingredient mapping for the optimization engine. After month 6, we'll hire a part-time recipe curator ($2K/month) to add seasonal recipes, remove unpopular options, and refine ingredient compatibility data based on user completion rates.</p>
+
+      <h3>Other technical maintenance</h3>
+      <p>The ingredient optimization algorithm requires continuous refinement based on real user behavior — tracking which plans users complete, which get abandoned, and which swaps occur most frequently. We'll retain the development team on a $1K/month retainer for bug fixes and algorithm tuning (8-10 hrs/month) for the first year.</p>
+
+      <h2 id="risks">Risks</h2>
+
+      <div class="table-wide">
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Mitigation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Grocery pricing data may be stale, incomplete, or require paid partnerships with stores</td>
+              <td>We start with publicly available weekly flyers. Partner with 2-3 major chains for real-time pricing. Build a user feedback loop to report incorrect prices.</td>
+            </tr>
+            <tr>
+              <td>If recipes are poorly written, have incorrect ingredient quantities, or produce bad-tasting food, users blame the app even though we're aggregating third-party content.</td>
+              <td>Curate high-quality recipe sources (NYT Cooking). Build a user rating system. Commission proprietary recipes optimized for ingredient overlap. Test recipes internally before featuring.</td>
+            </tr>
+            <tr>
+              <td>The multi-constraint optimization (budget + reuse + variety + schedule + nutrition) may produce suboptimal results, especially at scale.</td>
+              <td>Start with simplified heuristics that work for 80% of cases. Gradually layer in machine learning. Use pre-computed recipe clusters for common constraints.</td>
+            </tr>
+            <tr>
+              <td>Cold start — low engagement on logging kills the learning loop.</td>
+              <td>Make logging frictionless — one-tap "I cooked this." Gamify with stats (meals cooked, money saved, waste prevented).</td>
+            </tr>
+            <tr>
+              <td>Large competitors (Instacart, PlanToEat) could add ingredient-first optimization features once we validate the model.</td>
+              <td>Build a proprietary recipe database and taste graph quickly. Focus on user experience excellence that's hard to replicate. Create partnerships with mid-size grocery chains.</td>
+            </tr>
+            <tr>
+              <td>If a user gets food poisoning and claims it was from following our recipe or storage advice, we face potential legal risk.</td>
+              <td>Clear disclaimers on all recipes: "Follow safe food handling practices."</td>
+            </tr>
+            <tr>
+              <td>Sales and produce availability vary dramatically by region and season. Algorithms optimized for Chicago in summer may fail in Phoenix in winter.</td>
+              <td>Build regional and seasonal models. Use user feedback to tune regional preferences.</td>
+            </tr>
+            <tr>
+              <td>Even with good optimization, users can abandon because cooking at home is hard and takeout is easy. The app can't overcome fundamental behavior challenges.</td>
+              <td>Celebrate small wins — "You cooked 4 times this week, saved $45!" Make failure okay — "Ordered out? No problem, here's what to do with those groceries." Reduce friction on comeback — easy to resume after a week off. Build community so users feel accountability.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <footer class="article-footer">
+      <a href="/work.html" class="back-link">← Back to all projects</a>
+      <span class="article-byline">Medini Chopra</span>
+    </footer>
+
+  </div>
+
+  </div><!-- /.article-layout -->
+
+  <script>
+    (function () {
+      const tocLinks = document.querySelectorAll('.toc-link');
+      const headings = document.querySelectorAll('.article-body h2[id]');
+      if (!tocLinks.length || !headings.length) return;
+
+      const linkMap = {};
+      tocLinks.forEach(link => {
+        linkMap[link.getAttribute('href').slice(1)] = link;
+      });
+
+      let activeId = null;
+      function setActive(id) {
+        if (id === activeId) return;
+        activeId = id;
+        tocLinks.forEach(l => l.classList.remove('is-active'));
+        if (id && linkMap[id]) linkMap[id].classList.add('is-active');
+      }
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+      }, { rootMargin: '-84px 0px -70% 0px', threshold: 0 });
+
+      headings.forEach(h => observer.observe(h));
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY < 100) setActive(headings[0]?.id ?? null);
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>

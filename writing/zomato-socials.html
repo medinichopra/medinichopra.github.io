@@ -14,13 +14,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:         #722F37;
-      --cream:        #F5ECD7;
-      --gold:         #C9A84C;
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
       --sienna:       #B85C3A;
-      --ink:          #2C1810;
-      --ink-soft:     rgba(44, 24, 16, 0.6);
-      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
     }
@@ -58,7 +58,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--cream);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .nav-name {
@@ -69,7 +69,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-back {
@@ -98,7 +97,7 @@
     .article-header {
       margin-bottom: 56px;
       padding-bottom: 40px;
-      border-bottom: 1px solid rgba(44,24,16,0.10);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
     }
 
     .article-eyebrow {
@@ -107,7 +106,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
@@ -128,7 +127,7 @@
       color: var(--ink);
       margin-bottom: 20px;
     }
-    .article-title em { font-style: italic; color: var(--wine); }
+    .article-title em { font-style: normal; color: inherit; }
 
     .article-subtitle {
       font-family: var(--font-display);
@@ -145,8 +144,8 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      background: rgba(44,24,16,0.04);
-      border: 1px solid rgba(44,24,16,0.09);
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.09);
       border-radius: 4px;
       padding: 16px 20px;
       font-size: 0.8rem;
@@ -171,7 +170,7 @@
       color: var(--ink);
       margin: 2.4em 0 0.8em;
     }
-    .article-body h2 em { font-style: italic; color: var(--wine); }
+    .article-body h2 em { font-style: normal; color: inherit; }
 
     .article-body h3 {
       font-family: var(--font-ui);
@@ -186,7 +185,7 @@
     .article-body a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.3);
+      text-decoration-color: rgba(138,20,34,0.3);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -210,14 +209,14 @@
 
     .article-body hr {
       border: none;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       margin: 3em 0;
     }
 
     /* Requirement / criteria sections */
     .req-section {
-      background: rgba(44,24,16,0.03);
-      border: 1px solid rgba(44,24,16,0.08);
+      background: rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.08);
       border-radius: 4px;
       padding: 20px 24px;
       margin: 0 0 1.6em;
@@ -230,7 +229,7 @@
     .criteria-list { list-style: none; margin: 0; }
     .criteria-item {
       padding: 14px 0;
-      border-bottom: 1px solid rgba(44,24,16,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
       font-size: 0.9rem;
       line-height: 1.7;
     }
@@ -239,8 +238,8 @@
 
     /* User story callout */
     .user-story {
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(122,136,98,0.08);
+      border: 1px solid rgba(122,136,98,0.25);
       border-radius: 4px;
       padding: 20px 24px;
       margin: 0 0 2em;
@@ -259,7 +258,7 @@
     /* Journey step */
     .journey-step {
       padding: 16px 0;
-      border-bottom: 1px solid rgba(44,24,16,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
     }
     .journey-step:last-child { border-bottom: none; }
     .journey-step-title {
@@ -292,15 +291,15 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: rgba(44,24,16,0.10);
+      background: rgba(0,0,0,0.10);
     }
     .pdf-frame {
       width: 140%;
       margin-left: -20%;
       height: 520px;
-      border: 1px solid rgba(44,24,16,0.10);
+      border: 1px solid rgba(0,0,0,0.10);
       border-radius: 6px;
-      background: rgba(44,24,16,0.02);
+      background: rgba(0,0,0,0.02);
     }
     .pdf-caption {
       font-size: 0.75rem;
@@ -319,7 +318,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       background: rgba(184,92,58,0.08);
       border: 1px solid rgba(184,92,58,0.18);
       border-radius: 3px;
@@ -331,7 +330,7 @@
     .article-footer {
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -371,7 +370,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li>
         <a href="/work.html" class="nav-back">← All projects</a>
@@ -387,7 +386,7 @@
         <span>Research</span>
         <span>Spring 2024</span>
       </div>
-      <h1 class="article-title">Zomato <em>Socials</em></h1>
+      <h1 class="article-title">Zomato Socials</h1>
       <p class="article-subtitle">Designing a social discovery layer for Zomato — personalized restaurant recommendations through trusted networks.</p>
       <div class="meta-box">
         <span><strong>Members</strong> — Medini Chopra, Nishtha Das, Bhumika Mittal, Anna Upreti, Pranav Iyengar</span>
@@ -406,7 +405,7 @@
 
       <p>This also relates to the <em>"Social Media"</em> module which covers that a major design goal of social computing has been to enhance online social interactions to mimic in-person interactions. We aim to make the dining experience as human-centric as possible with this.</p>
 
-      <h2>Business <em>Model</em></h2>
+      <h2>Business Model</h2>
 
       <p>Social features are only available for Zomato Gold users — to increase the push for Zomato Gold subscriptions. Currently, Zomato Gold features are also the cost incurred for the company; the feature we are proposing provides special services to the Gold user without adding to the cost value for the company.</p>
 
@@ -420,7 +419,7 @@
 
       <p>We are creating an opportunity to become Zomato influencers via this feature — only if you are a Gold member — which will allow Zomato and restaurants to capitalize on the influencer economy and increase app engagement.</p>
 
-      <h2>User <em>Stories</em></h2>
+      <h2>User Stories</h2>
 
       <div class="user-story">
         <p class="user-story-label">User Story</p>
@@ -485,7 +484,7 @@
         </ul>
       </div>
 
-      <h2>User <em>Journey</em></h2>
+      <h2>User Journey</h2>
 
       <p>The "Cognitive Models" and "Methodology" modules also pushed us to deeply understand the role of the consumer while designing for them. Hence, we opted for a user journey map to cognitively track how an ideal user would interact with Zomato.</p>
 
@@ -541,7 +540,7 @@
         </div>
       </div>
 
-      <h2>Design <em>Process</em></h2>
+      <h2>Design Process</h2>
 
       <p>Overall design considerations:</p>
       <div class="req-section">
