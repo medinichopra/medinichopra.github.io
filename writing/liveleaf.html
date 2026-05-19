@@ -100,10 +100,73 @@
     .nav-back:hover { color: var(--ink); gap: 10px; }
 
     /* ── Article layout ── */
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 560px 1fr;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      align-items: start;
+    }
+
     .article-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 120px 48px 120px;
+      grid-column: 2;
+      max-width: 560px;
+      margin: 0;
+      padding: 120px 0 120px;
+      min-width: 0;
+    }
+
+    /* ── TOC Sidebar ── */
+    #toc {
+      grid-column: 1;
+      justify-self: start;
+      position: sticky;
+      top: 84px;
+      padding-top: 120px;
+      padding-left: 48px;
+      max-height: calc(100vh - 84px);
+      overflow-y: auto;
+      scrollbar-width: none;
+      width: 180px;
+    }
+    #toc::-webkit-scrollbar { display: none; }
+
+    .toc-label {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+
+    .toc-list { list-style: none; margin: 0; padding: 0; }
+    .toc-list li { margin: 0; }
+
+    .toc-link {
+      display: block;
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink-muted);
+      padding: 5px 0 5px 10px;
+      border-left: 2px solid transparent;
+      line-height: 1.4;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .toc-link:hover {
+      color: var(--ink-soft);
+      border-left-color: rgba(0, 0, 0, 0.15);
+    }
+    .toc-link.is-active {
+      color: var(--ink);
+      border-left-color: var(--wine);
+      font-weight: 500;
     }
 
     /* ── Header ── */
@@ -162,6 +225,7 @@
       line-height: 1.2;
       color: var(--ink);
       margin: 2.4em 0 0.8em;
+      scroll-margin-top: 84px;
     }
     .article-body h2 em { font-style: normal; color: inherit; }
 
@@ -288,6 +352,20 @@
       letter-spacing: 0.04em;
     }
 
+    @media (max-width: 768px) {
+      .article-layout {
+        display: block;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      #toc { display: none; }
+      .article-wrap {
+        grid-column: auto;
+        max-width: 720px;
+        padding: 120px 48px 120px;
+      }
+    }
+
     @media (max-width: 640px) {
       #navbar { padding: 0 24px; }
       .article-wrap { padding: 100px 24px 80px; }
@@ -307,11 +385,29 @@
     </ul>
   </nav>
 
+  <div class="article-layout">
+
+  <aside id="toc" aria-label="Table of contents">
+    <p class="toc-label">Jump to</p>
+    <nav>
+      <ul class="toc-list">
+        <li><a class="toc-link" href="#overview">Overview</a></li>
+        <li><a class="toc-link" href="#the-problem">The Problem</a></li>
+        <li><a class="toc-link" href="#design-evolution">Design Evolution</a></li>
+        <li><a class="toc-link" href="#testing">Testing</a></li>
+        <li><a class="toc-link" href="#results">Results</a></li>
+        <li><a class="toc-link" href="#reflections">Reflections</a></li>
+        <li><a class="toc-link" href="#next-steps">Next Steps</a></li>
+        <li><a class="toc-link" href="#final-presentation">Presentation</a></li>
+      </ul>
+    </nav>
+  </aside>
+
   <div class="article-wrap">
 
     <header class="article-header">
       <div class="article-eyebrow">
-        <span>HCI · Behavior Design</span>
+        <span>Product Design &amp; Management</span>
         <span>Fall 2024</span>
       </div>
       <h1 class="article-title">Adaptive Plant Care</h1>
@@ -322,7 +418,7 @@
 
       <p>COMP_SCI 329: HCI Studio</p>
 
-      <h2>Overview</h2>
+      <h2 id="overview">Overview</h2>
 
       <p>LiveLeaf is an intelligent plant care companion that uses personalized, emotionally-toned notifications and social accountability to help working individuals maintain healthy plants. The project explored how adaptive messaging and community features can address forgetfulness — not through rigid automation, but by working with human behavior patterns.</p>
 
@@ -330,7 +426,7 @@
         Key Outcome: Through iterative testing, we discovered that the emotional dimension of plant care — fulfillment, guilt, pride — matters more than logistics, and that peer pressure can motivate or inhibit action depending on the user.
       </div>
 
-      <h2>The Problem</h2>
+      <h2 id="the-problem">The Problem</h2>
 
       <h3>Who We Designed For</h3>
 
@@ -350,7 +446,7 @@
         Core Insight: Plant care isn't really about logistics — it's about people feeling capable of nurturing something living. Forgetfulness stems from competing priorities, not a lack of caring.
       </blockquote>
 
-      <h2>Design Evolution</h2>
+      <h2 id="design-evolution">Design Evolution</h2>
 
       <h3>Attempt 1: The Gamified Virtual Garden</h3>
 
@@ -384,7 +480,7 @@
         <li>Community feed — view others' plants to build accountability and connection</li>
       </ol>
 
-      <h2>Testing: Embracing Imperfection</h2>
+      <h2 id="testing">Testing: Embracing Imperfection</h2>
 
       <h3>Experimental Setup</h3>
 
@@ -412,7 +508,7 @@
         The key realization: perfection delayed us, but imperfection got us moving. We shifted focus from creating a flawless experiment to improving the user experience.
       </div>
 
-      <h2>Results</h2>
+      <h2 id="results">Results</h2>
 
       <h3>User-by-User Findings</h3>
 
@@ -437,7 +533,7 @@
         <li>Users 3 and 4 posted consistently but with different levels of enjoyment, suggesting personality and intrinsic motivation play a large role.</li>
       </ul>
 
-      <h2>Reflections & Lessons Learned</h2>
+      <h2 id="reflections">Reflections &amp; Lessons Learned</h2>
 
       <h3>On the Design Process</h3>
 
@@ -457,7 +553,7 @@
         <li>Transparency in why a notification is sent builds trust</li>
       </ul>
 
-      <h2>Next Steps</h2>
+      <h2 id="next-steps">Next Steps</h2>
 
       <ul>
         <li>Add an "away from home" feature so notifications pause when users can't act on them</li>
@@ -469,7 +565,7 @@
 
       <hr />
 
-      <h2>Final Presentation</h2>
+      <h2 id="final-presentation">Final Presentation</h2>
 
       <div class="pdf-embed">
         <iframe src="/[Pinwheel] Final Defense Presentation.pdf" title="LiveLeaf Final Defense Presentation"></iframe>
@@ -487,6 +583,25 @@
     </footer>
 
   </div>
+
+  </div>
+
+  <script>
+    const headings = document.querySelectorAll('.article-body h2[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => link.classList.remove('is-active'));
+          const active = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    headings.forEach(h => observer.observe(h));
+  </script>
 
 </body>
 </html>
