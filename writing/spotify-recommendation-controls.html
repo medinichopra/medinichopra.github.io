@@ -14,13 +14,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:         #722F37;
-      --cream:        #F5ECD7;
-      --gold:         #C9A84C;
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
       --sienna:       #B85C3A;
-      --ink:          #2C1810;
-      --ink-soft:     rgba(44, 24, 16, 0.6);
-      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
     }
@@ -58,7 +58,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--cream);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .nav-name {
@@ -69,7 +69,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-back {
@@ -98,7 +97,7 @@
     .article-header {
       margin-bottom: 56px;
       padding-bottom: 40px;
-      border-bottom: 1px solid rgba(44,24,16,0.10);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
     }
 
     .article-eyebrow {
@@ -107,7 +106,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
@@ -128,7 +127,7 @@
       color: var(--ink);
       margin-bottom: 20px;
     }
-    .article-title em { font-style: italic; color: var(--wine); }
+    .article-title em { font-style: normal; color: inherit; }
 
     .article-subtitle {
       font-family: var(--font-display);
@@ -144,8 +143,8 @@
       display: inline-flex;
       flex-direction: column;
       gap: 2px;
-      background: rgba(44,24,16,0.04);
-      border: 1px solid rgba(44,24,16,0.09);
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.09);
       border-radius: 4px;
       padding: 14px 18px;
       font-size: 0.78rem;
@@ -169,12 +168,12 @@
       color: var(--ink);
       margin: 2.4em 0 0.8em;
     }
-    .article-body h2 em { font-style: italic; color: var(--wine); }
+    .article-body h2 em { font-style: normal; color: inherit; }
 
     .article-body a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.3);
+      text-decoration-color: rgba(138,20,34,0.3);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -182,8 +181,8 @@
 
     /* User story callout */
     .user-story {
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(122,136,98,0.08);
+      border: 1px solid rgba(122,136,98,0.25);
       border-radius: 4px;
       padding: 20px 24px;
       margin-bottom: 2.4em;
@@ -227,7 +226,7 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: rgba(44,24,16,0.10);
+      background: rgba(0,0,0,0.10);
     }
 
     .req-list {
@@ -262,8 +261,8 @@
       gap: 12px;
     }
     .criteria-item {
-      background: rgba(44,24,16,0.03);
-      border: 1px solid rgba(44,24,16,0.07);
+      background: rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.07);
       border-radius: 4px;
       padding: 14px 16px;
       font-size: 0.875rem;
@@ -295,7 +294,7 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: rgba(44,24,16,0.10);
+      background: rgba(0,0,0,0.10);
     }
     .wireframes-grid {
       margin-bottom: 12px;
@@ -304,8 +303,8 @@
       width: 140%;
       margin-left: -20%;
       border-radius: 6px;
-      border: 1px solid rgba(44,24,16,0.10);
-      background: rgba(44,24,16,0.02);
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(0,0,0,0.02);
     }
     .wireframes-caption {
       font-size: 0.75rem;
@@ -319,7 +318,7 @@
     .article-footer {
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -358,7 +357,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li>
         <a href="/work.html" class="nav-back">← All projects</a>
@@ -374,7 +373,7 @@
         <span>Engineering</span>
         <span>Spring 2024</span>
       </div>
-      <h1 class="article-title">Weighted Spotify<br><em>Recommendation Controls</em></h1>
+      <h1 class="article-title">Weighted Spotify<br>Recommendation Controls</h1>
       <p class="article-subtitle">Giving users fine-grained control over what drives their Discover Weekly — without sacrificing the magic of serendipity.</p>
       <div class="course-context">
         <span><strong>Course</strong> — Essentials of Technology Product Management</span>
@@ -389,7 +388,7 @@
         <p>As a college-going user, I want to frequently find new songs based on what I've listened to in the past, so that I can expand my music taste without manually searching.</p>
       </div>
 
-      <h2>Design <em>Considerations</em></h2>
+      <h2>Design Considerations</h2>
       <div class="req-section">
         <ul class="req-list">
           <li>There should be clear navigation to find the playlist on the user profile</li>
@@ -401,7 +400,7 @@
         </ul>
       </div>
 
-      <h2>Performance <em>Considerations</em></h2>
+      <h2>Performance Considerations</h2>
       <div class="req-section">
         <ul class="req-list">
           <li>Backend must handle a simultaneous roll-out of playlists every week without crashing</li>
@@ -412,7 +411,7 @@
         </ul>
       </div>
 
-      <h2>Security <em>Considerations</em></h2>
+      <h2>Security Considerations</h2>
       <div class="req-section">
         <ul class="req-list">
           <li>Encrypt user data in the database to protect from unauthorized access</li>
@@ -422,7 +421,7 @@
         </ul>
       </div>
 
-      <h2>Localization &amp; <em>Accessibility</em></h2>
+      <h2>Localization &amp; Accessibility</h2>
       <div class="req-section">
         <ul class="req-list">
           <li>Train the algorithm with a diverse dataset to avoid bias, including factors such as culture, location, language, and artist popularity</li>
@@ -439,7 +438,7 @@
         <p class="wireframes-caption">Left to right: Playlist is prominent on the first page, save songs in line, toggle weights for recommendations</p>
       </div>
 
-      <h2>Acceptance <em>Criteria</em></h2>
+      <h2>Acceptance Criteria</h2>
       <div class="req-section">
         <ul class="criteria-list">
           <li class="criteria-item"><strong>Given</strong> I have an active subscription, <strong>when</strong> I open the Spotify application, <strong>then</strong> I should view the personalized playlist first at the start of every week.</li>

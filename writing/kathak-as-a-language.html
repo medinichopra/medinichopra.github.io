@@ -14,13 +14,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:         #722F37;
-      --cream:        #F5ECD7;
-      --gold:         #C9A84C;
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
       --sienna:       #B85C3A;
-      --ink:          #2C1810;
-      --ink-soft:     rgba(44, 24, 16, 0.6);
-      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
     }
@@ -58,7 +58,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--cream);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .nav-name {
@@ -69,7 +69,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-back {
@@ -98,7 +97,7 @@
     .article-header {
       margin-bottom: 56px;
       padding-bottom: 40px;
-      border-bottom: 1px solid rgba(44,24,16,0.10);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
     }
 
     .article-eyebrow {
@@ -107,7 +106,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
@@ -128,7 +127,7 @@
       color: var(--ink);
       margin-bottom: 20px;
     }
-    .article-title em { font-style: italic; color: var(--wine); }
+    .article-title em { font-style: normal; color: inherit; }
 
     .article-subtitle {
       font-family: var(--font-display);
@@ -145,8 +144,8 @@
       display: inline-flex;
       flex-direction: column;
       gap: 2px;
-      background: rgba(44,24,16,0.04);
-      border: 1px solid rgba(44,24,16,0.09);
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.09);
       border-radius: 4px;
       padding: 14px 18px;
       font-size: 0.78rem;
@@ -171,7 +170,7 @@
       color: var(--ink);
       margin: 2.4em 0 0.8em;
     }
-    .article-body h2 em { font-style: italic; color: var(--wine); }
+    .article-body h2 em { font-style: normal; color: inherit; }
 
     .article-body h3 {
       font-family: var(--font-ui);
@@ -186,7 +185,7 @@
     .article-body a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.3);
+      text-decoration-color: rgba(138,20,34,0.3);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -211,13 +210,13 @@
 
     .article-body hr {
       border: none;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       margin: 3em 0;
     }
 
     .callout {
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(122,136,98,0.08);
+      border: 1px solid rgba(122,136,98,0.25);
       border-radius: 4px;
       padding: 20px 24px;
       margin: 2em 0;
@@ -229,8 +228,8 @@
     .postscript {
       margin-top: 2.4em;
       padding: 24px 28px;
-      background: rgba(114,47,55,0.04);
-      border: 1px solid rgba(114,47,55,0.10);
+      background: rgba(138,20,34,0.04);
+      border: 1px solid rgba(138,20,34,0.10);
       border-radius: 4px;
     }
     .postscript-label {
@@ -254,7 +253,7 @@
     .references {
       margin-top: 3em;
       padding-top: 2em;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
     }
     .references h3 {
       font-family: var(--font-ui);
@@ -277,7 +276,7 @@
     .references a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.25);
+      text-decoration-color: rgba(138,20,34,0.25);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -287,7 +286,7 @@
     .article-footer {
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -326,7 +325,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li>
         <a href="/work.html" class="nav-back">← All projects</a>
@@ -342,7 +341,7 @@
         <span>Blogs</span>
         <span>Spring 2024</span>
       </div>
-      <h1 class="article-title">Kathak as a <em>Language</em></h1>
+      <h1 class="article-title">Kathak as a Language</h1>
       <div class="course-context">
         <span><strong>Course</strong> — Philosophy of Language</span>
         <span><strong>Instructor</strong> — Prof. Arindam Chakrabarti</span>
@@ -357,7 +356,7 @@
 
       <p>Given the minimal requirements for a language, Margolis contends that works of art cannot be a language as it lacks syntactic structure, conventions, vocabulary, and speech acts. On the other hand, Bannerman takes the example of Western theatre dance to argue in favor of dance having a similar structure to language — despite the limitations dance has in expressing meaning as opposed to spoken language. If arguments in favor of codified dance as a language are stronger than those against, then according to J.L. Austin's speech act theory, it should be possible to distinguish different speech acts performed by codified dance.</p>
 
-      <h2>Codified dance <em>as a language</em></h2>
+      <h2>Codified dance as a language</h2>
 
       <p>Margolis argues against art as a language by comparing its functions to that of everyday language (spoken or written), citing the absence of the minimal requirements needed for it to be deemed a language. Those requirements are as follows:</p>
 
@@ -379,7 +378,7 @@
 
       <p>Lastly, Margolis denies the existence of speech acts such as querying and demanding in works of art: we cannot 'utter' an instance of art that performs an act; they are standalone objects. However, if you can't marry someone (or state or promise etc.) through dance, that is simply its limitation. While it doesn't guarantee dance as a language, it definitely does not disprove it as a language. Moreover, it is not sufficient reason to claim that dance does not have speech acts at all. Having clarified that, I will now provide examples of speech acts in codified dance.</p>
 
-      <h2>Speech acts <em>in codified dance</em></h2>
+      <h2>Speech acts in codified dance</h2>
 
       <p>Austin's speech act theory claims that with words, one can either state something to describe their reality or perform an action. The <em>locutionary act</em> is the act of saying something, which in the case of Kathak, is the dance itself. If I am uttering in Kathak, I am performing facial expressions, mudras, and movements from the repository provided to me, and I am executing a locutionary act. For example, performing a stylized gait to reach my destination.</p>
 

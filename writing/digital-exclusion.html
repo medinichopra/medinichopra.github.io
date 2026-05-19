@@ -14,13 +14,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --wine:         #722F37;
-      --cream:        #F5ECD7;
-      --gold:         #C9A84C;
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
       --sienna:       #B85C3A;
-      --ink:          #2C1810;
-      --ink-soft:     rgba(44, 24, 16, 0.6);
-      --ink-muted:    rgba(44, 24, 16, 0.38);
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-ui:      'DM Sans', system-ui, sans-serif;
     }
@@ -58,7 +58,7 @@
       justify-content: space-between;
       padding: 0 48px;
       background: var(--cream);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
     .nav-name {
@@ -69,7 +69,6 @@
       letter-spacing: 0.01em;
       text-decoration: none;
     }
-    .nav-name em { font-style: italic; color: var(--gold); }
 
     .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
     .nav-back {
@@ -98,7 +97,7 @@
     .article-header {
       margin-bottom: 56px;
       padding-bottom: 40px;
-      border-bottom: 1px solid rgba(44,24,16,0.10);
+      border-bottom: 1px solid rgba(0,0,0,0.10);
     }
 
     .article-eyebrow {
@@ -107,7 +106,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--sienna);
+      color: var(--wine);
       margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
@@ -128,7 +127,7 @@
       color: var(--ink);
       margin-bottom: 20px;
     }
-    .article-title em { font-style: italic; color: var(--wine); }
+    .article-title em { font-style: normal; color: inherit; }
 
     .article-subtitle {
       font-family: var(--font-display);
@@ -153,7 +152,7 @@
       color: var(--ink);
       margin: 2.4em 0 0.8em;
     }
-    .article-body h2 em { font-style: italic; color: var(--wine); }
+    .article-body h2 em { font-style: normal; color: inherit; }
 
     .article-body h3 {
       font-family: var(--font-ui);
@@ -168,7 +167,7 @@
     .article-body a {
       color: var(--wine);
       text-decoration: underline;
-      text-decoration-color: rgba(114,47,55,0.3);
+      text-decoration-color: rgba(138,20,34,0.3);
       text-underline-offset: 3px;
       transition: text-decoration-color 0.2s;
     }
@@ -187,7 +186,7 @@
 
     .article-body hr {
       border: none;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       margin: 3em 0;
     }
 
@@ -195,7 +194,7 @@
     .article-footer {
       margin-top: 64px;
       padding-top: 40px;
-      border-top: 1px solid rgba(44,24,16,0.10);
+      border-top: 1px solid rgba(0,0,0,0.10);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -234,7 +233,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li>
         <a href="/work.html" class="nav-back">← All projects</a>
@@ -249,7 +248,7 @@
         <span>Technology · Society</span>
         <span>Blogs</span>
       </div>
-      <h1 class="article-title">Digital <em>Exclusion</em></h1>
+      <h1 class="article-title">Digital Exclusion</h1>
     </header>
 
     <div class="article-body">
