@@ -459,6 +459,7 @@ const NODES = [
   ]},
   { label: 'Product Design & Management', hx: 0.44, hy: 0.78, url: '/work.html', projects: [ // 7
     { title: 'Vouchd',                          href: 'https://vouchd.us/',                                  img: '/vouchd.png',              desc: 'Connecting students with volunteer opportunities.' },
+    { title: 'Google Pay Redesign',             href: '/writing/gpay.html',                                  img: '/gpay/upi.png',            desc: 'HCI-grounded redesign targeting UPI fraud for low-income Indian merchants.' },
     { title: 'Topshelf',                        href: '/writing/topshelf.html',                              img: '/topshelf/image11.png',    desc: 'Meal planning around what\'s cheap, not the other way around.' },
     { title: 'Adaptive Plant Care',             href: '/writing/liveleaf.html',                              img: '/liveleaf.png',            desc: 'Social pressure & personalized nudges for plant care.' },
     { title: 'Weighted Spotify Rec. Controls',  href: '/writing/spotify-recommendation-controls.html',      img: '/spotify_controls.png',   desc: 'Fine-grained control over Discover Weekly.' },
