@@ -21,6 +21,7 @@ export default defineConfig({
         writingDigitalExclusion: resolve(__dirname, "writing/digital-exclusion.html"),
         writingZomatoSocials: resolve(__dirname, "writing/zomato-socials.html"),
         writingLiveleaf: resolve(__dirname, "writing/liveleaf.html"),
+        writingTopshelf: resolve(__dirname, "writing/topshelf.html"),
       },
     },
   },

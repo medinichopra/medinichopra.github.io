@@ -31,6 +31,7 @@ let scrollProgress   = 0; // 0 → 1 across the hero scroll zone
 let postProgress     = 0; // 0 → 1 as user scrolls through the about section after the hero
 let portraitProgress = 0; // 0 → 1 for state 3: network fades, portrait scrolls in
 let introProgress    = 0; // 0 → 1 as user scrolls the intro section (fades out intro, fades in hero)
+let netAlpha = 0; // current network opacity, updated each frame
 let mouseX = -9999, mouseY = -9999;
 let mouseDX = 0, mouseDY = 0; // velocity of cursor movement
 let bars = [];
@@ -424,25 +425,61 @@ function applyScrollState() {
 // Indian Classical Dance and AI for Music pulled toward the middle.
 // hx/hy are fractions of W/H; 0.5 = dead centre.
 const NODES = [
-  { label: 'Indian Classical Dance',          hx: 0.28, hy: 0.47, url: '/work.html' }, // 0
-  { label: 'Kathak as a Language',            hx: 0.30, hy: 0.27, url: '/work.html' }, // 1
-  { label: 'Philosophy of Language',          hx: 0.48, hy: 0.20, url: '/work.html' }, // 2
-  { label: 'AI Safety & Behavior',            hx: 0.64, hy: 0.32, url: '/work.html' }, // 3
-  { label: 'Human-Centered AI Systems',       hx: 0.52, hy: 0.52, url: '/work.html' }, // 4 — centre hub
-  { label: 'AI for Music',                    hx: 0.64, hy: 0.67, url: '/work.html' }, // 5
-  { label: 'AI Evaluations & Benchmarks',     hx: 0.71, hy: 0.49, url: '/work.html' }, // 6
-  { label: 'Human Experience of Music',       hx: 0.30, hy: 0.68, url: '/work.html' }, // 7
+  { label: 'Indian Classical Dance', hx: 0.22, hy: 0.47, url: '/work.html', projects: [ // 0
+    { title: 'Kathak as a Language',   href: '/writing/kathak-as-a-language.html', img: '/mudra.jpeg',                                                       desc: 'Can codified dance perform speech acts?' },
+    { title: 'A Celebration of Kathak',href: 'https://www.youtube.com/watch?v=gJjOwlU63nc', img: 'https://img.youtube.com/vi/gJjOwlU63nc/hqdefault.jpg',     desc: 'Stillness & movement, power & grace.' },
+    { title: 'An Acapella With Bodies',href: 'https://www.youtube.com/watch?v=RCTwQQrqNGo', img: 'https://img.youtube.com/vi/RCTwQQrqNGo/hqdefault.jpg',     desc: 'Rhythm loops & a fusion of 4 dance forms.' },
+    { title: 'Two Rivers of Movement', href: 'https://www.youtube.com/watch?v=-KRDuXOqIcc', img: 'https://img.youtube.com/vi/-KRDuXOqIcc/hqdefault.jpg',     desc: 'Two distinct bodies, one shared path.' },
+    { title: 'Tihai',                  href: 'https://medinichopra.notion.site/tihai-99ed48d6c10d4acfa361a3f3e05a4d2a', img: '/musicians.png',                desc: 'Hindustani rhythm pattern generator.' },
+  ]},
+  { label: 'Philosophy of Language', hx: 0.38, hy: 0.20, url: '/work.html', projects: [ // 1
+    { title: 'Kathak as a Language', href: '/writing/kathak-as-a-language.html', img: '/mudra.jpeg', desc: 'Commentary on Margolis, Bannerman, and Austin.' },
+  ]},
+  { label: 'AI Safety', hx: 0.64, hy: 0.28, url: '/work.html', projects: [ // 2
+    { title: 'Persuasion in LLMs',               href: 'https://github.com/medinichopra/persuasion-classification',              img: '/persuasion_detection_banner.png',  desc: 'Custom BERT to classify persuasive text.' },
+    { title: 'Reasoning & Role-playing in LLMs', href: '/When_Clumsy_Teachers_Outperform.pdf', img: '/adversarial_personas_banner.png', desc: 'Adversarial vs. helpful personas for teaching math.' },
+  ]},
+  { label: 'Human-Centered AI Systems', hx: 0.52, hy: 0.50, url: '/work.html', projects: [ // 3 — centre hub
+    { title: 'Make It Different', href: 'https://human-ai-collaboration-lab.kellogg.northwestern.edu/ai-creativity', img: '/ai-creativity.png', desc: 'Generative AI as an interface for creative thinking in music.' },
+    { title: 'Rasa',              href: 'https://medinichopra.notion.site/rasa-142ad643875342f68a8660a02829c554',    img: '/indian art.jpg',    desc: 'CNN-based emotion detection from Indian classical paintings.' },
+  ]},
+  { label: 'AI for Music', hx: 0.66, hy: 0.65, url: '/work.html', projects: [ // 4
+    { title: 'Make It Different', href: 'https://human-ai-collaboration-lab.kellogg.northwestern.edu/ai-creativity', img: '/ai-creativity.png', desc: 'Can AI coach people to further their musical ideas?' },
+    { title: 'Resonance',         href: '/Resonance_ Capstone Project.pdf', img: '/resonance.png',       desc: 'Context-first playlists from where you are and how you feel.' },
+    { title: 'Tihai',             href: 'https://medinichopra.notion.site/tihai-99ed48d6c10d4acfa361a3f3e05a4d2a', img: '/musicians.png',       desc: 'Hindustani rhythm pattern generator.' },
+  ]},
+  { label: 'Human Experience of Music', hx: 0.28, hy: 0.70, url: '/work.html', projects: [ // 5
+    { title: 'Resonance',                      href: '/Resonance_ Capstone Project.pdf', img: '/resonance.png',       desc: 'Playlists built from where you are and how you feel.' },
+    { title: 'Weighted Spotify Rec. Controls', href: '/writing/spotify-recommendation-controls.html',                           img: '/spotify_controls.png', desc: 'Fine-grained control over Discover Weekly.' },
+  ]},
+  { label: 'Technology & Society', hx: 0.30, hy: 0.26, url: '/work.html', projects: [ // 6
+    { title: 'Successful Failure',   href: '/writing/successful-failure.html',    img: '/foucault.jpeg',                                                                              desc: 'Foucault on privacy in a world of Big Data.' },
+    { title: 'Content Moderation',   href: '/writing/content-moderation.html',   img: '/Magdalena Pankiewicz \u2013 World Illustration Awards  \u2013 The AOI.jpeg',                desc: 'Invisible labor and the cost of keeping it clean.' },
+    { title: 'Digital Exclusion',    href: '/writing/digital-exclusion.html',    img: '/digi exclusion.jpeg',                                                                        desc: 'How digitization compounds systemic inequalities.' },
+  ]},
+  { label: 'Product Design & Management', hx: 0.44, hy: 0.78, url: '/work.html', projects: [ // 7
+    { title: 'Vouchd',                          href: 'https://vouchd.us/',                                  img: '/vouchd.png',              desc: 'Connecting students with volunteer opportunities.' },
+    { title: 'Topshelf',                        href: '/writing/topshelf.html',                              img: '/topshelf/image11.png',    desc: 'Meal planning around what\'s cheap, not the other way around.' },
+    { title: 'Adaptive Plant Care',             href: '/writing/liveleaf.html',                              img: '/liveleaf.png',            desc: 'Social pressure & personalized nudges for plant care.' },
+    { title: 'Weighted Spotify Rec. Controls',  href: '/writing/spotify-recommendation-controls.html',      img: '/spotify_controls.png',   desc: 'Fine-grained control over Discover Weekly.' },
+    { title: 'Zomato Socials',                  href: '/writing/zomato-socials.html',                       img: '/zomato_cover.png',        desc: 'Social discovery layer for restaurant recommendations.' },
+  ]},
+  { label: 'Computational Social Science', hx: 0.76, hy: 0.44, url: '/work.html', projects: [ // 8
+    { title: 'Deciphering psycho-social effects of Eating Disorder', href: 'https://aclanthology.org/2024.nlp4dh-1.15/', img: '/Topicpercentage.png', desc: 'EMNLP 2024. LLM analysis of ED social media data.' },
+    { title: 'Toxicity on Gendered Subreddits', href: '/Toxicity on Reddit.pdf', img: '/Smartphone Detox_ How To Power Down In A Wired World.jpeg', desc: 'Harmful language across gendered STEM communities.' },
+  ]},
 ];
 
 const EDGES = [
-  [0, 1], // Indian Classical Dance → Kathak as a Language
-  [0, 7], // Indian Classical Dance → Human Experience of Music
-  [1, 2], // Kathak as a Language → Philosophy of Language
-  [2, 3], // Philosophy of Language → AI Safety & Behavior
-  [6, 3], // AI Evaluations & Benchmarks → AI Safety & Behavior
-  [3, 4], // AI Safety & Behavior → Human-Centered AI Systems
-  [5, 7], // AI for Music → Human Experience of Music
-  [5, 4], // AI for Music → Human-Centered AI Systems
+  [0, 1], // Indian Classical Dance → Philosophy of Language
+  [0, 5], // Indian Classical Dance → Human Experience of Music
+  [1, 2], // Philosophy of Language → AI Safety
+  [2, 3], // AI Safety → Human-Centered AI Systems
+  [3, 4], // Human-Centered AI Systems → AI for Music
+  [4, 5], // AI for Music → Human Experience of Music
+  [6, 1], // Technology & Society → Philosophy of Language
+  [7, 3], // Product Design & Management → Human-Centered AI Systems
+  [8, 2], // Computational Social Science → AI Safety
 ];
 
 let nodePhysics = [];
@@ -591,7 +628,8 @@ function loop(timestamp) {
 
   ctx.clearRect(0, 0, W, H);
 
-  const { netAlpha } = applyScrollState();
+  const { netAlpha: na } = applyScrollState();
+  netAlpha = na;
 
   // Decay mouse delta so stir fades when cursor is still
   mouseDX *= 0.75;
@@ -729,7 +767,7 @@ const NODE_HIT_R = 28; // px in canvas-space (before scale transform)
  * invert that transform before comparing to node positions.
  */
 function hitTestNodes(cx, cy) {
-  if (scrollProgress < 1) return -1; // network not visible yet
+  if (netAlpha < 0.2) return -1; // network not visible enough yet
   const p = easeInOut(postProgress);
   const sc = lerp(1, 0.76, p);
   const tx = lerp(0, W * 0.22, p);
@@ -749,10 +787,79 @@ function hitTestNodes(cx, cy) {
   return -1;
 }
 
+/* ── Node tooltip helpers ── */
+let tooltipEl = null;
+let tooltipVisible = false;
+let lastHoveredIdx = -1;
+
+function getNodeScreenPos(idx) {
+  const p = easeInOut(postProgress);
+  const sc = lerp(1, 0.76, p);
+  const tx = lerp(0, W * 0.22, p);
+  const ty = lerp(0, -H * 0.04, p);
+  const np = nodePhysics[idx];
+  const originX = W / 2 + tx;
+  const originY = H / 2 + ty;
+  return {
+    x: originX + (np.x - W / 2) * sc,
+    y: originY + (np.y - H / 2) * sc,
+  };
+}
+
+function positionTooltip(idx) {
+  const { x, y } = getNodeScreenPos(idx);
+  const w = tooltipEl.offsetWidth;
+  const h = tooltipEl.offsetHeight;
+  tooltipEl.style.left = Math.round(x - w / 2) + 'px';
+  tooltipEl.style.top  = Math.round(y - h - 20) + 'px';
+}
+
+function showTooltip(idx) {
+  const node = NODES[idx];
+  const cards = node.projects.map(p =>
+    `<a class="tooltip-card" href="${p.href}" ${p.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>
+      <div class="tooltip-thumb"><img src="${p.img}" alt="" loading="lazy" /></div>
+      <div class="tooltip-card-text">
+        <span class="tooltip-project-title">${p.title}</span>
+        <span class="tooltip-project-desc">${p.desc}</span>
+      </div>
+    </a>`
+  ).join('');
+  tooltipEl.innerHTML = cards;
+  tooltipEl.style.display = 'block';
+  positionTooltip(idx);
+  requestAnimationFrame(() => tooltipEl.classList.add('visible'));
+  tooltipVisible = true;
+}
+
+function hideTooltip() {
+  tooltipEl.classList.remove('visible');
+  tooltipVisible = false;
+  tooltipEl.addEventListener('transitionend', () => {
+    if (!tooltipVisible) tooltipEl.style.display = 'none';
+  }, { once: true });
+}
+
 function setupNetworkInteraction() {
+  tooltipEl = document.getElementById('node-tooltip');
+
   window.addEventListener('mousemove', (e) => {
     const idx = hitTestNodes(e.clientX, e.clientY);
     canvas.style.cursor = idx >= 0 ? 'pointer' : 'default';
+
+    if (idx >= 0) {
+      if (idx !== lastHoveredIdx) {
+        lastHoveredIdx = idx;
+        showTooltip(idx);
+      } else if (tooltipVisible) {
+        positionTooltip(idx);
+      }
+    } else {
+      // Keep tooltip open when cursor is over the tooltip itself
+      if (tooltipVisible && tooltipEl && tooltipEl.matches(':hover')) return;
+      if (tooltipVisible) hideTooltip();
+      lastHoveredIdx = -1;
+    }
   }, { passive: true });
 
   canvas.addEventListener('click', (e) => {

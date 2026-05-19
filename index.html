@@ -41,7 +41,7 @@
 
   <!-- ─── Navbar ─── -->
   <nav id="navbar">
-    <a href="/" class="nav-name">Medini <em>Chopra</em></a>
+    <a href="/" class="nav-name">Medini Chopra</a>
     <ul class="nav-links">
       <li><a href="/work.html">Projects</a></li>
       <li class="nav-dropdown">
@@ -50,7 +50,7 @@
         </button>
         <ul class="nav-dropdown-menu" role="menu">
           <li role="none"><a href="#" id="nav-jump-about" role="menuitem">About</a></li>
-          <li role="none"><a href="https://drive.google.com/file/d/11qlCo4298TirdCjQydvVnAydewmXdqMi/view?usp=sharing" id="nav-jump-resume" role="menuitem" target="_blank" rel="noopener">Resume</a></li>
+          <li role="none"><a href="/Medini_Chopra_AI.pdf" id="nav-jump-resume" role="menuitem" target="_blank" rel="noopener">Resume</a></li>
         </ul>
       </li>
     </ul>
@@ -61,8 +61,10 @@
     <div id="intro-sticky">
 
       <div id="intro-text">
+        <h1 id="intro-name">Hi, I'm Medini</h1>
+        <p id="intro-pronunciation">(pronounced: may-the-knee)</p>
         <p id="intro-sentence">
-          Hi, I'm Medini <em>(pronounced: may-the-knee)</em>, a Research Engineer @
+          a Research Engineer @
           <a href="https://nico.northwestern.edu" class="inline-link" target="_blank" rel="noopener">Northwestern Institute on Complex Systems</a>,
           working with <a href="https://scholar.google.com/citations?user=uGJ_6aQAAAAJ&hl=en" class="inline-link" target="_blank" rel="noopener">Brian Uzzi</a>
           and <a href="https://mattgroh.com" class="inline-link" target="_blank" rel="noopener">Matt Groh</a>.
@@ -83,6 +85,9 @@
 
   <!-- Canvas: lives at body level, position:fixed, covers intro + hero -->
   <canvas id="waveform-canvas" aria-hidden="true"></canvas>
+
+  <!-- Network node hover tooltip -->
+  <div id="node-tooltip" aria-hidden="true"></div>
 
   <!-- ─── Hero (scroll-driven three-state) ─── -->
   <section id="hero">
