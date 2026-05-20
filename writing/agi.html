@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artificial General Intelligence — Medini Chopra</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
+      --sienna:       #B85C3A;
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); gap: 10px; }
+
+    /* ── Article layout ── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 48px 120px;
+    }
+
+    /* ── Header ── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.10);
+    }
+
+    .article-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .article-eyebrow span + span::before {
+      content: '·';
+      margin-right: 16px;
+      opacity: 0.4;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    /* ── Body content ── */
+    .article-body { font-size: 1rem; line-height: 1.85; color: var(--ink); }
+
+    .article-body p { margin-bottom: 1.6em; }
+
+    .article-body strong {
+      font-weight: 500;
+    }
+
+    .article-body a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-color: rgba(138,20,34,0.3);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+      word-break: break-all;
+    }
+    .article-body a:hover { text-decoration-color: var(--wine); }
+
+    /* References */
+    .references {
+      margin-top: 3em;
+      padding-top: 2em;
+      border-top: 1px solid rgba(0,0,0,0.10);
+    }
+    .references h3 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1em;
+    }
+    .references p {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .references a {
+      color: var(--wine);
+      text-decoration: underline;
+      text-decoration-color: rgba(138,20,34,0.25);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s;
+      word-break: break-all;
+    }
+    .references a:hover { text-decoration-color: var(--wine); }
+
+    /* ── Footer ── */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(0,0,0,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .back-link:hover { color: var(--ink); gap: 13px; }
+
+    .article-byline {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      #navbar { padding: 0 24px; }
+      .article-wrap { padding: 100px 24px 80px; }
+      .article-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="/" class="nav-name">Medini Chopra</a>
+    <ul class="nav-links">
+      <li>
+        <a href="/work.html" class="nav-back">← All projects</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span>Technology &amp; Society</span>
+        <span>Blogs</span>
+        <span>February 2023</span>
+      </div>
+      <h1 class="article-title">Artificial General Intelligence</h1>
+    </header>
+
+    <div class="article-body">
+
+      <p>The hype around AI makes it easy for laymen to imagine world-conquering robots, but that is
+still a distant goal. While certain tests aim at understanding consciousness in AI, I believe that
+we don't understand it enough to devise robust tests at all. Douglas Hofstadter provided the most interesting hypothesis for consciousness: the idea of strange loops. It revolutionized maths, music, and art, and paved a new paradigm for viewing ourselves as conscious beings. Hofstadter talks about self-referencing and a hierarchical structure that moves upwards, always returning to the origin. In agreement, I believe humans can never be completely intelligent, and in that way,
+we would always climb the hierarchical ladder open-mindedly. At the end of the day, we would
+reach back to who we are. Taking off from this, I definitely believe artificial consciousness is far
+from where we are because such a self-referencing ability is not programmed. Until we grasp
+what our minds are made of, progress will remain limited in this area.</p>
+
+      <p>The field of artificial intelligence (intelligent behavior), started from a little experiment called
+the Turing Test, where a human attempted to guess whether they were talking to a robot.
+Interestingly, Turing noted that it is easy to appear intelligent even though one might actually not be. The language model won't know what it's saying, but the human's ability to make sense of what the AI says is what attributes intelligence to it. In some sense, we are projecting a certain
+type of intelligence and intentionality on them based on exhibited behavior, quite like the
+Braitenberg vehicles. However, not only are our current methods for testing intelligence too
+simplistic, but they are also heavily anthropomorphic. Testing intelligence would require a great
+deal of understanding, not only of humans but other animals as part of an ecosystem.</p>
+
+      <p>With the ubiquity of ChatGPT, it's important to discuss language models in the context of
+intelligence. Noam Chomsky believed that language can give insights into the human mind's
+structure, suggesting that language shapes our understanding of the world and that we have an
+innate ability to communicate. It only follows that one might question the relationship between
+language and cognition in AI. Language models, however, do not have the capacity of
+intelligence as discussed above, and whether language hones cognition or cognition gives us
+language, this theory doesn't hold true for artificial models. In fact, Chomsky believes that the
+current statistical learning methods of AI should shift focus toward the cognitive structures of
+language instead. Therefore, reaching human-like intelligence goes beyond just understanding
+and communicating in language; it requires advancements in cognition which AI has not yet
+achieved.</p>
+
+      <p>In summary, a complete understanding of AI demands collaboration between fields like
+neuroscience, linguistics, psychology, mathematics, and computer science. The study of AI
+involves using AI itself to gain insights into human cognition and intelligence: a paradoxical
+approach to drive technological and scientific innovation.</p>
+
+      <div class="references">
+        <h3>References</h3>
+        <p>
+          <a href="https://www.theatlantic.com/education/archive/2015/02/what-animals-teach-us-about-measuringintelligence/386330/" target="_blank" rel="noopener">https://www.theatlantic.com/education/archive/2015/02/what-animals-teach-us-about-measuringintelligence/386330/</a><br>
+          <a href="https://www.nytimes.com/2023/03/08/opinion/noam-chomsky-chatgpt-ai.html" target="_blank" rel="noopener">https://www.nytimes.com/2023/03/08/opinion/noam-chomsky-chatgpt-ai.html</a><br>
+          <a href="https://stories.clare.cam.ac.uk/will-ai-ever-be-conscious/index.html" target="_blank" rel="noopener">https://stories.clare.cam.ac.uk/will-ai-ever-be-conscious/index.html</a><br>
+          <a href="https://www.youtube.com/watch?v=4MGCQOAxgv4" target="_blank" rel="noopener">https://www.youtube.com/watch?v=4MGCQOAxgv4</a><br>
+          <a href="https://www.technologyreview.com/2021/08/25/1032111/conscious-ai-can-machines-think/" target="_blank" rel="noopener">https://www.technologyreview.com/2021/08/25/1032111/conscious-ai-can-machines-think/</a><br>
+          <a href="https://www.technologyreview.com/2020/10/15/1010461/artificial-general-intelligence-robots-aiagi-deepmind-google-openai/" target="_blank" rel="noopener">https://www.technologyreview.com/2020/10/15/1010461/artificial-general-intelligence-robots-aiagi-deepmind-google-openai/</a><br>
+          <a href="https://www.theguardian.com/culture/2019/mar/09/bach-escher-godel-douglas-hofstadter-consciousness-ai-revolution-mathematical-idea-art-music#:~:text=The%20strange%2Dloop%20concept%20may,itself%20back%20at%20the%20beginning." target="_blank" rel="noopener">https://www.theguardian.com/culture/2019/mar/09/bach-escher-godel-douglas-hofstadter-consciousness-ai-revolution-mathematical-idea-art-music</a><br>
+          <a href="https://medium.com/the-sophist/douglas-hofstadter-strange-loops-and-the-enigma-of-intelligence-f8f1dc9d377c" target="_blank" rel="noopener">https://medium.com/the-sophist/douglas-hofstadter-strange-loops-and-the-enigma-of-intelligence-f8f1dc9d377c</a><br>
+          <a href="https://gizmodo.com/chatgpt-openai-ai-contractors-15-dollars-per-hour-1850415474" target="_blank" rel="noopener">https://gizmodo.com/chatgpt-openai-ai-contractors-15-dollars-per-hour-1850415474</a><br>
+          <a href="https://ubiquity.acm.org/article.cfm?id=3459743" target="_blank" rel="noopener">https://ubiquity.acm.org/article.cfm?id=3459743</a><br>
+          <a href="http://justinhart.net/files/publications/SHORT-HRI-10.pdf" target="_blank" rel="noopener">http://justinhart.net/files/publications/SHORT-HRI-10.pdf</a>
+        </p>
+      </div>
+
+    </div>
+
+    <footer class="article-footer">
+      <a href="/work.html" class="back-link">← Back to all projects</a>
+      <span class="article-byline">Medini Chopra · February 2023</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
