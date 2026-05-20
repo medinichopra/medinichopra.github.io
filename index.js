@@ -433,7 +433,9 @@ const NODES = [
     { title: 'Tihai',                  href: 'https://medinichopra.notion.site/tihai-99ed48d6c10d4acfa361a3f3e05a4d2a', img: '/musicians.png',                desc: 'Hindustani rhythm pattern generator.' },
   ]},
   { label: 'Philosophy of Language', hx: 0.38, hy: 0.20, url: '/work.html', projects: [ // 1
-    { title: 'Kathak as a Language', href: '/writing/kathak-as-a-language.html', img: '/mudra.jpeg', desc: 'Commentary on Margolis, Bannerman, and Austin.' },
+    { title: 'Kathak as a Language',                     href: '/writing/kathak-as-a-language.html',      img: '/mudra.jpeg',              desc: 'Commentary on Margolis, Bannerman, and Austin.' },
+    { title: 'On Referring',                             href: '/writing/strawson-russell.html',           img: '/strawson.jpeg',           desc: 'Strawson\'s objections to Russell on definite descriptions.' },
+    { title: 'Language, Realism, Dharma, and Ineffability', href: '/writing/language-realism-dharma.html', img: '/indian philosphy.jpeg',  desc: 'On the eight methods of learning meaning — and what lies beyond.' },
   ]},
   { label: 'AI Safety', hx: 0.64, hy: 0.28, url: '/work.html', projects: [ // 2
     { title: 'Persuasion in LLMs',               href: 'https://github.com/medinichopra/persuasion-classification',              img: '/persuasion_detection_banner.png',  desc: 'Custom BERT to classify persuasive text.' },
@@ -453,9 +455,10 @@ const NODES = [
     { title: 'Weighted Spotify Rec. Controls', href: '/writing/spotify-recommendation-controls.html',                           img: '/spotify_controls.png', desc: 'Fine-grained control over Discover Weekly.' },
   ]},
   { label: 'Technology & Society', hx: 0.30, hy: 0.26, url: '/work.html', projects: [ // 6
-    { title: 'Successful Failure',   href: '/writing/successful-failure.html',    img: '/foucault.jpeg',                                                                              desc: 'Foucault on privacy in a world of Big Data.' },
-    { title: 'Content Moderation',   href: '/writing/content-moderation.html',   img: '/Magdalena Pankiewicz \u2013 World Illustration Awards  \u2013 The AOI.jpeg',                desc: 'Invisible labor and the cost of keeping it clean.' },
-    { title: 'Digital Exclusion',    href: '/writing/digital-exclusion.html',    img: '/digi exclusion.jpeg',                                                                        desc: 'How digitization compounds systemic inequalities.' },
+    { title: 'Successful Failure',             href: '/writing/successful-failure.html',    img: '/foucault.jpeg',                                                                              desc: 'Foucault on privacy in a world of Big Data.' },
+    { title: 'Content Moderation',             href: '/writing/content-moderation.html',   img: '/Magdalena Pankiewicz \u2013 World Illustration Awards  \u2013 The AOI.jpeg',                desc: 'Invisible labor and the cost of keeping it clean.' },
+    { title: 'Digital Exclusion',              href: '/writing/digital-exclusion.html',    img: '/digi exclusion.jpeg',                                                                        desc: 'How digitization compounds systemic inequalities.' },
+    { title: 'Artificial General Intelligence',href: '/writing/agi.html',                  img: '/david.jpg',                                                                                  desc: 'On consciousness, strange loops, and the limits of AI.' },
   ]},
   { label: 'Product Design & Management', hx: 0.44, hy: 0.78, url: '/work.html', projects: [ // 7
     { title: 'Vouchd',                          href: 'https://vouchd.us/',                                  img: '/vouchd.png',              desc: 'Connecting students with volunteer opportunities.' },

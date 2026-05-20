@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>On Referring — Medini Chopra</title>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon-mc.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --wine:         #8A1422;
+      --cream:        #F3E8D3;
+      --gold:         #7A8862;
+      --sienna:       #B85C3A;
+      --ink:          #000000;
+      --ink-soft:     rgba(0, 0, 0, 0.6);
+      --ink-muted:    rgba(0, 0, 0, 0.38);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); gap: 10px; }
+
+    /* ── Article layout ── */
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 48px 120px;
+    }
+
+    /* ── Header ── */
+    .article-header {
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.10);
+    }
+
+    .article-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wine);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .article-eyebrow span + span::before {
+      content: '·';
+      margin-right: 16px;
+      opacity: 0.4;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .article-subtitle {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+
+    /* ── Body content ── */
+    .article-body { font-size: 1rem; line-height: 1.85; color: var(--ink); }
+
+    .article-body p { margin-bottom: 1.6em; }
+
+    /* ── Footer ── */
+    .article-footer {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(0,0,0,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .back-link:hover { color: var(--ink); gap: 13px; }
+
+    .article-byline {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      #navbar { padding: 0 24px; }
+      .article-wrap { padding: 100px 24px 80px; }
+      .article-footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="/" class="nav-name">Medini Chopra</a>
+    <ul class="nav-links">
+      <li>
+        <a href="/work.html" class="nav-back">← All projects</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-eyebrow">
+        <span>Philosophy of Language</span>
+        <span>Blogs</span>
+        <span>Spring 2023</span>
+      </div>
+      <h1 class="article-title">On Referring</h1>
+      <p class="article-subtitle">On Strawson's objections to Russell's theory of definite and indefinite descriptions</p>
+    </header>
+
+    <div class="article-body">
+
+      <p>In simple terms, Russell talks about 'meaning' and analyzing language in a purely logical and
+abstract form: each sentence (or expression) must be true, false, or meaningless, and only
+meaningful sentences have either of the truth values. In a rudimentary way, he also believes that sentences (or expressions) are what make references to objects. Strawson objects to this, proposing a more contextual analysis of sentences and their use in conversation. He objects that true, false, and meaningless can be the (only) states of a sentence, and truth and falsity imply the meaningfulness of a sentence and vice versa. There are two things: reference and truth values, and according to Strawson, both of them are determined by an entity
+separate from what determines the meaning of a sentence (different from what Russell had
+proposed).</p>
+
+      <p>Strawson puts across the distinction between the sentence, the utterance of a sentence, and the use of the sentence. Firstly, a sentence has a grammatical and syntactic structure, is a proposition, and meaningfulness is a property of sentences. For example, "I am playing a game" is a sentence. Secondly, the utterance is just the instance when sentences are spoken/written in that context: for example, I am uttering "I am playing a game". Thirdly, the use of a sentence happens in a certain linguistic context, and this contextual use is what determines the truth/falsity of that sentence. Further, people refer to objects by the use of a sentence in a context; the sentence itself does not refer. When I say "I am playing a game", I am referring to myself and this will either be true or false in the instance I say it. The sentence can also be called the sentence type, which is meaningful, and the use of the sentence in an instance is the sentence token, which is referring and is either true or false. One consequence is that a given sentence can be both true and false, depending on the context. "I am playing a game" when used in an instance will be truth if I am, and false if I am not (playing a game), but the sentence itself is meaningful, regardless of the truth value and reference. This also implies that meaningful sentences can also be neither true nor false, objecting to Russell, and separating meaning from reference and truth values.</p>
+
+    </div>
+
+    <footer class="article-footer">
+      <a href="/work.html" class="back-link">← Back to all projects</a>
+      <span class="article-byline">Medini Chopra · Spring 2023</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
